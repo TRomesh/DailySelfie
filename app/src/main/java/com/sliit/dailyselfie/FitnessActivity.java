@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -38,10 +40,14 @@ public class FitnessActivity extends BaseActivity {
         findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(FitnessActivity.this);
                 mBuilder.setSmallIcon(android.R.drawable.ic_dialog_alert);
                 mBuilder.setContentTitle("DailySelfie");
                 mBuilder.setContentText("Time to take a Selfie!");
+                mBuilder.setSound(alarmSound);
+                mBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
                 Intent resultIntent = new Intent(FitnessActivity.this, CameraActivity.class);
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(FitnessActivity.this);
                 stackBuilder.addParentStack(CameraActivity.class);
@@ -62,7 +68,6 @@ public class FitnessActivity extends BaseActivity {
 
     }
 
-   
 
 
 }
