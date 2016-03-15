@@ -93,22 +93,23 @@
         android:layout_alignParentEnd="true"
         android:hint="@string/txt_timeP"/>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_btn_submit"
         android:id="@+id/fit_submit_btn"
-        android:layout_below="@+id/edt_timep"
-        android:layout_alignRight="@+id/edt_timep"
-        android:layout_alignEnd="@+id/edt_timep"
-        android:layout_marginTop="43dp" />
-
+        />
      <Button
          android:text="open Nav"
-         android:id="@+id/opennav"
-         android:onClick=""
+         android:id="@+id/setAlarm"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
+</LinearLayout>
+
 
  </LinearLayout>
 
