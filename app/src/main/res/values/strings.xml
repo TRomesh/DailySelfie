@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DailySelfie</string>
+    <string name="txt_fitnesstype">Fitness Type</string>
+    <string name="txt_fitnesstyperadio1">Weight Gain</string>
+    <string name="txt_fitnesstyperadio2">Weight Loss</string>
+    <string name="txt_height">Height</string>
+    <string name="txt_weight">Weight</string>
+    <string name="txt_targetw">Target Weight</string>
+    <string name="txt_timeP">Target Time Period</string>
+    <string name="txt_btn_submit">Submit</string>
+    <string name="title_activity_camera">CameraActivity</string>
+</resources>

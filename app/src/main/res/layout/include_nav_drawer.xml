@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="230dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#44E0F2F1"
+    android:clickable="true"
+    android:id="@+id/navdraw"
+    android:layout_gravity="start">
+
+    <ImageView
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/navdrawer_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <Button
+        android:id="@+id/nav_btn1"
+        android:text="Button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/nav_btn2"
+        android:text="Button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/nav_btn3"
+        android:text="Button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/nav_btn4"
+        android:text="Button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+</LinearLayout>
