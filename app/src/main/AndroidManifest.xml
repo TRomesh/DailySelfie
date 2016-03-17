@@ -27,6 +27,10 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_camera"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PostMaternityActivity" />
+
+        <activity android:name=".AddChallangeActivity"></activity>
+
         <activity android:name=".LoginActivity"><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

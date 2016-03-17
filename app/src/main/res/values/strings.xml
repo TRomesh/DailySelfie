@@ -9,4 +9,19 @@
     <string name="txt_timeP">Target Time Period</string>
     <string name="txt_btn_submit">Submit</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="txt_maternity">My Pregnancy day by day</string>
+    <string name="txt_size">Waist size</string>
+    <string name="txt_deliveryDate">Expected Birth Date</string>
+    <string name="txt_sepNote">Special Note</string>
+    <string name="txt_chaName">Challenge Name</string>
+    <string name="txt_childgro">Child Growth</string>
+    <string name="txt_bdy">Date of Birth</string>
+
+    <array name="challenges">
+        <item>Challenge Type</item>
+        <item>Children Growing</item>
+        <item>Hair</item>
+        <item>Fitness</item>
+        <item>Health</item>
+    </array>
 </resources>
