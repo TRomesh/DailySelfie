@@ -42,6 +42,8 @@
                         android:orientation="vertical">
 
                         <ImageButton
+
+                            android:src="@drawable/fitnesslogo12"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1.5"
@@ -50,8 +52,11 @@
                             />
 
                         <ImageButton
+
+                            android:src="@drawable/maternity"
                             android:id="@+id/button_maternity"
                             android:layout_width="match_parent"
+                            android:scaleType="fitCenter"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             />
@@ -76,13 +81,16 @@
 
 
                     <ImageButton
-                        android:id="@+id/button_noshave"
+                        android:src="@drawable/childgroeth"
+                        android:id="@+id/button_childgrow"
+                        android:scaleType="fitCenter"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
                     <ImageButton
-                        android:id="@+id/button_childgrow"
+                        android:id="@+id/button_noshave"
+                        android:src="@drawable/noshave12"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"

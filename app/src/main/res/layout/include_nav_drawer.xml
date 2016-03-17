@@ -9,6 +9,7 @@
     android:id="@+id/navdraw"
     android:layout_gravity="start">
 
+
     <ImageView
         android:layout_weight="1"
         android:scaleType="centerCrop"
@@ -45,7 +46,6 @@
         android:text="Button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 
 
 
