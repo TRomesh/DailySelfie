@@ -41,7 +41,7 @@ public class FitnessActivity extends BaseActivity {
 
                 Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(FitnessActivity.this);
-                mBuilder.setSmallIcon(android.R.drawable.ic_dialog_alert);
+                mBuilder.setSmallIcon(R.drawable.ic_noti_dailyselfie);
                 mBuilder.setContentTitle("DailySelfie");
                 mBuilder.setContentText("Time to take a Selfie!");
                 mBuilder.setSound(alarmSound);
