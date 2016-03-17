@@ -1,10 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sliit.dailyselfie.ChildGrowthActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="5dp"
+                android:text="@string/txt_childgro"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#FF9800" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:inputType="textPersonName"
+                    android:text="@string/txt_chaName"
+                    android:ems="10"
+                    android:id="@+id/editText2"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp" />
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                    <!--android:text="@string/txt_bdy"-->
+                    <!--android:id="@+id/textView4"-->
+                    <!--android:layout_weight="0.7"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layout_marginLeft="13dp"-->
+                    <!--android:textSize="15sp" />-->
+
+                <!--<DatePicker-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.0001"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginLeft="13dp"-->
+                    <!--android:calendarViewShown="false"></DatePicker>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="13dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"></LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/txt_height"
+                                android:gravity="center_vertical"
+                                android:layout_marginRight="10dp"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="Feets"
+                            android:gravity="center_vertical|center_horizontal" />
+
+                        <com.vi.swipenumberpicker.SwipeNumberPicker
+                            android:id="@+id/snp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:snp_numberColor="@android:color/white"
+                            app:snp_arrowColor="@android:color/white"
+                            app:snp_backgroundColor="@color/colorAccent"
+                            app:snp_max="11"
+                            app:snp_min="1"
+                            app:snp_value="5"
+                            android:layout_marginRight="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="Inches"
+                            android:gravity="center_vertical|center_horizontal" />
+
+                        <com.vi.swipenumberpicker.SwipeNumberPicker
+                            android:id="@+id/snp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:snp_numberColor="@android:color/white"
+                            app:snp_arrowColor="@android:color/white"
+                            app:snp_backgroundColor="@color/colorAccent"
+                            app:snp_max="11"
+                            app:snp_min="1"
+                            app:snp_value="5"
+                            android:layout_marginRight="10dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="13dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"></LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/txt_weight"
+                            android:gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="Kilograme"
+                            android:gravity="center_vertical|center_horizontal" />
+
+                        <com.vi.swipenumberpicker.SwipeNumberPicker
+                            android:id="@+id/snp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:snp_numberColor="@android:color/white"
+                            app:snp_arrowColor="@android:color/white"
+                            app:snp_backgroundColor="@color/colorAccent"
+                            app:snp_max="11"
+                            app:snp_min="1"
+                            app:snp_value="5"
+                            android:layout_marginRight="10dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Next"
+                android:layout_marginRight="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <include layout="@layout/include_nav_drawer"/>

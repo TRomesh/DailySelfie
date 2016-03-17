@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,11 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FitnessActivity extends BaseActivity {
@@ -29,14 +35,6 @@ public class FitnessActivity extends BaseActivity {
         getSupportActionBar().setTitle("Fitness");
 
 
-        findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-            }
-        });
-
-
         findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +45,7 @@ public class FitnessActivity extends BaseActivity {
                 mBuilder.setContentTitle("DailySelfie");
                 mBuilder.setContentText("Time to take a Selfie!");
                 mBuilder.setSound(alarmSound);
-                mBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
                 Intent resultIntent = new Intent(FitnessActivity.this, CameraActivity.class);
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(FitnessActivity.this);
                 stackBuilder.addParentStack(CameraActivity.class);
@@ -61,7 +59,6 @@ public class FitnessActivity extends BaseActivity {
                 mBuilder.setContentIntent(resultPendingIntent);
                 NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(1001, mBuilder.build());
-
             }
         });
 
