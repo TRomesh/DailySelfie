@@ -14,23 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
-        <activity android:name=".MaternityActivity" />
-        <activity android:name=".NoshaveActivity" />
-        <activity android:name=".ChildGrowthActivity" />
-        <activity android:name=".DiaryActivity" />
-        <activity
-            android:name=".CameraActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_camera"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PostMaternityActivity" />
-        <activity android:name=".AddChallangeActivity" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_splash"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,8 +24,43 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_activity_main_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CameraActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_camera"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity" />
+        <activity
             android:name=".FitnessActivity"
             android:label="@string/title_activity_fitness"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddChallangeActivity"
+            android:label="@string/title_activity_add_challange"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChildGrowthActivity"
+            android:label="@string/title_activity_child_growth"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DiaryActivity"
+            android:label="@string/title_activity_diary"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MaternityActivity"
+            android:label="@string/title_activity_maternity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoshaveActivity"
+            android:label="@string/title_activity_noshave"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PostMaternityActivity"
+            android:label="@string/title_activity_post_maternity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

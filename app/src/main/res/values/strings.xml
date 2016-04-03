@@ -26,4 +26,16 @@
     </array>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_fitness">FitnessActivity</string>
+    <string name="title_activity_main_drawer">MainDrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_challange">AddChallangeActivity</string>
+    <string name="title_activity_child_growth">ChildGrowthActivity</string>
+    <string name="title_activity_diary">DiaryActivity</string>
+    <string name="title_activity_maternity">MaternityActivity</string>
+    <string name="title_activity_noshave">NoshaveActivity</string>
+    <string name="title_activity_post_maternity">PostMaternityActivity</string>
 </resources>
