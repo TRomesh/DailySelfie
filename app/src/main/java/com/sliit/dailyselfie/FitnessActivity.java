@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -16,25 +17,30 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.vi.swipenumberpicker.OnValueChangeListener;
+import com.vi.swipenumberpicker.SwipeNumberPicker;
 
 public class FitnessActivity extends BaseActivity {
 
-    
+    SwipeNumberPicker fitpicker;
+    SwipeNumberPicker fitpicker1;
+    SwipeNumberPicker fitpicker2;
+    SwipeNumberPicker fitpicker3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitness);
-        getSupportActionBar().setTitle("Fitness");
 
 
-        findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-            }
-        });
+
 
 
         findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
@@ -47,7 +53,7 @@ public class FitnessActivity extends BaseActivity {
                 mBuilder.setContentTitle("DailySelfie");
                 mBuilder.setContentText("Time to take a Selfie!");
                 mBuilder.setSound(alarmSound);
-                mBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
                 Intent resultIntent = new Intent(FitnessActivity.this, CameraActivity.class);
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(FitnessActivity.this);
                 stackBuilder.addParentStack(CameraActivity.class);
@@ -61,11 +67,50 @@ public class FitnessActivity extends BaseActivity {
                 mBuilder.setContentIntent(resultPendingIntent);
                 NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(1001, mBuilder.build());
-
             }
         });
 
 
+
+        findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+            }
+        });
+
+
+        fitpicker = (SwipeNumberPicker)findViewById(R.id.snp1);
+        fitpicker.setOnValueChangeListener(new OnValueChangeListener() {
+            @Override
+            public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                return true;
+            }
+        });
+
+        fitpicker1 = (SwipeNumberPicker)findViewById(R.id.snp2);
+        fitpicker1.setOnValueChangeListener(new OnValueChangeListener() {
+            @Override
+            public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                return true;
+            }
+        });
+
+        fitpicker2 = (SwipeNumberPicker)findViewById(R.id.snp3);
+        fitpicker2.setOnValueChangeListener(new OnValueChangeListener() {
+            @Override
+            public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                return true;
+            }
+        });
+
+        fitpicker3 = (SwipeNumberPicker)findViewById(R.id.snp4);
+        fitpicker3.setOnValueChangeListener(new OnValueChangeListener() {
+            @Override
+            public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                return true;
+            }
+        });
     }
 
 

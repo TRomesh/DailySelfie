@@ -32,8 +32,8 @@ public class MainActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), AddChallangeActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.button_noshave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),NoshaveActivity.class));
+                startActivity(new Intent(getApplicationContext(),CameraActivity.class));
             }
         });
 
@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.button_diary).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),DiaryActivity.class));
+                startActivity(new Intent(getApplicationContext(),PostMaternityActivity.class));
             }
         });
 
