@@ -1,30 +1,32 @@
 package com.sliit.dailyselfie;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
+import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
-        final Intent login=new Intent(getApplicationContext(),MainActivity.class);
 
-        findViewById(R.id.logbutton).setOnClickListener(new View.OnClickListener() {
+        Button blogin=(Button)findViewById(R.id.login);
+        blogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  startActivity(login);
+                Intent i=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
 
 
-
-
     }
+
 }

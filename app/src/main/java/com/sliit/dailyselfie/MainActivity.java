@@ -15,8 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.logging.Handler;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    boolean doubleBackToExitPressedOnce = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,4 +162,6 @@ public class MainActivity extends AppCompatActivity
             findViewById(R.id.activity_MainMenu).setPadding(16, 16, 16, 16);
         }
     }
+
+
 }
