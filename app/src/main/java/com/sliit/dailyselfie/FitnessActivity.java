@@ -30,6 +30,7 @@ public class FitnessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fitness);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
             @Override

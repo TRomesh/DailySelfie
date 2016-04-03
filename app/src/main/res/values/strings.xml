@@ -38,4 +38,5 @@
     <string name="title_activity_maternity">MaternityActivity</string>
     <string name="title_activity_noshave">NoshaveActivity</string>
     <string name="title_activity_post_maternity">PostMaternityActivity</string>
+    <string name="title_activity_time_line">TimeLine</string>
 </resources>
