@@ -15,8 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
-        <activity android:name=".FitnessActivity" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".MaternityActivity" />
         <activity android:name=".NoshaveActivity" />
         <activity android:name=".ChildGrowthActivity" />
@@ -28,8 +27,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PostMaternityActivity" />
         <activity android:name=".AddChallangeActivity" />
-        <activity android:name=".LoginActivity">
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
@@ -40,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FitnessActivity"
+            android:label="@string/title_activity_fitness"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

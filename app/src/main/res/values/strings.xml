@@ -25,4 +25,5 @@
         <item>Health</item>
     </array>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_fitness">FitnessActivity</string>
 </resources>
