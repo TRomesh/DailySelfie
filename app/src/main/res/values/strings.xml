@@ -40,4 +40,9 @@
     <string name="title_activity_post_maternity">PostMaternityActivity</string>
     <string name="title_activity_time_line">TimeLine</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+
+    <string name="Sign_in">Sign in</string>
+    <string name="Success">Success</string>
+    <string name="Loading">Loading..</string>
 </resources>
