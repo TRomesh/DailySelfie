@@ -11,10 +11,14 @@ import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
 
+    DBHelper DBH;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        DBH = new DBHelper(this);
 
 
         Button blogin=(Button)findViewById(R.id.login);
