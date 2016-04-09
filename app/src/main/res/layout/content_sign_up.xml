@@ -38,6 +38,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/fname"
                     android:hint="First Name" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -50,6 +51,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/lname"
                     android:hint="Last Name" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -64,6 +66,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/semail"
                 android:hint="Email"
                 android:inputType="textEmailAddress"/>
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -77,6 +80,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/password"
                 android:hint="Password"
                 android:inputType="textPassword" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -91,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
+                android:id="@+id/cpassword"
                 android:inputType="textPassword" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -115,7 +120,8 @@
             custom:pb_colorPressed="@color/blue_pressed"
             custom:pb_colorProgress="@color/purple_progress"
             custom:pb_textComplete="@string/Success"
-            custom:pb_textProgress="@string/Loading" />
+            custom:pb_textProgress="@string/Loading"
+            android:onClick="signUp"/>
 
     </LinearLayout>
 

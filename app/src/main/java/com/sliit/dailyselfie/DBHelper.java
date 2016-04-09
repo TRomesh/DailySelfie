@@ -14,7 +14,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public static String REGISTER_TABLE =
-            "CREATE TABLE register (id INTEGER PRIMARY KEY AUTOINCREMENT, fname VARCHAR(255), lname VARCHAR(255), email VARCHAR(255), profilepic VARCHAR(255) )";
+            "CREATE TABLE register (id INTEGER PRIMARY KEY AUTOINCREMENT, fname VARCHAR(255), lname VARCHAR(255), email VARCHAR(255),password VARCHAR(10), profilepic VARCHAR(255) )";
+
+    public static String LOGIN_TABLE =
+            "CREATE TABLE login (id INTEGER PRIMARY KEY AUTOINCREMENT,activatedStatus VARCHAR(50), userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
+
+    public static String CHALLANGES_TABLE =
+            "CREATE TABLE challanges (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR(200), name VARCHAR(250), description TEXT, fitCategory VARCHAR(100), height DOUBLE, weight DOUBLE, waistSize DOUBLE, targetWeight DOUBLE, targetDate DATE, targetWaistSize DOUBLE, birthDay DATE, alram DATETIME, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
+
+    public static String POST_TABLE =
+            "CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, height DOUBLE, weight DOUBLE, waistSize DOUBLE, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, alram DATETIME,challangeId INT, FOREIGN KEY (challangeId) REFERENCES challanges(id) )";
 
 
     public DBHelper(Context context){
@@ -26,7 +35,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(REGISTER_TABLE);
-
+        db.execSQL(LOGIN_TABLE);
+        db.execSQL(CHALLANGES_TABLE);
+        db.execSQL(POST_TABLE);
     }
 
     @Override
