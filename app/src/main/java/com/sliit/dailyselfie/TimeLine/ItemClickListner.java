@@ -1,4 +1,4 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.TimeLine;
 
 import android.view.View;
 

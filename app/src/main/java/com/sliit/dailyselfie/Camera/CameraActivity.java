@@ -1,4 +1,4 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.Camera;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.sliit.dailyselfie.R;
 
 import java.io.File;
 import java.io.IOException;

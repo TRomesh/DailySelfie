@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sliit.dailyselfie.MaternityActivity"
+    tools:context=".Challenges.MaternityActivity"
     tools:showIn="@layout/activity_maternity">
 
     <LinearLayout

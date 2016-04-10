@@ -1,8 +1,10 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.Challenges;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.sliit.dailyselfie.R;
 
 public class ChildGrowthActivity extends AppCompatActivity {
 

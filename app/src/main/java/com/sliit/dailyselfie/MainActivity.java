@@ -15,7 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.logging.Handler;
+import com.sliit.dailyselfie.Camera.CameraActivity;
+import com.sliit.dailyselfie.Challenges.AddChallangeActivity;
+import com.sliit.dailyselfie.Challenges.ChildGrowthActivity;
+import com.sliit.dailyselfie.Challenges.FitnessActivity;
+import com.sliit.dailyselfie.Challenges.MaternityActivity;
+import com.sliit.dailyselfie.Challenges.PostMaternityActivity;
+import com.sliit.dailyselfie.TimeLine.TimeLine;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

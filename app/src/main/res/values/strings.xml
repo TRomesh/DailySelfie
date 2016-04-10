@@ -45,4 +45,6 @@
     <string name="Sign_in">Sign in</string>
     <string name="Success">Success</string>
     <string name="Loading">Loading..</string>
+    
+    <string name="FireBaseLink">https://dailyselfie.firebaseio.com</string>
 </resources>

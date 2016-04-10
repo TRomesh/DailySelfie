@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.sliit.dailyselfie.LoginActivity">
+    tools:context=".Start.LoginActivity">
 
     <include layout="@layout/content_login" />
 
