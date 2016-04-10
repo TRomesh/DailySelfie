@@ -1,4 +1,4 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.DB;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

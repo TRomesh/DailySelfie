@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Start.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,12 +29,12 @@
             android:label="@string/title_activity_main_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".Camera.CameraActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_camera"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FitnessActivity"
+            android:name=".Challenges.FitnessActivity"
             android:label="@string/title_activity_fitness"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -43,7 +43,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".AddChallangeActivity"
+            android:name=".Challenges.AddChallangeActivity"
             android:label="@string/title_activity_add_challange"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -52,7 +52,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".ChildGrowthActivity"
+            android:name=".Challenges.ChildGrowthActivity"
             android:label="@string/title_activity_child_growth"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -61,11 +61,11 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".DiaryActivity"
+            android:name=".Diary.DiaryActivity"
             android:label="@string/title_activity_diary"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MaternityActivity"
+            android:name=".Challenges.MaternityActivity"
             android:label="@string/title_activity_maternity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -74,7 +74,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".NoshaveActivity"
+            android:name=".Challenges.NoshaveActivity"
             android:label="@string/title_activity_noshave"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -83,7 +83,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".PostMaternityActivity"
+            android:name=".Challenges.PostMaternityActivity"
             android:label="@string/title_activity_post_maternity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -92,7 +92,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".TimeLine"
+            android:name=".TimeLine.TimeLine"
             android:label="@string/title_activity_time_line"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -101,11 +101,11 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Start.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Start.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

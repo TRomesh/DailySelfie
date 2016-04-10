@@ -1,9 +1,11 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.Start;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+
+import com.sliit.dailyselfie.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.Start;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.sliit.dailyselfie.DB.DBHelper;
+import com.sliit.dailyselfie.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

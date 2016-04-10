@@ -1,9 +1,11 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.TimeLine;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sliit.dailyselfie.R;
 
 /**
  * Created by Tharaka on 22/03/2016.

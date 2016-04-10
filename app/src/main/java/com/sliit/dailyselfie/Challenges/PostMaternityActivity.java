@@ -1,4 +1,4 @@
-package com.sliit.dailyselfie;
+package com.sliit.dailyselfie.Challenges;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class AddChallangeActivity extends AppCompatActivity {
+import com.sliit.dailyselfie.R;
+
+public class PostMaternityActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_challange);
+        setContentView(R.layout.activity_post_maternity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
