@@ -1,15 +1,19 @@
 package com.sliit.dailyselfie.Community;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by Tharaka on 10/04/2016.
  */
 public class SharePost {
 
-    private String PostID;
+
     private String PostType;
     private String PostImage;
     private String PostDescription;
     private String PostedTime;
+    @JsonIgnore
+    private String PostID;
 
 
     public SharePost(){}

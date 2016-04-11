@@ -47,4 +47,8 @@
     <string name="Loading">Loading..</string>
     
     <string name="FireBaseLink">https://dailyselfie.firebaseio.com</string>
+
+    <string name="Propicselect">Take a photo or select an image from Gallery</string>
+
+
 </resources>

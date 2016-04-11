@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public static String REGISTER_TABLE =
-            "CREATE TABLE register (id INTEGER PRIMARY KEY AUTOINCREMENT, fname VARCHAR(255), lname VARCHAR(255), email VARCHAR(255),password VARCHAR(10), profilepic VARCHAR(255) )";
+            "CREATE TABLE register (id INTEGER PRIMARY KEY AUTOINCREMENT, fname VARCHAR(255), lname VARCHAR(255), email VARCHAR(255) NOT NULL UNIQUE,password VARCHAR(10), profilepic VARCHAR(255) )";
 
     public static String LOGIN_TABLE =
             "CREATE TABLE login (id INTEGER PRIMARY KEY AUTOINCREMENT,activatedStatus VARCHAR(50), userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";

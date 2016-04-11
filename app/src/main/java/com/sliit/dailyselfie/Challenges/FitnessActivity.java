@@ -66,7 +66,7 @@ public class FitnessActivity extends AppCompatActivity {
         findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge","fitness"));
             }
         });
 

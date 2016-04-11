@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class RegisterUser {
 
-    private String Uname;
+    private String fname;
+    private String Lname;
     private String Password;
+    private String Email;
     private String Profilepic;
 
     @JsonIgnore
@@ -17,18 +19,35 @@ public class RegisterUser {
     public RegisterUser(){}
 
 
-    public RegisterUser(String uname,String password,String propic){
-        Uname=uname;
+    public String getLname() {
+        return Lname;
+    }
+
+    public void setLname(String lname) {
+        Lname = lname;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public RegisterUser(String uname, String password, String propic){
+        fname=uname;
         Password=password;
         Profilepic=propic;
+
     }
 
     public String getUname() {
-        return Uname;
+        return fname;
     }
 
     public void setUname(String uname) {
-        Uname = uname;
+        fname = uname;
     }
 
     public String getPassword() {

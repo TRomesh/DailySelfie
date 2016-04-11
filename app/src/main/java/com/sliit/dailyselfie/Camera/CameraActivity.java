@@ -1,5 +1,7 @@
 package com.sliit.dailyselfie.Camera;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -18,7 +20,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sliit.dailyselfie.R;
@@ -36,6 +42,12 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView IV;
     private String ImageFileLoaction="";
 
+    ImageButton bcan,bsnap,bdesc;
+    Dialog d;
+    String challenge;
+    Bundle extras;
+
+
 
 
 
@@ -48,6 +60,53 @@ public class CameraActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         IV = (ImageView)findViewById(R.id.snap1);
+        bcan = (ImageButton)findViewById(R.id.cancle);
+        bsnap = (ImageButton)findViewById(R.id.takeSnap);
+        bdesc = (ImageButton)findViewById(R.id.addDesc);
+
+         extras = getIntent().getExtras();
+        if (extras != null) {
+            challenge = extras.getString("Challenge");
+        }
+
+
+        bdesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (challenge) {
+
+                    case "fitness":
+                      d = new Dialog(CameraActivity.this);
+                      d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                      d.setContentView(R.layout.fitnessdialog);
+                      ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
+                      TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
+                      d.show();
+                        break;
+
+                    case "maternity" :
+                       d = new Dialog(CameraActivity.this);
+                       d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                       d.setContentView(R.layout.maternitydialog);
+                       ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
+                       TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
+                       d.show();
+                        break;
+
+                    case "child":
+                        d = new Dialog(CameraActivity.this);
+                        d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        d.setContentView(R.layout.childdialog);
+                       ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
+                       TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
+                       d.show();
+                        break;
+
+                }
+
+            }
+        });
 
     }
 
