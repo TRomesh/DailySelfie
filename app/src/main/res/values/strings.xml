@@ -6,7 +6,7 @@
     <string name="txt_height">Height</string>
     <string name="txt_weight">Weight</string>
     <string name="txt_targetw">Target Weight</string>
-    <string name="txt_timeP">Target Time Period</string>
+    <string name="txt_timeP">Challange Period</string>
     <string name="txt_btn_submit">Submit</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="txt_maternity">My Pregnancy day by day</string>
