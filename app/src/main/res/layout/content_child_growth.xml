@@ -2,215 +2,251 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Challenges.ChildGrowthActivity"
     tools:showIn="@layout/activity_child_growth">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginBottom="5dp"
-                android:text="@string/txt_childgro"
-                android:textSize="20dp"
-                android:gravity="center_vertical"
-                android:textColor="#FF9800" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
-                android:orientation="vertical">
+                android:layout_weight="1.5"
+                android:layout_marginTop="10dp">
 
-                <EditText
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    float:fletPadding="10dp">
+
+                    <EditText
+                        android:hint="@string/txt_chaName"
+                        android:id="@+id/childgrowthName"
+                        android:layout_weight="0.6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/txt_chaName"
-                    android:ems="10"
-                    android:id="@+id/editText2"
+                    android:layout_weight="0.5"
+                    android:text="@string/txt_bdy"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="15dp" />
+
+                <com.vi.swipenumberpicker.SwipeNumberPicker
+                    android:id="@+id/snp7"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="15sp" />
+                    app:snp_numberColor="@android:color/white"
+                    app:snp_arrowColor="@android:color/white"
+                    app:snp_backgroundColor="@color/colorAccent"
+                    app:snp_max="8"
+                    app:snp_min="1"
+                    app:snp_value="5"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
 
-                <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                <!--android:text="@string/txt_bdy"-->
-                <!--android:id="@+id/textView4"-->
-                <!--android:layout_weight="0.7"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:layout_marginLeft="13dp"-->
-                <!--android:textSize="15sp" />-->
+            </LinearLayout>
 
-                <!--<DatePicker-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.0001"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="13dp"-->
-                <!--android:calendarViewShown="false"></DatePicker>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/txt_height"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="15dp"
+                    android:gravity="center_vertical" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal">
+
+                    <com.vi.swipenumberpicker.SwipeNumberPicker
+                        android:id="@+id/snp0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:snp_numberColor="@android:color/white"
+                        app:snp_arrowColor="@android:color/white"
+                        app:snp_backgroundColor="@color/colorAccent"
+                        app:snp_max="8"
+                        app:snp_min="1"
+                        app:snp_value="5"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:text="@string/txt_weight"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="15dp"
+                    android:gravity="center_vertical" />
+
+                <com.vi.swipenumberpicker.SwipeNumberPicker
+                    android:id="@+id/snp2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="13dp">
+                    app:snp_numberColor="@android:color/white"
+                    app:snp_arrowColor="@android:color/white"
+                    app:snp_backgroundColor="@color/colorAccent"
+                    app:snp_max="8"
+                    app:snp_min="1"
+                    app:snp_value="5"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
 
-                    <LinearLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:text="@string/txt_timeP"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="15dp" />
+
+                <com.vi.swipenumberpicker.SwipeNumberPicker
+                    android:id="@+id/snp8"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:snp_numberColor="@android:color/white"
+                    app:snp_arrowColor="@android:color/white"
+                    app:snp_backgroundColor="@color/colorAccent"
+                    app:snp_max="8"
+                    app:snp_min="1"
+                    app:snp_value="5"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:layout_marginTop="15dp">
+
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    float:fletPadding="10dp">
+
+                    <EditText
+                        android:hint="Add your thoughts"
+                        android:id="@+id/description"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"></LinearLayout>
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/txt_height"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/fit_submit_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:text="Feets"
-                            android:gravity="center_vertical|center_horizontal" />
-
-                        <com.vi.swipenumberpicker.SwipeNumberPicker
-                            android:id="@+id/snp1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:snp_numberColor="@android:color/white"
-                            app:snp_arrowColor="@android:color/white"
-                            app:snp_backgroundColor="@color/colorAccent"
-                            app:snp_max="11"
-                            app:snp_min="1"
-                            app:snp_value="5"
-                            android:layout_marginRight="10dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:text="Inches"
-                            android:gravity="center_vertical|center_horizontal" />
-
-                        <com.vi.swipenumberpicker.SwipeNumberPicker
-                            android:id="@+id/snp2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:snp_numberColor="@android:color/white"
-                            app:snp_arrowColor="@android:color/white"
-                            app:snp_backgroundColor="@color/colorAccent"
-                            app:snp_max="11"
-                            app:snp_min="1"
-                            app:snp_value="5"
-                            android:layout_marginRight="10dp"/>
-
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|top"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="5dp"
+                        android:minHeight="50dp"
+                        android:minWidth="120dp"
+                        android:text="@string/txt_btn_submit"
+                        android:textColor="@android:color/white"
+                        fbutton:buttonColor="@color/fbutton_color_peter_river"
+                        fbutton:shadowEnabled="true" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="13dp">
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/setAlarm"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"></LinearLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/txt_weight"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:text="Kilograme"
-                            android:gravity="center_vertical|center_horizontal" />
-
-                        <com.vi.swipenumberpicker.SwipeNumberPicker
-                            android:id="@+id/snp3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:snp_numberColor="@android:color/white"
-                            app:snp_arrowColor="@android:color/white"
-                            app:snp_backgroundColor="@color/colorAccent"
-                            app:snp_max="11"
-                            app:snp_min="1"
-                            app:snp_value="5"
-                            android:layout_marginRight="10dp"/>
-
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="20dp"
+                        android:minHeight="50dp"
+                        android:minWidth="120dp"
+                        android:text="Set Alarm"
+                        android:textColor="@android:color/white"
+                        fbutton:buttonColor="@color/fbutton_color_peter_river"
+                        fbutton:shadowEnabled="true" />
 
                 </LinearLayout>
 
@@ -218,21 +254,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="Next"
-                android:layout_marginRight="10dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

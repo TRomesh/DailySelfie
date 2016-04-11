@@ -20,6 +20,7 @@ import com.sliit.dailyselfie.Challenges.AddChallangeActivity;
 import com.sliit.dailyselfie.Challenges.ChildGrowthActivity;
 import com.sliit.dailyselfie.Challenges.FitnessActivity;
 import com.sliit.dailyselfie.Challenges.MaternityActivity;
+import com.sliit.dailyselfie.Challenges.NoshaveActivity;
 import com.sliit.dailyselfie.Challenges.PostMaternityActivity;
 import com.sliit.dailyselfie.TimeLine.TimeLine;
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         findViewById(R.id.button_noshave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(),NoshaveActivity.class));
             }
         });
 
