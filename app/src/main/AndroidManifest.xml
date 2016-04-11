@@ -35,7 +35,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Challenges.FitnessActivity"
-            android:label="@string/title_activity_fitness"
+            android:label="My Fitness Pal"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".Challenges.AddChallangeActivity"
-            android:label="@string/title_activity_add_challange"
+            android:label="Add New Challange"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name=".Challenges.ChildGrowthActivity"
-            android:label="@string/title_activity_child_growth"
+            android:label="Child Growth"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -66,7 +66,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Challenges.MaternityActivity"
-            android:label="@string/title_activity_maternity"
+            android:label="@string/txt_maternity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -75,7 +75,7 @@
         </activity>
         <activity
             android:name=".Challenges.NoshaveActivity"
-            android:label="@string/title_activity_noshave"
+            android:label="No Shave November"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -84,7 +84,7 @@
         </activity>
         <activity
             android:name=".Challenges.PostMaternityActivity"
-            android:label="@string/title_activity_post_maternity"
+            android:label="Post Maternity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
