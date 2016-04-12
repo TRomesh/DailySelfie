@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private static final int ActivityStartCAM=0;
     private String ImageFileLoaction="";
+    private String bit64camimage="";
 
     RegisterUser RU;
     Firebase SignupRef;
@@ -89,8 +91,8 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                         startActivityForResult(gallery,PICK_IMAGE);
-                        Cam=true;
-                        Gal=false;
+                        Cam=false;
+                        Gal=true;
                         d.cancel();
                     }
                 });
@@ -110,8 +112,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                         CAMint.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                         startActivityForResult(CAMint, ActivityStartCAM);
-                        Gal=true;
-                        Cam=false;
+                        Gal=false;
+                        Cam=true;
                         d.cancel();
                     }
                 });
@@ -146,11 +148,14 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK && requestCode==PICK_IMAGE){
             imageUri=data.getData();
+            bit64camimage=BitmaptoString(imageUri.getPath());
             CIV.setImageURI(imageUri);
 
         }
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
+            bit64camimage=BitmaptoString(ImageFileLoaction);
             rotateImage(setReducedImageSize());
+            Toast.makeText(getApplicationContext(),bit64camimage,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -197,10 +202,10 @@ public class SignUpActivity extends AppCompatActivity {
             RU.setPassword(password);
 
             if(Cam){
-                RU.setProfilepic("Camera pic");
+                RU.setProfilepic(bit64camimage);
 
             }else if(Gal){
-
+                RU.setProfilepic(bit64camimage);
             }else{
                 RU.setProfilepic("Gallery pic");
             }

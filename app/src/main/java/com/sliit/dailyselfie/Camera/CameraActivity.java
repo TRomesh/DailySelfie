@@ -12,8 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 import com.sliit.dailyselfie.R;
 
 import java.io.File;
@@ -34,6 +38,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import rebus.bottomdialog.BottomDialog;
 
 
 public class CameraActivity extends AppCompatActivity {
@@ -42,10 +47,13 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView IV;
     private String ImageFileLoaction="";
 
+    BottomBar CamBottomBar;
     ImageButton bcan,bsnap,bdesc;
     Dialog d;
+    BottomDialog dialog;
     String challenge;
     Bundle extras;
+    boolean picpresent=false;
 
 
 
@@ -53,16 +61,48 @@ public class CameraActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         IV = (ImageView)findViewById(R.id.snap1);
-        bcan = (ImageButton)findViewById(R.id.cancle);
-        bsnap = (ImageButton)findViewById(R.id.takeSnap);
-        bdesc = (ImageButton)findViewById(R.id.addDesc);
+
+        IV.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+
+                if (picpresent) {
+                    dialog = new BottomDialog(CameraActivity.this);
+                    dialog.title("Options");
+                    dialog.canceledOnTouchOutside(true);
+                    dialog.cancelable(true);
+                    dialog.inflateMenu(R.menu.camera_bottomsheet_menu);
+                    dialog.setOnItemSelectedListener(new BottomDialog.OnItemSelectedListener() {
+                        @Override
+                        public boolean onItemSelected(int id) {
+                            switch (id) {
+                                case R.id.addeffects:
+                                    return true;
+
+                                case R.id.crop:
+                                    return true;
+
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    dialog.show();
+                }
+                return true;
+            }
+        });
+//        bcan = (ImageButton)findViewById(R.id.cancle);
+//        bsnap = (ImageButton)findViewById(R.id.takeSnap);
+//        bdesc = (ImageButton)findViewById(R.id.addDesc);
 
          extras = getIntent().getExtras();
         if (extras != null) {
@@ -70,43 +110,164 @@ public class CameraActivity extends AppCompatActivity {
         }
 
 
-        bdesc.setOnClickListener(new View.OnClickListener() {
+        CamBottomBar = BottomBar.attach(this, savedInstanceState);
+        CamBottomBar.noNavBarGoodness();
+
+
+
+        CamBottomBar.setItemsFromMenu(R.menu.camera_bottombar, new OnMenuTabClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onMenuTabSelected(@IdRes int menuItemId) {
 
-                switch (challenge) {
+                if (menuItemId == R.id.nav_back) {
 
-                    case "fitness":
-                      d = new Dialog(CameraActivity.this);
-                      d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                      d.setContentView(R.layout.fitnessdialog);
-                      ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
-                      TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
-                      d.show();
-                        break;
+                    IV.setImageResource(R.drawable.selfieimage);
+                    IV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    picpresent = false;
 
-                    case "maternity" :
-                       d = new Dialog(CameraActivity.this);
-                       d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                       d.setContentView(R.layout.maternitydialog);
-                       ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
-                       TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
-                       d.show();
-                        break;
+                } else if (menuItemId == R.id.nav_takeSnap) {
+                    Intent CAMint= new Intent();
+                    CAMint.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File photoFile=null;
+                    try{
+                        photoFile=createImageFile();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
 
-                    case "child":
-                        d = new Dialog(CameraActivity.this);
-                        d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        d.setContentView(R.layout.childdialog);
-                       ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
-                       TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
-                       d.show();
-                        break;
+                    CAMint.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    startActivityForResult(CAMint, ActivityStartCAM);
+
+
+                } else if (menuItemId == R.id.nav_addDetails) {
+                    if (picpresent) {
+
+                        switch (challenge) {
+
+                            case "fitness":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.fitnessdialog);
+                                ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
+                                TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
+                                d.show();
+                                break;
+
+                            case "maternity":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.maternitydialog);
+                                ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
+                                TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
+                                d.show();
+
+                                break;
+
+                            case "child":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.childdialog);
+                                ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
+                                TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
+                                d.show();
+
+                                break;
+
+                        }
+
+
+                    }else{
+                        Toast.makeText(CameraActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+//
+//                CamBottomBar.mapColorForTab(0, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+//                CamBottomBar.mapColorForTab(1, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+//                CamBottomBar.mapColorForTab(2, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+
+
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+
+
+                if (menuItemId == R.id.nav_back) {
+
+                    IV.setImageResource(R.drawable.selfieimage);
+                    IV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    picpresent = false;
+
+
+                } else if (menuItemId == R.id.nav_takeSnap) {
+                    Intent CAMint = new Intent();
+                    CAMint.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    CAMint.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    startActivityForResult(CAMint, ActivityStartCAM);
+
+
+                } else if (menuItemId == R.id.nav_addDetails) {
+
+                    if (picpresent) {
+
+                        switch (challenge) {
+
+                            case "fitness":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.fitnessdialog);
+                                ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
+                                TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
+                                d.show();
+                                break;
+
+                            case "maternity":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.maternitydialog);
+                                ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
+                                TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
+                                d.show();
+
+                                break;
+
+                            case "child":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.childdialog);
+                                ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
+                                TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
+                                d.show();
+
+                                break;
+
+                        }
+
+
+                    }else{
+                        Toast.makeText(CameraActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
+//
+//                CamBottomBar.mapColorForTab(0, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+//                CamBottomBar.mapColorForTab(1, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+//                CamBottomBar.mapColorForTab(2, ContextCompat.getColor(CameraActivity.this, R.color.bottomPrimary));
+
+
             }
         });
+
+
 
     }
 
@@ -115,6 +276,10 @@ public class CameraActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         rotateImage(setReducedImageSize());
+        if(!picpresent){
+            IV.setImageResource(R.drawable.selfieimage);
+            IV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
     }
 
     public void TakePhoto(View v){
@@ -135,6 +300,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
             rotateImage(setReducedImageSize());
+            picpresent=true;
+
         }
 
     }

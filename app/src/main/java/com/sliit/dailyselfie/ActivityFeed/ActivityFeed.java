@@ -19,6 +19,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+import com.roughike.bottombar.OnSizeDeterminedListener;
 import com.sliit.dailyselfie.Community.SharePost;
 import com.sliit.dailyselfie.R;
 
@@ -46,6 +47,7 @@ public class ActivityFeed extends AppCompatActivity {
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noNavBarGoodness();
+
 
 
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {

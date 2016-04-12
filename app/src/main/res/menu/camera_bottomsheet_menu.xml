@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/addeffects"
+        android:icon="@drawable/ic_brush_black_24dp"
+        android:title="Add Effects" />
+    <item
+        android:id="@+id/crop"
+        android:icon="@drawable/ic_crop_free_black_24dp"
+        android:title="Crop Image" />
+</menu>
