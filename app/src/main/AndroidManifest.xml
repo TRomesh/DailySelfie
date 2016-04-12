@@ -107,6 +107,10 @@
         <activity
             android:name=".Start.SignUpActivity"
             android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityFeed.ActivityFeed"
+            android:label="@string/title_activity_activity_feed"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

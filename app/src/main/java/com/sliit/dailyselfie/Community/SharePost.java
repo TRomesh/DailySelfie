@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class SharePost {
 
-
+    private String PostSharer;
     private String PostType;
     private String PostImage;
     private String PostDescription;
@@ -18,15 +18,21 @@ public class SharePost {
 
     public SharePost(){}
 
+    public SharePost(String postSharer, String postID, String postedTime, String postDescription, String postImage, String postType) {
+        PostSharer = postSharer;
+        PostID = postID;
+        PostedTime = postedTime;
+        PostDescription = postDescription;
+        PostImage = postImage;
+        PostType = postType;
+    }
 
-    public SharePost(String pid,String ptype,String pimage,String pdesc,String ptime){
-        PostID=pid;
-        PostType=ptype;
-        PostImage=pimage;
-        PostDescription=pdesc;
-        PostedTime=ptime;
+    public String getPostSharer() {
+        return PostSharer;
+    }
 
-
+    public void setPostSharer(String postSharer) {
+        PostSharer = postSharer;
     }
 
     public String getPostID() {

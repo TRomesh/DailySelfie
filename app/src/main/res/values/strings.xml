@@ -45,10 +45,11 @@
     <string name="Sign_in">Sign in</string>
     <string name="Success">Success</string>
     <string name="Loading">Loading..</string>
-    
+
     <string name="FireBaseLink">https://dailyselfie.firebaseio.com</string>
 
     <string name="Propicselect">Take a photo or select an image from Gallery</string>
+    <string name="title_activity_activity_feed">ActivityFeed</string>
 
 
 </resources>

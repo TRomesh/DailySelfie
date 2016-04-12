@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.sliit.dailyselfie.ActivityFeed.ActivityFeed;
 import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.Challenges.AddChallangeActivity;
 import com.sliit.dailyselfie.Challenges.ChildGrowthActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+
+            startActivity(new Intent(MainActivity.this,ActivityFeed.class));
 
         } else if (id == R.id.nav_slideshow) {
 

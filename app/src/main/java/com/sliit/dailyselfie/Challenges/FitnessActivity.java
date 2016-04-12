@@ -116,7 +116,7 @@ public class FitnessActivity extends AppCompatActivity {
 
                 Toast.makeText(FitnessActivity.this, "Saved !", Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge","fitness"));
 
             }
         });
