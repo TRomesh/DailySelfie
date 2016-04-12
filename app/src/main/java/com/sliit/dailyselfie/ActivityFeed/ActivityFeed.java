@@ -47,35 +47,26 @@ public class ActivityFeed extends AppCompatActivity {
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noNavBarGoodness();
 
+
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
 
                 if (menuItemId == R.id.nav_home) {
 
-                    Toast.makeText(ActivityFeed.this, "Home", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityFeed.this, "Timeline", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_fav) {
-                    Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityFeed.this, "Take Snap", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_gallery) {
-                    Toast.makeText(ActivityFeed.this, "Gallery", Toast.LENGTH_SHORT).show();
-
-                } else if (menuItemId == R.id.nav_events) {
-                    Toast.makeText(ActivityFeed.this, "Home", Toast.LENGTH_SHORT).show();
-
-                } else if (menuItemId == R.id.nav_notifications) {
-                    Toast.makeText(ActivityFeed.this, "Notifications", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();
 
                 }
-
 
                 mBottomBar.mapColorForTab(0, ContextCompat.getColor(ActivityFeed.this, R.color.bottomPrimary));
                 mBottomBar.mapColorForTab(1, ContextCompat.getColor(ActivityFeed.this, R.color.bottomPrimary));
                 mBottomBar.mapColorForTab(2, ContextCompat.getColor(ActivityFeed.this, R.color.bottomPrimary));
-                mBottomBar.mapColorForTab(3, ContextCompat.getColor(ActivityFeed.this, R.color.bottomPrimary));
-                mBottomBar.mapColorForTab(4, ContextCompat.getColor(ActivityFeed.this, R.color.bottomPrimary));
 
 
             }
