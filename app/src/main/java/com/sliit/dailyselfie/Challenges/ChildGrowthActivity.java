@@ -98,7 +98,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
 
                 Toast.makeText(ChildGrowthActivity.this, "Saved !", Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge","child"));
             }
         });
 

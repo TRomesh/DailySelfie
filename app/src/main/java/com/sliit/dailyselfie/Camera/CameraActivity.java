@@ -100,9 +100,7 @@ public class CameraActivity extends AppCompatActivity {
                 return true;
             }
         });
-//        bcan = (ImageButton)findViewById(R.id.cancle);
-//        bsnap = (ImageButton)findViewById(R.id.takeSnap);
-//        bdesc = (ImageButton)findViewById(R.id.addDesc);
+
 
          extras = getIntent().getExtras();
         if (extras != null) {

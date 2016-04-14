@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -54,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
     Dialog d;
     ImageButton ib1;
     ImageButton ib2;
-    private final static int PICK_IMAGE=100;
+    private final static int PICK_IMAGE=1;
     Uri imageUri;
     String dimagepath="";
 
@@ -146,9 +147,9 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK && requestCode==PICK_IMAGE){
+        if(requestCode==PICK_IMAGE  && resultCode==RESULT_OK){
             imageUri=data.getData();
-            bit64camimage=BitmaptoString(imageUri.getPath());
+           bit64camimage=BitmaptoString(getRealPathFromURI(imageUri));
             CIV.setImageURI(imageUri);
 
         }
@@ -167,7 +168,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     public void registerUser(RegisterUser ru){
-      SignupRef.push().setValue(ru);
+        SignupRef.push().setValue(ru);
     }
 
     public void signUp(View v) {
@@ -273,7 +274,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public String BitmaptoString(String path){
-       // Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.thara1);
+        // Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.thara1);
         Bitmap bmp = BitmapFactory.decodeFile(path);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
@@ -281,6 +282,20 @@ public class SignUpActivity extends AppCompatActivity {
         byte[] byteArray = stream.toByteArray();
         String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return  imageFile;
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
 
 }

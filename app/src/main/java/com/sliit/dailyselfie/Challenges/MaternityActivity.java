@@ -102,7 +102,7 @@ public class MaternityActivity extends AppCompatActivity {
 
                 Toast.makeText(MaternityActivity.this, "Saved !", Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge","maternity"));
             }
         });
 
