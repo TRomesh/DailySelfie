@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.Community.RegisterUser;
 import com.sliit.dailyselfie.DB.DBHelper;
@@ -138,7 +139,8 @@ public class SignUpActivity extends AppCompatActivity {
         if(Cam){
             rotateImage(setReducedImageSize());
         }else if(Gal){
-            CIV.setImageURI(imageUri);
+            //CIV.setImageURI(imageUri);
+            Glide.with(this).load(imageUri).into(CIV);
         }else{
 
         }
@@ -150,7 +152,8 @@ public class SignUpActivity extends AppCompatActivity {
         if(requestCode==PICK_IMAGE  && resultCode==RESULT_OK){
             imageUri=data.getData();
            bit64camimage=BitmaptoString(getRealPathFromURI(imageUri));
-            CIV.setImageURI(imageUri);
+           // CIV.setImageURI(imageUri);
+            Glide.with(this).load(imageUri).into(CIV);
 
         }
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
@@ -271,6 +274,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         CIV.setImageBitmap(rotatedBitmap);
+
     }
 
     public String BitmaptoString(String path){
