@@ -1,5 +1,6 @@
 package com.sliit.dailyselfie.Challenges;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -7,6 +8,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,10 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.DB.DBHelper;
@@ -25,12 +32,16 @@ import com.sliit.dailyselfie.R;
 import com.vi.swipenumberpicker.OnValueChangeListener;
 import com.vi.swipenumberpicker.SwipeNumberPicker;
 
+import picker.ugurtekbas.com.Picker.Picker;
+
 public class FitnessActivity extends AppCompatActivity {
 
     SwipeNumberPicker fitpicker;
     SwipeNumberPicker fitpicker1;
     SwipeNumberPicker fitpicker2;
     String fitType;
+    Dialog d;
+    Picker picker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +55,40 @@ public class FitnessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(FitnessActivity.this);
-                mBuilder.setSmallIcon(R.drawable.ic_noti_dailyselfie);
-                mBuilder.setContentTitle("DailySelfie");
-                mBuilder.setContentText("Time to take a Selfie!");
-                mBuilder.setSound(alarmSound);
-                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-                Intent resultIntent = new Intent(FitnessActivity.this, CameraActivity.class);
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(FitnessActivity.this);
-                stackBuilder.addParentStack(CameraActivity.class);
 
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(1001, mBuilder.build());
+                d = new Dialog(FitnessActivity.this);
+                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                d.setContentView(R.layout.alarmmodel);
+                picker = (Picker)d.findViewById(R.id.amPicker);
+                picker.setClockColor(Color.parseColor("#2196F3"));
+                picker.setDialColor(Color.parseColor("#FF9800"));
+                picker.getCurrentHour();
+                picker.getCurrentMin();
+
+
+                d.show();
+
+
+//                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(FitnessActivity.this);
+//                mBuilder.setSmallIcon(R.drawable.ic_noti_dailyselfie);
+//                mBuilder.setContentTitle("DailySelfie");
+//                mBuilder.setContentText("Time to take a Selfie!");
+//                mBuilder.setSound(alarmSound);
+//                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+//                Intent resultIntent = new Intent(FitnessActivity.this, CameraActivity.class);
+//                TaskStackBuilder stackBuilder = TaskStackBuilder.create(FitnessActivity.this);
+//                stackBuilder.addParentStack(CameraActivity.class);
+//
+//                stackBuilder.addNextIntent(resultIntent);
+//                PendingIntent resultPendingIntent =
+//                        stackBuilder.getPendingIntent(
+//                                0,
+//                                PendingIntent.FLAG_UPDATE_CURRENT
+//                        );
+//                mBuilder.setContentIntent(resultPendingIntent);
+//                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                mNotificationManager.notify(1001, mBuilder.build());
             }
         });
 

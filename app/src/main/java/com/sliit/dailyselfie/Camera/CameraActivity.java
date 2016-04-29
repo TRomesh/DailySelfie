@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.sliit.dailyselfie.R;
@@ -44,6 +45,7 @@ import rebus.bottomdialog.BottomDialog;
 public class CameraActivity extends AppCompatActivity {
 
     private static final int ActivityStartCAM=0;
+    private final static int EDIT_IMAGE=1;
     private ImageView IV;
     private String ImageFileLoaction="";
 
@@ -55,9 +57,7 @@ public class CameraActivity extends AppCompatActivity {
     Bundle extras;
     boolean picpresent=false;
 
-
-
-
+    Uri ImageUri;
 
 
     @Override
@@ -85,9 +85,11 @@ public class CameraActivity extends AppCompatActivity {
                         public boolean onItemSelected(int id) {
                             switch (id) {
                                 case R.id.addeffects:
+                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_SHORT).show();
                                     return true;
 
                                 case R.id.crop:
+                                    Toast.makeText(getApplicationContext(),"crop",Toast.LENGTH_SHORT).show();
                                     return true;
 
                                 default:
@@ -274,6 +276,7 @@ public class CameraActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         rotateImage(setReducedImageSize());
+        IV.setScaleType(ImageView.ScaleType.CENTER_CROP);
         if(!picpresent){
             IV.setImageResource(R.drawable.selfieimage);
             IV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -298,7 +301,23 @@ public class CameraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
             rotateImage(setReducedImageSize());
+           ImageUri = Uri.parse(ImageFileLoaction);
+            IV.setScaleType(ImageView.ScaleType.CENTER_CROP);
             picpresent=true;
+
+        }
+        if (resultCode == RESULT_OK && requestCode==EDIT_IMAGE) {
+
+
+                /* Make a case for the request code we passed to startActivityForResult() */
+
+                    /* Show the image! */
+            Uri editedImageUri = data.getData();
+            ImageUri=data.getData();
+           Glide.with(this).load(editedImageUri).into(IV);
+            picpresent=true;
+
+
 
         }
 
@@ -349,5 +368,7 @@ public class CameraActivity extends AppCompatActivity {
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         IV.setImageBitmap(rotatedBitmap);
     }
+
+
 
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="5dp">
+    card_view:cardElevation="2.5dp">
 
     <RelativeLayout
         android:id="@+id/rlayout"
@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_weight="1"
                     android:text="Possition"
-                    android:textSize="36sp"
+                    android:textSize="16sp"
                     android:id="@+id/recyclerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -42,13 +42,14 @@
                 <TextView
                     android:layout_weight="1"
                     android:text="Name"
-                    android:textSize="36sp"
+                    android:textSize="16sp"
                     android:id="@+id/recyclerText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:id="@+id/postShare"
                     android:layout_weight="1"
-                    android:text="Like"
+                    android:text="Share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

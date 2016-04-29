@@ -9,7 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
+import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.R;
 
 public class TimeLine extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class TimeLine extends AppCompatActivity {
     int[] images;
     MyAdapter adapter;
     RecyclerView rv;
+    Button b1;
 
 
     @Override
@@ -28,6 +31,7 @@ public class TimeLine extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Firebase.setAndroidContext(this);
 
         players= new String[]{"Opening Batsman", "Middle order Batsman", "Wicketkeeper Batsman", "Tailender"};
         names= new String[]{"Dilshan", "Mahela", "Sangakkara", "Kulesakara"};
@@ -41,14 +45,8 @@ public class TimeLine extends AppCompatActivity {
         adapter =new MyAdapter(this,players,names,images);
         rv.setAdapter(adapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
     }
 
 }
