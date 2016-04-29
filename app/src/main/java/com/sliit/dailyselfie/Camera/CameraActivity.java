@@ -29,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adobe.creativesdk.aviary.AdobeImageIntent;
 import com.bumptech.glide.Glide;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -61,10 +60,6 @@ public class CameraActivity extends AppCompatActivity {
     Uri ImageUri;
 
 
-
-
-
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +85,7 @@ public class CameraActivity extends AppCompatActivity {
                         public boolean onItemSelected(int id) {
                             switch (id) {
                                 case R.id.addeffects:
-                                    image();
+                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_SHORT).show();
                                     return true;
 
                                 case R.id.crop:
@@ -375,18 +370,5 @@ public class CameraActivity extends AppCompatActivity {
     }
 
 
-    public void image(){
-      /* 1) Make a new Uri object (Replace this with a real image on your device) */
-        Uri imageUri = ImageUri;
-
-        /* 2) Create a new Intent */
-        Intent imageEditorIntent = new AdobeImageIntent.Builder(this)
-                .setData(imageUri)
-                .build();
-
-        /* 3) Start the Image Editor with request code 1 */
-        startActivityForResult(imageEditorIntent,EDIT_IMAGE);
-
-    }
 
 }

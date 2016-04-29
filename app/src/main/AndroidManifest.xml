@@ -12,7 +12,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".Camera.Creative"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Start.SplashActivity"
@@ -114,10 +113,6 @@
             android:label="@string/title_activity_activity_feed"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <provider
-            android:name="com.adobe.creativesdk.aviary.internal.cds.CdsProvider"
-            android:authorities="${applicationId}.CdsProvider"
-            android:exported="false" />
 
     </application>
 

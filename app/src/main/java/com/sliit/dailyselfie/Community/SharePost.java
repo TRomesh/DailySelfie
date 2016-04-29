@@ -12,19 +12,29 @@ public class SharePost {
     private String PostImage;
     private String PostDescription;
     private String PostedTime;
+    private String Date;
     @JsonIgnore
     private String PostID;
 
 
     public SharePost(){}
 
-    public SharePost(String postSharer, String postID, String postedTime, String postDescription, String postImage, String postType) {
+    public SharePost(String postSharer, String postType, String postImage, String postDescription, String postedTime, String date, String postID) {
         PostSharer = postSharer;
-        PostID = postID;
-        PostedTime = postedTime;
-        PostDescription = postDescription;
-        PostImage = postImage;
         PostType = postType;
+        PostImage = postImage;
+        PostDescription = postDescription;
+        PostedTime = postedTime;
+        Date = date;
+        PostID = postID;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 
     public String getPostSharer() {

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion 23
@@ -11,18 +11,13 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 
@@ -32,7 +27,7 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/NOTICE'
-        pickFirst 'AndroidManifest.xml'
+
 
     }
 
@@ -57,8 +52,8 @@ dependencies {
     compile 'rebus:bottom-dialog:0.0.5'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.github.ugurtekbas:dialTimePicker:4cc8db277d'
 
-    compile 'com.adobe.creativesdk.foundation:auth:0.9.7'
-    compile 'com.adobe.creativesdk:image:4.4.8'
+
 
 }

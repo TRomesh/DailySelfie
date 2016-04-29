@@ -41,6 +41,8 @@ public class ActivityFeed extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
 
+        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedPost");
+
         RV= (RecyclerView)findViewById(R.id.recycler1);
         RV.setLayoutManager(new LinearLayoutManager(this));
 
