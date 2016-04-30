@@ -45,6 +45,19 @@
     <string name="Sign_in">Sign in</string>
     <string name="Success">Success</string>
     <string name="Loading">Loading..</string>
-    
+
     <string name="FireBaseLink">https://dailyselfie.firebaseio.com</string>
+
+    <string name="hint_fname">First Name</string>
+    <string name="hint_lname">Last Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirmpassword">Confirm Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_fname">Enter your first name</string>
+    <string name="err_msg_lname">Enter your last name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string name="err_msg_confirmpassword">Re-enter the password</string>
+
 </resources>

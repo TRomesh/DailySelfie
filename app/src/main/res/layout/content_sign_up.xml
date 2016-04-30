@@ -15,90 +15,79 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:background="@android:color/holo_green_dark"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_firstName"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:orientation="horizontal">
-
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                float:fletPadding="5dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/fname"
-                    android:hint="First Name" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                float:fletPadding="5dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lname"
-                    android:hint="Last Name" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-        </LinearLayout>
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            float:fletPadding="5dp">
+            android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/input_firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/semail"
-                android:hint="Email"
+                android:hint="@string/hint_fname"
+                android:inputType="text"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_LastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_lname"
+                android:inputType="text"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"/>
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_Password"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            float:fletPaddingBottom="5dp">
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/input_confirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/password"
-                android:hint="Password"
-                android:inputType="textPassword" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:hint="@string/hint_confirmpassword"
+                android:inputType="textPassword"/>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            float:fletPaddingBottom="5dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Confirm Password"
-                android:id="@+id/cpassword"
-                android:inputType="textPassword" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -109,7 +98,7 @@
         android:layout_marginTop="15dp">
 
         <com.dd.processbutton.iml.ActionProcessButton
-            android:id="@+id/btnSignIn"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
@@ -121,8 +110,7 @@
             custom:pb_colorPressed="@color/blue_pressed"
             custom:pb_colorProgress="@color/purple_progress"
             custom:pb_textComplete="@string/Success"
-            custom:pb_textProgress="@string/Loading"
-            android:onClick="signUp"/>
+            custom:pb_textProgress="@string/Loading"/>
 
     </LinearLayout>
 
