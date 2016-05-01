@@ -50,6 +50,7 @@
 
     <string name="Propicselect">Take a photo or select an image from Gallery</string>
     <string name="title_activity_activity_feed">ActivityFeed</string>
+    <string name="title_activity_my_challeges">MyChallegesActivity</string>
 
 
 </resources>

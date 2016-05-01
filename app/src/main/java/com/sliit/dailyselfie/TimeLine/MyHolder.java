@@ -43,7 +43,6 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
 
 
 
-
     public void setItemClickListner(ItemClickListner ic){
         this.itemClickListner=ic;
     }
