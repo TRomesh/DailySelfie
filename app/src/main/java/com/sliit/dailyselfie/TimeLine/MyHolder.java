@@ -22,6 +22,7 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     TextView txt3;
     ItemClickListner itemClickListner;
     ItemOnLongClickListner itemOnLongClickListner;
+    ButtonClickListner buttonClickListner;
 
     public MyHolder(final View itemView) {
         super(itemView);
@@ -32,15 +33,11 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
         b1=(Button)itemView.findViewById(R.id.postShare);
 
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"shared",Toast.LENGTH_SHORT).show();
-            }
-        });
 
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
+
+
 
     }
 
