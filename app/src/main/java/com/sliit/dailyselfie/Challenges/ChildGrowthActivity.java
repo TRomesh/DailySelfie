@@ -1,19 +1,28 @@
 package com.sliit.dailyselfie.Challenges;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,10 +34,21 @@ import com.sliit.dailyselfie.R;
 import com.vi.swipenumberpicker.OnValueChangeListener;
 import com.vi.swipenumberpicker.SwipeNumberPicker;
 
+import java.util.Date;
+
+import picker.ugurtekbas.com.Picker.Picker;
+
 public class ChildGrowthActivity extends AppCompatActivity {
 
-    SwipeNumberPicker fitpicker;
-    SwipeNumberPicker fitpicker1;
+//    String fitType;
+//    Dialog d;
+//    Picker picker;
+
+    private EditText childname,childDescription;
+    private TextInputLayout inputLayoutName,inputLayoutDescription;
+    private Button btnAdd;
+
+    private SwipeNumberPicker cheight,cweight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +58,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.childsetAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -66,59 +86,151 @@ public class ChildGrowthActivity extends AppCompatActivity {
         });
 
 
-
-        findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EditText cname = (EditText) findViewById(R.id.childgrowthName);
-                SwipeNumberPicker cheight = (SwipeNumberPicker) findViewById(R.id.snp0);
-                SwipeNumberPicker cweight = (SwipeNumberPicker) findViewById(R.id.snp2);
-                EditText cdescription = (EditText) findViewById(R.id.description);
-
-                String Challangename = cname.getText().toString();
-                Double height = Double.parseDouble((String) cheight.getText());
-                Double weight = Double.parseDouble((String) cweight.getText());
-                String description = cdescription.getText().toString();
-
-                DBHelper helper = new DBHelper(ChildGrowthActivity.this);
-                SQLiteDatabase db = helper.getWritableDatabase();
-
-                ContentValues values = new ContentValues();
-                values.put("type", "ChildGrowth");
-                values.put("name", Challangename);
-                values.put("height", height);
-                values.put("weight", weight);
-                values.put("description", description);
-
-                db.insert("challanges", null, values);
-
-                cname.setText("");
-                cdescription.setText("");
-
-                Toast.makeText(ChildGrowthActivity.this, "Saved !", Toast.LENGTH_LONG).show();
-
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge","child"));
-            }
-        });
-
-
-        fitpicker = (SwipeNumberPicker)findViewById(R.id.snp0);
-        fitpicker.setOnValueChangeListener(new OnValueChangeListener() {
+        cheight = (SwipeNumberPicker)findViewById(R.id.snpchild0);
+        cheight.setOnValueChangeListener(new OnValueChangeListener() {
             @Override
             public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
                 return true;
             }
         });
 
-        fitpicker1 = (SwipeNumberPicker)findViewById(R.id.snp2);
-        fitpicker1.setOnValueChangeListener(new OnValueChangeListener() {
+        cweight = (SwipeNumberPicker)findViewById(R.id.snpchild2);
+        cweight.setOnValueChangeListener(new OnValueChangeListener() {
             @Override
             public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
                 return true;
             }
         });
 
+        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_ChildName);
+        inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_Childdescription);
+
+        childname = (EditText)findViewById(R.id.childgrowthName);
+        childDescription = (EditText)findViewById(R.id.cdescription);
+        btnAdd = (Button) findViewById(R.id.child_submit_btn);
+        cheight = (SwipeNumberPicker)findViewById(R.id.snpchild0);
+        cweight = (SwipeNumberPicker)findViewById(R.id.snpchild2);
+
+        childname.addTextChangedListener(new MyTextWatcher(childname));
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (submitForm()) {
+
+                    String cChallangename = childname.getText().toString();
+                    Double cHeight = Double.parseDouble((String) cheight.getText());
+                    Double cWeight = Double.parseDouble((String) cweight.getText());
+                    //Date cBirthday = "";
+                    //Date challangePeriod = "";
+                    String cdescription = childDescription.getText().toString();
+
+                    DBHelper helper = new DBHelper(ChildGrowthActivity.this);
+                    SQLiteDatabase db = helper.getWritableDatabase();
+
+                    ContentValues values = new ContentValues();
+                    values.put("type", "ChildGrowth");
+                    values.put("name", cChallangename);
+                    values.put("height", cHeight);
+                    values.put("weight", cWeight);
+                    //values.put("birthDay", "");
+                    //values.put("alram","");
+                    values.put("description", cdescription);
+
+                    try {
+                        db.insert("challanges", null, values);
+
+                        successfulAlert();
+
+                    } catch (SQLiteException e) {
+                        AlertDialog.Builder a_builder = new AlertDialog.Builder(ChildGrowthActivity.this);
+                        a_builder.setMessage("User already exist!")
+                                .setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        childname.setText("");
+                                        childDescription.setText("");
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert = a_builder.create();
+                        alert.setTitle("Alert");
+                        alert.show();
+                    }
+
+                    //Toast.makeText(this, "Registed !", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
-}
+    public void successfulAlert(){
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(ChildGrowthActivity.this);
+        a_builder.setMessage("Successfully created Child Growth challange")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        childname.setText("");
+                        childDescription.setText("");
+                        startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge", "child"));
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = a_builder.create();
+        alert.setTitle("Congratulation!");
+        alert.show();
+    }
+
+    private boolean submitForm() {
+        if (!validateChildName()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateChildName() {
+        if (childname.getText().toString().trim().isEmpty()) {
+            inputLayoutName.setError("Enter valid Challange name");
+            requestFocus(childname);
+            return false;
+        } else {
+            inputLayoutName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.childgrowthName:
+                    validateChildName();
+                    break;
+
+            }
+        }
+    }
+ }
+

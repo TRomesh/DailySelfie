@@ -75,17 +75,17 @@
         android:layout_height="0dp">
 
         <Button
-            android:id="@+id/fitcancle"
             android:text="Cancle"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/fitcancle"/>
         <Button
-            android:id="@+id/fitadd"
             android:text="Add"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/fitadd"/>
     </LinearLayout>
 
 

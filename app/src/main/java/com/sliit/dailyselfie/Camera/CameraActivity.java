@@ -63,6 +63,7 @@ public class CameraActivity extends AppCompatActivity {
     String challenge;
     Bundle extras;
     boolean picpresent=false;
+
     DBHelper helper;
     SQLiteDatabase db;
     ContentValues values;
@@ -181,6 +182,11 @@ public class CameraActivity extends AppCompatActivity {
                                 b1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+
+                                        String fitCurrentDescription = fittxt.getText().toString();
+                                        Double currentWeight = Double.parseDouble((String) fitpicker.getText());
+                                        String currentImg = ImageFileLoaction;
+
                                         Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
                                     }
                                 });

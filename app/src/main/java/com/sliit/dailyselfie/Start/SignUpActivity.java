@@ -1,7 +1,9 @@
 package com.sliit.dailyselfie.Start;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -19,8 +21,15 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.util.Base64;
 import android.view.View;
 import android.view.Window;
@@ -46,7 +55,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static final int ActivityStartCAM=0;
+    private EditText rfname,rlname,remail,rpassword,rconfirmpassword;
+    private TextInputLayout inputLayoutFName,inputLayoutLName,inputLayoutEmail,inputLayoutPassword,inputLayoutcPassword;
+    private Button btnSignUp;
+
+    private final int ActivityStartCAM=0;
     private String ImageFileLoaction="";
     private String bit64camimage="";
 
@@ -63,7 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
     boolean Cam=false;
     boolean Gal=false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,29 +84,27 @@ public class SignUpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
 
-
-
         CIV = (CircleImageView)findViewById(R.id.profile_image);
         CIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                d=new Dialog(SignUpActivity.this);
+                d = new Dialog(SignUpActivity.this);
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setContentView(R.layout.propicdialog);
                 d.show();
 
 
-                ib1=(ImageButton)d.findViewById(R.id.procam);
+                ib1 = (ImageButton) d.findViewById(R.id.procam);
 
-                ib2=(ImageButton)d.findViewById(R.id.progal);
+                ib2 = (ImageButton) d.findViewById(R.id.progal);
 
                 ib2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                        startActivityForResult(gallery,PICK_IMAGE);
-                        Cam=false;
-                        Gal=true;
+                        startActivityForResult(gallery, PICK_IMAGE);
+                        Cam = false;
+                        Gal = true;
                         d.cancel();
                     }
                 });
@@ -103,19 +113,19 @@ public class SignUpActivity extends AppCompatActivity {
                 ib1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent CAMint= new Intent();
+                        Intent CAMint = new Intent();
                         CAMint.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                        File photoFile=null;
-                        try{
-                            photoFile=createImageFile();
-                        }catch(IOException e){
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
 
                         CAMint.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                         startActivityForResult(CAMint, ActivityStartCAM);
-                        Gal=false;
-                        Cam=true;
+                        Gal = false;
+                        Cam = true;
                         d.cancel();
                     }
                 });
@@ -123,14 +133,240 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        inputLayoutFName = (TextInputLayout) findViewById(R.id.input_layout_firstName);
+        inputLayoutLName = (TextInputLayout) findViewById(R.id.input_layout_LastName);
+        inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_Email);
+        inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_Password);
+        inputLayoutcPassword = (TextInputLayout) findViewById(R.id.input_layout_confirmPassword);
 
+        rfname = (EditText)findViewById(R.id.input_firstName);
+        rlname = (EditText)findViewById(R.id.input_LastName);
+        remail = (EditText)findViewById(R.id.input_Email);
+        rpassword = (EditText)findViewById(R.id.input_Password);
+        rconfirmpassword = (EditText)findViewById(R.id.input_confirmPassword);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
+        rfname.addTextChangedListener(new MyTextWatcher(rfname));
+        rlname.addTextChangedListener(new MyTextWatcher(rlname));
+        remail.addTextChangedListener(new MyTextWatcher(remail));
+        rpassword.addTextChangedListener(new MyTextWatcher(rpassword));
+        rconfirmpassword.addTextChangedListener(new MyTextWatcher(rconfirmpassword));
 
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(submitForm()){
 
+                    String fname = rfname.getText().toString();
+                    String lname = rlname.getText().toString();
+                    String email = remail.getText().toString();
+                    String password = rpassword.getText().toString();
+                    String propic = "";
 
+                    DBHelper helper = new DBHelper(getApplicationContext());
+                    SQLiteDatabase db = helper.getWritableDatabase();
 
+                    ContentValues values = new ContentValues();
+                    values.put("fname",fname);
+                    values.put("lname", lname);
+                    values.put("email",email);
+                    values.put("password", password);
+                    values.put("profilepic", email);
+
+                    try {
+
+                        db.insertOrThrow("register", null, values);
+                        RU=new RegisterUser();
+                        RU.setUname(fname);
+                        RU.setLname(lname);
+                        RU.setEmail(email);
+                        RU.setPassword(password);
+
+                        if(Cam){
+                            RU.setProfilepic(bit64camimage);
+
+                        }else if(Gal){
+                            RU.setProfilepic(bit64camimage);
+                        }else{
+                            RU.setProfilepic("Gallery pic");
+                        }
+                        registerUser(RU);
+                        db.insert("register", null, values);
+
+                        successfulAlert();
+
+                    }catch(SQLiteException e){
+                        AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUpActivity.this);
+                        a_builder.setMessage("User already exist!")
+                                .setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        rfname.setText("");
+                                        rlname.setText("");
+                                        remail.setText("");
+                                        rpassword.setText("");
+                                        rconfirmpassword.setText("");
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert = a_builder.create();
+                        alert.setTitle("Alert");
+                        alert.show();
+                    }
+
+                    //Toast.makeText(this, "Registed !", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
+    public void successfulAlert(){
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUpActivity.this);
+        a_builder.setMessage("Successfully added")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = a_builder.create();
+        alert.setTitle("Welcome to Daily Selfi App!");
+        alert.show();
+
+        rlname.setText("");
+        remail.setText("");
+        rpassword.setText("");
+        rconfirmpassword.setText("");
+        rfname.setText("");
+    }
+
+    private boolean submitForm() {
+        if (!validateFName()) {
+            return false;
+        }
+        if (!validateLName()) {
+            return false;
+        }
+        if (!validateEmail()) {
+            return false;
+        }
+        if (!validatePassword()) {
+            return false;
+        }
+        if (!validateConfirmPassword()) {
+            return false;
+        }
+
+        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    private boolean validateFName() {
+        if (rfname.getText().toString().trim().isEmpty()) {
+            inputLayoutFName.setError(getString(R.string.err_msg_fname));
+            requestFocus(rfname);
+            return false;
+        } else {
+            inputLayoutFName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateLName() {
+        if (rlname.getText().toString().trim().isEmpty()) {
+            inputLayoutLName.setError(getString(R.string.err_msg_lname));
+            requestFocus(rlname);
+            return false;
+        } else {
+            inputLayoutLName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateEmail() {
+        String email = remail.getText().toString().trim();
+
+        if (email.isEmpty() || !isValidEmail(email)) {
+            inputLayoutEmail.setError(getString(R.string.err_msg_email));
+            requestFocus(remail);
+            return false;
+        } else {
+            inputLayoutEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        if (rpassword.getText().toString().trim().isEmpty()) {
+            inputLayoutPassword.setError(getString(R.string.err_msg_password));
+            requestFocus(rpassword);
+            return false;
+        } else {
+            inputLayoutPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateConfirmPassword() {
+        if (rconfirmpassword.getText().toString().trim().isEmpty() || !rconfirmpassword.getText().toString().equals(rpassword.getText().toString())) {
+            inputLayoutcPassword.setError(getString(R.string.err_msg_confirmpassword));
+            requestFocus(rconfirmpassword);
+            return false;
+        } else {
+            inputLayoutcPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.input_firstName:
+                    validateFName();
+                    break;
+                case R.id.input_LastName:
+                    validateFName();
+                    break;
+                case R.id.input_Email:
+                    validateEmail();
+                    break;
+                case R.id.input_Password:
+                    validatePassword();
+                    break;
+                case R.id.input_confirmPassword:
+                    validateConfirmPassword();
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -151,15 +387,15 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==PICK_IMAGE  && resultCode==RESULT_OK){
             imageUri=data.getData();
-           bit64camimage=BitmaptoString(getRealPathFromURI(imageUri));
-           // CIV.setImageURI(imageUri);
+            bit64camimage=BitmaptoString(getRealPathFromURI(imageUri));
+            // CIV.setImageURI(imageUri);
             Glide.with(this).load(imageUri).into(CIV);
 
         }
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
             bit64camimage=BitmaptoString(ImageFileLoaction);
             rotateImage(setReducedImageSize());
-            Toast.makeText(getApplicationContext(),bit64camimage,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), bit64camimage, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,62 +409,6 @@ public class SignUpActivity extends AppCompatActivity {
     public void registerUser(RegisterUser ru){
         SignupRef.push().setValue(ru);
     }
-
-    public void signUp(View v) {
-        EditText rfname = (EditText)findViewById(R.id.fname);
-        EditText rlname = (EditText)findViewById(R.id.lname);
-        EditText remail = (EditText)findViewById(R.id.semail);
-        EditText rpassword = (EditText)findViewById(R.id.password);
-
-        String fname = rfname.getText().toString();
-        String lname = rlname.getText().toString();
-        String email = remail.getText().toString();
-        String password = rpassword.getText().toString();
-        String propic = "";
-
-        DBHelper helper = new DBHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("fname",fname);
-        values.put("lname", lname);
-        values.put("email",email);
-        values.put("password", password);
-        values.put("profilepic", email);
-
-        try {
-
-            db.insertOrThrow("register", null, values);
-            RU=new RegisterUser();
-            RU.setUname(fname);
-            RU.setLname(lname);
-            RU.setEmail(email);
-            RU.setPassword(password);
-
-            if(Cam){
-                RU.setProfilepic(bit64camimage);
-
-            }else if(Gal){
-                RU.setProfilepic(bit64camimage);
-            }else{
-                RU.setProfilepic("Gallery pic");
-            }
-            registerUser(RU);
-
-            Toast.makeText(this, "Registed !", Toast.LENGTH_LONG).show();
-        }catch(SQLiteException e){
-            Toast.makeText(this,"User already exsist", Toast.LENGTH_LONG).show();
-        }
-        rfname.setText("");
-        rlname.setText("");
-        remail.setText("");
-        rpassword.setText("");
-        EditText rcpassword = (EditText)findViewById(R.id.cpassword);
-        rcpassword.setText("");
-    }
-
-
-
 
     File createImageFile()throws IOException{
         String timestamp= new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
