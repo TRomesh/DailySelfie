@@ -1,9 +1,11 @@
 package com.sliit.dailyselfie.Camera;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -24,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +35,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+import com.sliit.dailyselfie.DB.DBHelper;
 import com.sliit.dailyselfie.R;
+import com.vi.swipenumberpicker.OnValueChangeListener;
+import com.vi.swipenumberpicker.SwipeNumberPicker;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,12 +56,17 @@ public class CameraActivity extends AppCompatActivity {
     private String ImageFileLoaction="";
 
     BottomBar CamBottomBar;
+    SwipeNumberPicker fitpicker;
     ImageButton bcan,bsnap,bdesc;
     Dialog d;
     BottomDialog dialog;
     String challenge;
     Bundle extras;
     boolean picpresent=false;
+    DBHelper helper;
+    SQLiteDatabase db;
+    ContentValues values;
+    Button b1,b2;
 
     Uri ImageUri;
 
@@ -67,7 +78,15 @@ public class CameraActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+         helper = new DBHelper(this);
+         db = helper.getWritableDatabase();
+         values = new ContentValues();
+
         IV = (ImageView)findViewById(R.id.snap1);
+        fitpicker = (SwipeNumberPicker)findViewById(R.id.fitweight);
+        b1=(Button)findViewById(R.id.fitadd);
+        b2=(Button)findViewById(R.id.fitcancle);
+
 
         IV.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -149,7 +168,29 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.fitnessdialog);
                                 ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
-                                TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
+                                final EditText fittxt = (EditText) d.findViewById(R.id.fitdialogdesc);
+                                fitpicker = (SwipeNumberPicker)findViewById(R.id.fitweight);
+                                b1=(Button)d.findViewById(R.id.fitadd);
+                                b2=(Button)d.findViewById(R.id.fitcancle);
+                                fitpicker.setOnValueChangeListener(new OnValueChangeListener() {
+                                    @Override
+                                    public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                                        return true;
+                                    }
+                                });
+                                b1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                b2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        fittxt.setText("");
+                                    }
+                                });
+
                                 d.show();
                                 break;
 
@@ -158,7 +199,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.maternitydialog);
                                 ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
-                                TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
+                                EditText mattxt = (EditText) d.findViewById(R.id.matdialogdesc);
                                 d.show();
 
                                 break;
@@ -168,7 +209,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.childdialog);
                                 ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
-                                TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
+                                EditText chiltxt = (EditText) d.findViewById(R.id.childialogdesc);
                                 d.show();
 
                                 break;
@@ -225,7 +266,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.fitnessdialog);
                                 ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
-                                TextView fittxt = (TextView) d.findViewById(R.id.fitdialogdesc);
+                                EditText fittxt = (EditText) d.findViewById(R.id.fitdialogdesc);
                                 d.show();
                                 break;
 
@@ -234,7 +275,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.maternitydialog);
                                 ImageView matimg = (ImageView) d.findViewById(R.id.matdialogimg);
-                                TextView mattxt = (TextView) d.findViewById(R.id.matdialogdesc);
+                                EditText mattxt = (EditText) d.findViewById(R.id.matdialogdesc);
                                 d.show();
 
                                 break;
@@ -244,7 +285,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 d.setContentView(R.layout.childdialog);
                                 ImageView chilimg = (ImageView) d.findViewById(R.id.childialogimg);
-                                TextView chiltxt = (TextView) d.findViewById(R.id.childialogdesc);
+                                EditText chiltxt = (EditText) d.findViewById(R.id.childialogdesc);
                                 d.show();
 
                                 break;
