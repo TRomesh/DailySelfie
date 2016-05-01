@@ -1,28 +1,48 @@
 package com.sliit.dailyselfie.Community;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by Tharaka on 10/04/2016.
  */
 public class SharePost {
 
-    private String PostID;
+    private String PostSharer;
     private String PostType;
     private String PostImage;
     private String PostDescription;
     private String PostedTime;
+    private String Date;
+    @JsonIgnore
+    private String PostID;
 
 
     public SharePost(){}
 
+    public SharePost(String postSharer, String postType, String postImage, String postDescription, String postedTime, String date, String postID) {
+        PostSharer = postSharer;
+        PostType = postType;
+        PostImage = postImage;
+        PostDescription = postDescription;
+        PostedTime = postedTime;
+        Date = date;
+        PostID = postID;
+    }
 
-    public SharePost(String pid,String ptype,String pimage,String pdesc,String ptime){
-        PostID=pid;
-        PostType=ptype;
-        PostImage=pimage;
-        PostDescription=pdesc;
-        PostedTime=ptime;
+    public String getDate() {
+        return Date;
+    }
 
+    public void setDate(String date) {
+        Date = date;
+    }
 
+    public String getPostSharer() {
+        return PostSharer;
+    }
+
+    public void setPostSharer(String postSharer) {
+        PostSharer = postSharer;
     }
 
     public String getPostID() {

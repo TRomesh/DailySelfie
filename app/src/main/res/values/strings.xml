@@ -60,4 +60,9 @@
     <string name="err_msg_password">Enter the password</string>
     <string name="err_msg_confirmpassword">Re-enter the password</string>
 
+    <string name="Propicselect">Take a photo or select an image from Gallery</string>
+    <string name="title_activity_activity_feed">ActivityFeed</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+
+
 </resources>
