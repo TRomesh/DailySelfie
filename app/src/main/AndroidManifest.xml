@@ -116,6 +116,10 @@
             android:name=".NavigationItems.MyChallegesActivity"
             android:label="My Challeges"
             android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Profile.UserProfile"
+            android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,21 +1,29 @@
 package com.sliit.dailyselfie.Challenges;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +34,10 @@ import com.vi.swipenumberpicker.SwipeNumberPicker;
 
 public class NoshaveActivity extends AppCompatActivity {
 
+    private EditText noShavename,noShaveDescription;
+    private TextInputLayout inputLayoutName,inputLayoutDescription;
+    private Button btnAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +46,7 @@ public class NoshaveActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.setAlarm).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.noShavesetAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -61,36 +73,127 @@ public class NoshaveActivity extends AppCompatActivity {
             }
         });
 
+        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_noShaveName);
+        inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_noShavedescription);
 
+        noShavename = (EditText)findViewById(R.id.noShaveName);
+        noShaveDescription = (EditText)findViewById(R.id.noShavedescription);
+        btnAdd = (Button) findViewById(R.id.noShave_submit_btn);
 
-        findViewById(R.id.fit_submit_btn).setOnClickListener(new View.OnClickListener() {
+        noShavename.addTextChangedListener(new MyTextWatcher(noShavename));
+        //fitDescription.addTextChangedListener(new MyTextWatcher(fitDescription));
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                if (submitForm()) {
 
-                EditText name = (EditText) findViewById(R.id.Name);
-                EditText sdescription = (EditText) findViewById(R.id.description);
+                    String noshaveChallangename = noShavename.getText().toString();
+                    String noshavedescription = noShaveDescription.getText().toString();
 
-                String Challangename = name.getText().toString();
-                String description = sdescription.getText().toString();
+                    DBHelper helper = new DBHelper(NoshaveActivity.this);
+                    SQLiteDatabase db = helper.getWritableDatabase();
 
-                DBHelper helper = new DBHelper(NoshaveActivity.this);
-                SQLiteDatabase db = helper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    values.put("type", "NoShave");
+                    values.put("name", noshaveChallangename);
+                    values.put("description", noshavedescription);
 
-                ContentValues values = new ContentValues();
-                values.put("type", "NoShaveNovember");
-                values.put("name", Challangename);
-                values.put("description", description);
+                    try {
+                        db.insert("challanges", null, values);
 
-                db.insert("challanges", null, values);
+                        successfulAlert();
 
-                name.setText("");
-                sdescription.setText("");
+                    } catch (SQLiteException e) {
+                        AlertDialog.Builder a_builder = new AlertDialog.Builder(NoshaveActivity.this);
+                        a_builder.setMessage("User already exist!")
+                                .setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        noShavename.setText("");
+                                        noShaveDescription.setText("");
+                                        dialog.cancel();
+                                    }
+                                });
 
-                Toast.makeText(NoshaveActivity.this, "Saved !", Toast.LENGTH_LONG).show();
+                        AlertDialog alert = a_builder.create();
+                        alert.setTitle("Alert");
+                        alert.show();
+                    }
 
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                    //Toast.makeText(this, "Registed !", Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
+
+    public void successfulAlert(){
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(NoshaveActivity.this);
+        a_builder.setMessage("Successfully created No Shave challange")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        noShavename.setText("");
+                        noShaveDescription.setText("");
+                        startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge", "noshave"));
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = a_builder.create();
+        alert.setTitle("Congratulation!");
+        alert.show();
+    }
+
+    private boolean submitForm() {
+        if (!validateNSName()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validateNSName() {
+        if (noShavename.getText().toString().trim().isEmpty()) {
+            inputLayoutName.setError("Enter valid Challange name");
+            requestFocus(noShavename);
+            return false;
+        } else {
+            inputLayoutName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.noShaveName:
+                    validateNSName();
+                    break;
+
+            }
+        }
     }
 
 }

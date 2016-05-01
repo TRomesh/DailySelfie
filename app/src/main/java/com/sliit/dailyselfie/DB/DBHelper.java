@@ -20,10 +20,10 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE login (id INTEGER PRIMARY KEY AUTOINCREMENT,activatedStatus VARCHAR(50), userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
 
     public static String CHALLANGES_TABLE =
-            "CREATE TABLE challanges (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR(200), name VARCHAR(250), description TEXT, fitCategory VARCHAR(100), height DOUBLE, weight DOUBLE, waistSize DOUBLE, targetWeight DOUBLE, targetDate DATE, targetWaistSize DOUBLE, birthDay DATE, alram DATETIME, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
+            "CREATE TABLE challanges (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR(200), name VARCHAR(250) NOT NULL UNIQUE, description TEXT, fitCategory VARCHAR(100), height DOUBLE, weight DOUBLE, waistSize DOUBLE, targetWeight DOUBLE, targetDate DATE, targetWaistSize DOUBLE, birthDay DATE, alram DATETIME, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
 
     public static String POST_TABLE =
-            "CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, height DOUBLE, weight DOUBLE, waistSize DOUBLE, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, alram DATETIME,challangeId INT, FOREIGN KEY (challangeId) REFERENCES challanges(id) )";
+            "CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, height DOUBLE, weight DOUBLE, waistSize DOUBLE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, alram DATETIME,challangeId INT, FOREIGN KEY (challangeName) REFERENCES challanges(name) )";
 
 
     public DBHelper(Context context){
