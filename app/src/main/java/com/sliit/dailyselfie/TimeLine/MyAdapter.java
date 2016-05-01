@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sliit.dailyselfie.R;
 
@@ -75,6 +76,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 im.setImageResource(image[position]);
                 tx.setText(name[position]);
                 d.show();
+            }
+        });
+
+        holder.b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"hello "+position,Toast.LENGTH_SHORT).show();
             }
         });
 
