@@ -98,6 +98,9 @@ public class NoshaveActivity extends AppCompatActivity {
                     values.put("type", "NoShave");
                     values.put("name", noshaveChallangename);
                     values.put("description", noshavedescription);
+                    //values.put("targetDate",);
+                    //values.put("alram",);
+                    //values.put("userId",);
 
                     try {
                         db.insert("challanges", null, values);
@@ -157,7 +160,7 @@ public class NoshaveActivity extends AppCompatActivity {
 
     private boolean validateNSName() {
         if (noShavename.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError("Enter valid Challange name");
+            inputLayoutName.setError("Enter the Challange name");
             requestFocus(noShavename);
             return false;
         } else {

@@ -133,6 +133,9 @@ public class MaternityActivity extends AppCompatActivity {
                     values.put("weight", maternityWeight);
                     values.put("waistSize", maternitywaist);
                     values.put("description", maternitydescription);
+                    //values.put("targetDate",);
+                    //values.put("alram",);
+                    //values.put("userId",);
 
                     try {
                         db.insert("challanges", null, values);
@@ -192,7 +195,7 @@ public class MaternityActivity extends AppCompatActivity {
 
     private boolean validateMName() {
         if (maternityname.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError("Enter valid Challange name");
+            inputLayoutName.setError("Enter the Challange name");
             requestFocus(maternityname);
             return false;
         } else {
