@@ -109,7 +109,8 @@ public class AddChallangeActivity extends AppCompatActivity {
                     values.put("type", chaltype);
                     values.put("name", Challangename);
                     values.put("description", description);
-                    //values.put("alram","");
+                    //values.put("alram",);
+                    //values.put("userId",);
 
                     try {
                         db.insert("challanges", null, values);
@@ -172,7 +173,7 @@ public class AddChallangeActivity extends AppCompatActivity {
 
     private boolean validateCName() {
         if (cname.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError("Enter valid Challange name");
+            inputLayoutName.setError("Enter the Challange name");
             requestFocus(cname);
             return false;
         } else {

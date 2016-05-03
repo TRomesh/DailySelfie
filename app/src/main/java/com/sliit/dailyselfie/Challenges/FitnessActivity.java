@@ -176,6 +176,9 @@ public class FitnessActivity extends AppCompatActivity {
                     values.put("weight", fitweight);
                     values.put("targetWeight", fittarweight);
                     values.put("description", fitdescription);
+                    //values.put("targetDate",);
+                    //values.put("alram",);
+                    //values.put("userId",);
 
                     try {
                         db.insert("challanges", null, values);
@@ -236,7 +239,7 @@ public class FitnessActivity extends AppCompatActivity {
 
     private boolean validateFName() {
         if (fitname.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError("Enter valid Challange name");
+            inputLayoutName.setError("Enter the Challange name");
             requestFocus(fitname);
             return false;
         } else {

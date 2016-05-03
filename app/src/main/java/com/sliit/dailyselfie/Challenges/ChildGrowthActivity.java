@@ -131,11 +131,14 @@ public class ChildGrowthActivity extends AppCompatActivity {
                     ContentValues values = new ContentValues();
                     values.put("type", "ChildGrowth");
                     values.put("name", cChallangename);
+                    values.put("description", cdescription);
                     values.put("height", cHeight);
                     values.put("weight", cWeight);
-                    //values.put("birthDay", "");
-                    //values.put("alram","");
-                    values.put("description", cdescription);
+                    //values.put("targetDate",);
+                    //values.put("birthDay", );
+                    //values.put("alram",);
+                    //values.put("userId",);
+
 
                     try {
                         db.insert("challanges", null, values);
@@ -194,7 +197,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
 
     private boolean validateChildName() {
         if (childname.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError("Enter valid Challange name");
+            inputLayoutName.setError("Enter the Challange name");
             requestFocus(childname);
             return false;
         } else {
