@@ -8,6 +8,10 @@
     card_view:cardCornerRadius="5dp"
     card_view:cardElevation="5dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
        android:orientation="vertical"
         android:layout_width="match_parent"
@@ -50,7 +54,7 @@
 
                 <TextView
                     android:id="@+id/activity_fitnesstype"
-                    android:paddingBottom="6dp"
+                    android:paddingBottom="1dp"
                     android:textSize="16sp"
                     android:text="Fitness"
                     android:layout_width="match_parent"
@@ -58,7 +62,7 @@
 
                 <TextView
                     android:id="@+id/activity_date"
-                    android:paddingBottom="6dp"
+                    android:paddingBottom="2dp"
                     android:textSize="10sp"
                     android:text="Date"
                     android:layout_width="match_parent"
@@ -92,13 +96,13 @@
             <TextView
                 android:id="@+id/activityDescription"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" />
+                android:layout_height="100dp" />
 
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="100dp">
                 <Button
                     android:id="@+id/activity_but1"
                     android:text="Like"
@@ -119,6 +123,8 @@
 
 
     </LinearLayout>
+
+    </RelativeLayout>
 
 
 
