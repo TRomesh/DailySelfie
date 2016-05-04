@@ -1,10 +1,13 @@
-package com.sliit.dailyselfie.Community;
+package com.sliit.dailyselfie.ActivityFeed;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Created by Tharaka on 10/04/2016.
  */
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class SharePost {
 
     private String PostSharer;
@@ -12,30 +15,20 @@ public class SharePost {
     private String PostImage;
     private String PostDescription;
     private String PostedTime;
-    private String Date;
-    @JsonIgnore
-    private String PostID;
+
 
 
     public SharePost(){}
 
-    public SharePost(String postSharer, String postType, String postImage, String postDescription, String postedTime, String date, String postID) {
+    public SharePost(String postSharer, String postType, String postImage, String postDescription, String postedTime) {
         PostSharer = postSharer;
         PostType = postType;
         PostImage = postImage;
         PostDescription = postDescription;
         PostedTime = postedTime;
-        Date = date;
-        PostID = postID;
+
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
 
     public String getPostSharer() {
         return PostSharer;
@@ -43,14 +36,6 @@ public class SharePost {
 
     public void setPostSharer(String postSharer) {
         PostSharer = postSharer;
-    }
-
-    public String getPostID() {
-        return PostID;
-    }
-
-    public void setPostID(String postID) {
-        PostID = postID;
     }
 
     public String getPostType() {

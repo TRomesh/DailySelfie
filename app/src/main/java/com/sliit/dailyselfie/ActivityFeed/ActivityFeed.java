@@ -3,8 +3,6 @@ package com.sliit.dailyselfie.ActivityFeed;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,17 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
-import com.roughike.bottombar.OnSizeDeterminedListener;
-import com.sliit.dailyselfie.Community.SharePost;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -31,7 +27,7 @@ import java.util.ArrayList;
 public class ActivityFeed extends AppCompatActivity {
 
     BottomBar mBottomBar;
-    ArrayList<SharePost> SharedPosts;
+    ArrayList<SharePost>  SharedPosts = new ArrayList<>();;
     RecyclerView RV;
     AdapterAC adapterAC;
     Firebase fire;
@@ -43,19 +39,19 @@ public class ActivityFeed extends AppCompatActivity {
         setContentView(R.layout.activity_activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        RV= (RecyclerView)findViewById(R.id.recycler1);
+        RV.setLayoutManager(new LinearLayoutManager(this));
         Firebase.setAndroidContext(this);
-        SharedPosts = new ArrayList<>();
+
 
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
 
-        RV= (RecyclerView)findViewById(R.id.recycler1);
-        RV.setLayoutManager(new LinearLayoutManager(this));
 
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noNavBarGoodness();
 
-
+            // this.RefreshData();
 
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override
@@ -85,6 +81,7 @@ public class ActivityFeed extends AppCompatActivity {
 
             }
         });
+        this.RefreshData();
     }
 
 
@@ -96,32 +93,18 @@ public class ActivityFeed extends AppCompatActivity {
     }
 
     public void RetriveData(){
-           fire.addChildEventListener(new ChildEventListener() {
-          @Override
-          public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-              GetDataUpdates(dataSnapshot);
-          }
 
-          @Override
-          public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-              GetDataUpdates(dataSnapshot);
-          }
+        fire.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GetDataUpdates(dataSnapshot);
+            }
 
-          @Override
-          public void onChildRemoved(DataSnapshot dataSnapshot) {
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
 
-          }
-
-          @Override
-          public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-          }
-
-          @Override
-          public void onCancelled(FirebaseError firebaseError) {
-
-          }
-      });
+            }
+        });
     }
 
     public void GetDataUpdates(DataSnapshot dataSnapshot ){
@@ -134,7 +117,7 @@ public class ActivityFeed extends AppCompatActivity {
             sp.setPostType(ds.getValue(SharePost.class).getPostType());
             sp.setPostDescription(ds.getValue(SharePost.class).getPostDescription());
             sp.setPostImage(ds.getValue(SharePost.class).getPostImage());
-            sp.setDate(ds.getValue(SharePost.class).getDate());
+            sp.setPostedTime(ds.getValue(SharePost.class).getPostedTime());
 
 
 
@@ -154,25 +137,10 @@ public class ActivityFeed extends AppCompatActivity {
 
     public void RefreshData(){
 
-        fire.addChildEventListener(new ChildEventListener() {
+        fire.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                 GetDataUpdates(dataSnapshot);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 GetDataUpdates(dataSnapshot);
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -180,6 +148,7 @@ public class ActivityFeed extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -190,7 +159,7 @@ public class ActivityFeed extends AppCompatActivity {
         sp.setPostSharer(name);
         sp.setPostType(type);
         sp.setPostDescription(description);
-        sp.setDate(date);
+        sp.setPostedTime(date);
         fire.push().setValue(sp);
         d.dismiss();
 

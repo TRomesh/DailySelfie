@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,13 @@ import android.widget.Toast;
 import com.sliit.dailyselfie.DB.DBHelper;
 import com.sliit.dailyselfie.MainActivity;
 import com.sliit.dailyselfie.R;
+import com.sliit.dailyselfie.Start.mFacebook.MyConfigurations;
+import com.sromku.simple.fb.Permission;
+import com.sromku.simple.fb.SimpleFacebook;
+import com.sromku.simple.fb.SimpleFacebookConfiguration;
+import com.sromku.simple.fb.listeners.OnLoginListener;
+
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +42,23 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username,password;
     private TextInputLayout inputLayoutName,inputLayoutPassword;
     String uid;
+    SimpleFacebook SF;
+    Button fb,gplus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SimpleFacebook.setConfiguration(new MyConfigurations().getMyConfigs());
+
         DBH = new DBHelper(this);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_userName);
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
+
+        fb=(Button)findViewById(R.id.fb) ;
+        gplus=(Button)findViewById(R.id.gplus);
 
         username = (EditText)findViewById(R.id.uname);
         password = (EditText)findViewById(R.id.password);
@@ -87,9 +102,55 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fblogin();
+            }
+        });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SF=SimpleFacebook.getInstance(this);
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        SF.onActivityResult(requestCode,resultCode,data);
+
+    }
+
+    private void fblogin(){
+        OnLoginListener loginListener = new OnLoginListener() {
+            @Override
+            public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
+                Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(LoginActivity.this, "cancled", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                Log.e("onException",throwable.getMessage());
+            }
+
+            @Override
+            public void onFail(String reason) {
+                Log.e("Fail",reason);
+            }
+        };
+
+        SF.login(loginListener);
+    }
 
 }
