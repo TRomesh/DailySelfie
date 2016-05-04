@@ -37,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(REGISTER_TABLE);
         db.execSQL(LOGIN_TABLE);
         db.execSQL(CHALLANGES_TABLE);
-        //db.execSQL(POST_TABLE);
+        db.execSQL(POST_TABLE);
     }
 
     @Override
