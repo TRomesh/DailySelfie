@@ -59,7 +59,7 @@ public class CameraActivity extends AppCompatActivity {
     private String ImageFileLoaction="";
 
     BottomBar CamBottomBar;
-    SwipeNumberPicker fitpicker,maternitypicker,childpicker;
+    SwipeNumberPicker fitpicker,maternitypicker,childpicker,postpicker;
     ImageButton bcan,bsnap,bdesc;
     Dialog d;
     BottomDialog dialog;
@@ -70,7 +70,7 @@ public class CameraActivity extends AppCompatActivity {
     DBHelper helper;
     SQLiteDatabase db;
     ContentValues values;
-    Button b1,b2,b3,b4,b5,b6;
+    Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12;
 
     Uri ImageUri;
 
@@ -308,7 +308,7 @@ public class CameraActivity extends AppCompatActivity {
                                         return true;
                                     }
                                 });
-                                b3.setOnClickListener(new View.OnClickListener() {
+                                b5.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
 
@@ -346,10 +346,182 @@ public class CameraActivity extends AppCompatActivity {
                                         //Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                b4.setOnClickListener(new View.OnClickListener() {
+                                b6.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         chiltxt.setText("");
+                                    }
+                                });
+                                d.show();
+
+                                break;
+                            case "postmaternity":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.postmaternitydialog);
+                                ImageView postimg = (ImageView) d.findViewById(R.id.postmatdialogimg);
+                                final EditText posttxt = (EditText) d.findViewById(R.id.postdialogdesc);
+                                postpicker = (SwipeNumberPicker)d.findViewById(R.id.Postwaist);
+                                b7=(Button)d.findViewById(R.id.postadd);
+                                b8=(Button)d.findViewById(R.id.postcan);
+                                postpicker.setOnValueChangeListener(new OnValueChangeListener() {
+                                    @Override
+                                    public boolean onValueChange(SwipeNumberPicker view, int oldValue, int newValue) {
+                                        return true;
+                                    }
+                                });
+                                b7.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        String postCurrentDescription = posttxt.getText().toString();
+                                        Double currentWaist = Double.parseDouble((String) postpicker.getText());
+                                        String currentImg = ImageFileLoaction;
+                                        String ChallangeName = "aaa1";
+
+                                        DBHelper helper = new DBHelper(CameraActivity.this);
+                                        String sql = "INSERT INTO posts (description,waistSize,image,challangeName)" +
+                                                " VALUES ('"+postCurrentDescription+"','"+currentWaist+"','"+currentImg+"','"+ChallangeName+"') ";
+
+                                        SQLiteDatabase db = helper.getWritableDatabase();
+
+                                        try {
+                                            db.execSQL(sql);
+                                            successfulAlert();
+
+                                        } catch (SQLiteException e) {
+                                            AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
+                                            a_builder.setMessage("User already exist!")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+                                                        }
+                                                    });
+
+                                            AlertDialog alert = a_builder.create();
+                                            alert.setTitle("Alert");
+                                            alert.show();
+                                        }
+
+                                        //Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                b8.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        posttxt.setText("");
+                                    }
+                                });
+                                d.show();
+
+                                break;
+                            case "noshave":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.noshavedialog);
+                                ImageView noshaveimg = (ImageView) d.findViewById(R.id.noshavedialogimg);
+                                final EditText noshavetxt = (EditText) d.findViewById(R.id.noshavedialogdesc);
+                                b9=(Button)d.findViewById(R.id.chiladd);
+                                b10=(Button)d.findViewById(R.id.chilcan);
+
+                                b9.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        String noshaveCurrentDescription = noshavetxt.getText().toString();
+                                        String currentImg = ImageFileLoaction;
+                                        String ChallangeName = "aaa1";
+
+                                        DBHelper helper = new DBHelper(CameraActivity.this);
+                                        String sql = "INSERT INTO posts (description,image,challangeName)" +
+                                                " VALUES ('"+noshaveCurrentDescription+"','"+currentImg+"','"+ChallangeName+"') ";
+
+                                        SQLiteDatabase db = helper.getWritableDatabase();
+
+                                        try {
+                                            db.execSQL(sql);
+                                            successfulAlert();
+
+                                        } catch (SQLiteException e) {
+                                            AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
+                                            a_builder.setMessage("User already exist!")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+                                                        }
+                                                    });
+
+                                            AlertDialog alert = a_builder.create();
+                                            alert.setTitle("Alert");
+                                            alert.show();
+                                        }
+
+                                        //Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                b10.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        noshavetxt.setText("");
+                                    }
+                                });
+                                d.show();
+
+                                break;
+                            case "customizedChallange":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.customchallangedialog);
+                                ImageView cusimg = (ImageView) d.findViewById(R.id.cusdialogimg);
+                                final EditText custxt = (EditText) d.findViewById(R.id.cusdialogdesc);
+                                b11=(Button)d.findViewById(R.id.cusadd);
+                                b12=(Button)d.findViewById(R.id.cuscan);
+
+                                b11.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        String cusCurrentDescription = custxt.getText().toString();
+                                        String currentImg = ImageFileLoaction;
+                                        String ChallangeName = "aaa1";
+
+                                        DBHelper helper = new DBHelper(CameraActivity.this);
+                                        String sql = "INSERT INTO posts (description,image,challangeName)" +
+                                                " VALUES ('"+cusCurrentDescription+"','"+currentImg+"','"+ChallangeName+"') ";
+
+                                        SQLiteDatabase db = helper.getWritableDatabase();
+
+                                        try {
+                                            db.execSQL(sql);
+                                            successfulAlert();
+
+                                        } catch (SQLiteException e) {
+                                            AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
+                                            a_builder.setMessage("User already exist!")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+                                                        }
+                                                    });
+
+                                            AlertDialog alert = a_builder.create();
+                                            alert.setTitle("Alert");
+                                            alert.show();
+                                        }
+
+                                        //Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                b12.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        custxt.setText("");
                                     }
                                 });
                                 d.show();
@@ -432,6 +604,36 @@ public class CameraActivity extends AppCompatActivity {
 
                                 break;
 
+                            case "postmaternity":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.postmaternitydialog);
+                                ImageView postimg = (ImageView) d.findViewById(R.id.postmatdialogimg);
+                                EditText posttxt = (EditText) d.findViewById(R.id.postdialogdesc);
+                                d.show();
+
+                                break;
+
+                            case "noshave":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.noshavedialog);
+                                ImageView noshaveimg = (ImageView) d.findViewById(R.id.noshavedialogimg);
+                                EditText noshavetxt = (EditText) d.findViewById(R.id.noshavedialogdesc);
+                                d.show();
+
+                                break;
+
+                            case "customizedChallange":
+                                d = new Dialog(CameraActivity.this);
+                                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                d.setContentView(R.layout.customchallangedialog);
+                                ImageView cusimg = (ImageView) d.findViewById(R.id.cusdialogimg);
+                                EditText custxt = (EditText) d.findViewById(R.id.cusdialogdesc);
+                                d.show();
+
+                                break;
+
                         }
 
 
@@ -454,7 +656,7 @@ public class CameraActivity extends AppCompatActivity {
 
     public void successfulAlert(){
         AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
-        a_builder.setMessage("Successfully inserted")
+        a_builder.setMessage("Successfully Inserted")
                 .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override

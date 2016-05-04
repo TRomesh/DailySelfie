@@ -148,7 +148,7 @@ public class AddChallangeActivity extends AppCompatActivity {
                         cname.setText("");
                         //spn.getSelectedItem();
                         cDescription.setText("");
-                        startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CameraActivity.class).putExtra("Challenge", "customizedChallange"));
                         dialog.cancel();
                     }
                 });
