@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sliit.dailyselfie.Community.SharePost;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
         String  FitType =sharepost.get(position).getPostType();
         String Description =sharepost.get(position).getPostDescription();
         String Date = sharepost.get(position).getPostedTime();
-       // String Image =sharepost.get(position).getPostImage();
         holder.t1.setText(Uname);
         holder.t2.setText(FitType);
         holder.t3.setText(Description);

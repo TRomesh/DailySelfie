@@ -1,23 +1,16 @@
 package com.sliit.dailyselfie.Challenges;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,18 +18,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.sliit.dailyselfie.AlertReciver.AlarmReciver;
 import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.DB.DBHelper;
 import com.sliit.dailyselfie.R;
-import com.vi.swipenumberpicker.SwipeNumberPicker;
+
+import java.util.GregorianCalendar;
 
 public class NoshaveActivity extends AppCompatActivity {
 
     private EditText noShavename,noShaveDescription;
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
+    Button bset,bcancle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +45,34 @@ public class NoshaveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(NoshaveActivity.this);
-                mBuilder.setSmallIcon(R.drawable.ic_noti_dailyselfie);
-                mBuilder.setContentTitle("DailySelfie");
-                mBuilder.setContentText("Time to take a Selfie!");
-                mBuilder.setSound(alarmSound);
-                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-                Intent resultIntent = new Intent(NoshaveActivity.this, CameraActivity.class);
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(NoshaveActivity.this);
-                stackBuilder.addParentStack(CameraActivity.class);
+                Long alertTime =new GregorianCalendar().getTimeInMillis();
+                Intent alertIntent = new Intent(NoshaveActivity.this,AlarmReciver.class);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,alertTime,PendingIntent.getBroadcast(NoshaveActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,alertTime,alarmManager.INTERVAL_DAY*7,PendingIntent.getBroadcast(NoshaveActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
 
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(1001, mBuilder.build());
+
+
+//                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(NoshaveActivity.this);
+//                mBuilder.setSmallIcon(R.drawable.ic_noti_dailyselfie);
+//                mBuilder.setContentTitle("DailySelfie");
+//                mBuilder.setContentText("Time to take a Selfie!");
+//                mBuilder.setSound(alarmSound);
+//                mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+//                Intent resultIntent = new Intent(NoshaveActivity.this, CameraActivity.class);
+//                TaskStackBuilder stackBuilder = TaskStackBuilder.create(NoshaveActivity.this);
+//                stackBuilder.addParentStack(CameraActivity.class);
+//
+//                stackBuilder.addNextIntent(resultIntent);
+//                PendingIntent resultPendingIntent =
+//                        stackBuilder.getPendingIntent(
+//                                0,
+//                                PendingIntent.FLAG_UPDATE_CURRENT
+//                        );
+//                mBuilder.setContentIntent(resultPendingIntent);
+//                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                mNotificationManager.notify(1001, mBuilder.build());
             }
         });
 

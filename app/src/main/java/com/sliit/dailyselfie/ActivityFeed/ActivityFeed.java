@@ -3,8 +3,6 @@ package com.sliit.dailyselfie.ActivityFeed;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -22,8 +19,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
-import com.roughike.bottombar.OnSizeDeterminedListener;
-import com.sliit.dailyselfie.Community.SharePost;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -31,7 +26,7 @@ import java.util.ArrayList;
 public class ActivityFeed extends AppCompatActivity {
 
     BottomBar mBottomBar;
-    ArrayList<SharePost> SharedPosts;
+    ArrayList<SharePost>  SharedPosts = new ArrayList<>();;
     RecyclerView RV;
     AdapterAC adapterAC;
     Firebase fire;
@@ -43,13 +38,13 @@ public class ActivityFeed extends AppCompatActivity {
         setContentView(R.layout.activity_activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Firebase.setAndroidContext(this);
-        SharedPosts = new ArrayList<>();
-
-        fire=new Firebase("https://dailyselfie.firebaseio.com/SharePost");
-
         RV= (RecyclerView)findViewById(R.id.recycler1);
         RV.setLayoutManager(new LinearLayoutManager(this));
+        Firebase.setAndroidContext(this);
+
+
+        fire=new Firebase("https://dailyselfie.firebaseio.com");
+
 
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -85,7 +80,7 @@ public class ActivityFeed extends AppCompatActivity {
 
             }
         });
-        RefreshData();
+        this.RefreshData();
     }
 
 
@@ -97,7 +92,7 @@ public class ActivityFeed extends AppCompatActivity {
     }
 
     public void RetriveData(){
-           fire.addChildEventListener(new ChildEventListener() {
+        fire.addChildEventListener(new ChildEventListener() {
           @Override
           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
               GetDataUpdates(dataSnapshot);
