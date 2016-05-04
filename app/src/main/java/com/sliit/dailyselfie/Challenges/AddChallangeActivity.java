@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.media.RingtoneManager;
@@ -41,6 +42,7 @@ public class AddChallangeActivity extends AppCompatActivity {
     private EditText cname,cDescription;
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,9 @@ public class AddChallangeActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
+
         spn = (Spinner)findViewById(R.id.cusChallangespinner);
         final String [] challenges = getResources().getStringArray(R.array.challenges);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challenges);
@@ -101,7 +106,7 @@ public class AddChallangeActivity extends AppCompatActivity {
                     String Challangename = cname.getText().toString();
                     String chaltype = (String) spn.getSelectedItem();
                     String description = cDescription.getText().toString();
-                    int userId = 1;
+                    int userId = Integer.parseInt(userID);
 
                     DBHelper helper = new DBHelper(AddChallangeActivity.this);
                     String sql = "INSERT INTO challanges (type,name,description,userId)" +

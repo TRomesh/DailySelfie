@@ -1,5 +1,7 @@
 package com.sliit.dailyselfie.TimeLine;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.R;
@@ -22,6 +25,7 @@ public class TimeLine extends AppCompatActivity {
     MyAdapter adapter;
     RecyclerView rv;
     Button b1;
+    String challangeName;
 
 
     @Override
@@ -45,7 +49,9 @@ public class TimeLine extends AppCompatActivity {
         adapter =new MyAdapter(this,players,names,images);
         rv.setAdapter(adapter);
 
-
+        SharedPreferences challangeDetails = getSharedPreferences("challangeDetails", Context.MODE_PRIVATE);
+        challangeName = challangeDetails.getString("challangeID","");
+        Toast.makeText(getApplicationContext(),challangeName,Toast.LENGTH_SHORT).show();
 
     }
 

@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
@@ -56,6 +57,7 @@ public class FitnessActivity extends AppCompatActivity {
 
     private RadioGroup ftype;
     private SwipeNumberPicker fheight,fweight,ftarweight;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,9 @@ public class FitnessActivity extends AppCompatActivity {
 //                mNotificationManager.notify(1001, mBuilder.build());
             }
         });
+
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
 
         fheight = (SwipeNumberPicker)findViewById(R.id.snpfit0);
         fheight.setOnValueChangeListener(new OnValueChangeListener() {
@@ -165,7 +170,7 @@ public class FitnessActivity extends AppCompatActivity {
                     Double fittarweight = Double.parseDouble((String) ftarweight.getText());
                     String fitdescription = fitDescription.getText().toString();
                     String type = "Fitness";
-                    int userId = 1;
+                    int userId = Integer.parseInt(userID);
 
                     DBHelper helper = new DBHelper(FitnessActivity.this);
                     String sql = "INSERT INTO challanges (type,fitCategory,name,height,weight,targetWeight,description,userId)" +

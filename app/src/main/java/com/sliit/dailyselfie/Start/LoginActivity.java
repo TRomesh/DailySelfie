@@ -1,6 +1,8 @@
 package com.sliit.dailyselfie.Start;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,12 +25,15 @@ import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class LoginActivity extends AppCompatActivity {
 
     DBHelper DBH;
     private EditText username,password;
     private TextInputLayout inputLayoutName,inputLayoutPassword;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
             }
         });
+
+
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,15 +67,21 @@ public class LoginActivity extends AppCompatActivity {
                 DBHelper helper = new DBHelper(getApplicationContext());
                 SQLiteDatabase db = helper.getWritableDatabase();
 
-                String sql = "SELECT id FROM register WHERE email = '"+Username+"' AND password = '"+Password+"'";
+                String sql = "SELECT id FROM register WHERE email = '" + Username + "' AND password = '" + Password + "'";
                 Cursor results = db.rawQuery(sql, null);
 
-                if(results.moveToFirst()){
-                    String uid = results.getString(0);
-                    Intent i=new Intent(LoginActivity.this,MainActivity.class);
+                if (results.moveToFirst()) {
+                    uid = results.getString(0);
+
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
-                }
-                else {
+
+                    SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = userDetails.edit();
+                    editor.putString("loggedUserId", uid);
+                    editor.apply();
+
+                } else {
                     Toast.makeText(LoginActivity.this, "Some problem occurred", Toast.LENGTH_SHORT).show();
 
                 }

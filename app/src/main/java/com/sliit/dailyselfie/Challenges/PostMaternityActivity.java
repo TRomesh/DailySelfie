@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.media.RingtoneManager;
@@ -39,6 +40,7 @@ public class PostMaternityActivity extends AppCompatActivity {
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
     private SwipeNumberPicker pmaternityheight,pmaternityweight,pmaternityWaist,pmaternityTargetWaist;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,9 @@ public class PostMaternityActivity extends AppCompatActivity {
                 mNotificationManager.notify(1001, mBuilder.build());
             }
         });
+
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
 
         pmaternityheight = (SwipeNumberPicker)findViewById(R.id.snppostM0);
         pmaternityheight.setOnValueChangeListener(new OnValueChangeListener() {
@@ -133,7 +138,7 @@ public class PostMaternityActivity extends AppCompatActivity {
                     Double pmaternitytargetwaist = Double.parseDouble((String) pmaternityTargetWaist.getText());
                     String pmaternitydescription = pmaternityDescription.getText().toString();
                     String type = "PostMaternity";
-                    int userId = 1;
+                    int userId = Integer.parseInt(userID);
 
                     DBHelper helper = new DBHelper(PostMaternityActivity.this);
                     String sql = "INSERT INTO challanges (type,name,height,weight,waistSize,targetWaistSize,description,userId)" +

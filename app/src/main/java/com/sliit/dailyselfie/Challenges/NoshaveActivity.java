@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.media.RingtoneManager;
@@ -37,6 +38,7 @@ public class NoshaveActivity extends AppCompatActivity {
     private EditText noShavename,noShaveDescription;
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,9 @@ public class NoshaveActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
+
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_noShaveName);
         inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_noShavedescription);
 
@@ -91,7 +96,7 @@ public class NoshaveActivity extends AppCompatActivity {
                     String noshaveChallangename = noShavename.getText().toString();
                     String noshavedescription = noShaveDescription.getText().toString();
                     String type = "NoShave";
-                    int userId = 1;
+                    int userId = Integer.parseInt(userID);
 
                     DBHelper helper = new DBHelper(NoshaveActivity.this);
                     String sql = "INSERT INTO challanges (type,name,description,userId)" +

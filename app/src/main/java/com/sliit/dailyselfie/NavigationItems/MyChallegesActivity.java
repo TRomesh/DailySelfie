@@ -1,6 +1,8 @@
 package com.sliit.dailyselfie.NavigationItems;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -39,11 +41,12 @@ public class MyChallegesActivity extends AppCompatActivity {
 
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT name FROM challanges WHERE userId=1";
+        String sql = "SELECT name,type FROM challanges WHERE userId=1";
         Cursor results = db.rawQuery(sql, null);
 
         while(results.moveToNext()){
             String cName = results.getString(0);
+            //String cType = results.getString(1);
             AL.add(cName);
         }
 
@@ -57,9 +60,13 @@ public class MyChallegesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String)lv.getItemAtPosition(position);
 
-                startActivity(new Intent(getApplicationContext(),TimeLine.class).putExtra("ChallengeName", value));
+                startActivity(new Intent(getApplicationContext(),TimeLine.class));
 
-                //Toast.makeText(MyChallegesActivity.this, value, Toast.LENGTH_SHORT).show();
+                SharedPreferences challangeDetails = getSharedPreferences("challangeDetails", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = challangeDetails.edit();
+                editor.putString("challangeID", value);
+                editor.apply();
+
             }
 
         };
