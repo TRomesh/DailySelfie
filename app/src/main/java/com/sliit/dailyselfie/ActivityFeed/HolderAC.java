@@ -27,6 +27,7 @@ public class HolderAC extends RecyclerView.ViewHolder {
         t1 = (TextView)itemView.findViewById(R.id.activity_username);
         t2 = (TextView)itemView.findViewById(R.id.activity_fitnesstype);
         t3 = (TextView)itemView.findViewById(R.id.activityDescription);
+        t4 = (TextView)itemView.findViewById(R.id.activity_date);
         im = (ImageView) itemView.findViewById(R.id.activity_image);
 
 

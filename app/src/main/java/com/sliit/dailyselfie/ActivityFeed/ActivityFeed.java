@@ -46,7 +46,7 @@ public class ActivityFeed extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         SharedPosts = new ArrayList<>();
 
-        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+        fire=new Firebase("https://dailyselfie.firebaseio.com/SharePost");
 
         RV= (RecyclerView)findViewById(R.id.recycler1);
         RV.setLayoutManager(new LinearLayoutManager(this));
@@ -55,7 +55,7 @@ public class ActivityFeed extends AppCompatActivity {
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noNavBarGoodness();
 
-
+            // this.RefreshData();
 
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override
@@ -85,6 +85,7 @@ public class ActivityFeed extends AppCompatActivity {
 
             }
         });
+        RefreshData();
     }
 
 
@@ -134,7 +135,7 @@ public class ActivityFeed extends AppCompatActivity {
             sp.setPostType(ds.getValue(SharePost.class).getPostType());
             sp.setPostDescription(ds.getValue(SharePost.class).getPostDescription());
             sp.setPostImage(ds.getValue(SharePost.class).getPostImage());
-            sp.setDate(ds.getValue(SharePost.class).getDate());
+            sp.setPostedTime(ds.getValue(SharePost.class).getPostedTime());
 
 
 
@@ -190,7 +191,7 @@ public class ActivityFeed extends AppCompatActivity {
         sp.setPostSharer(name);
         sp.setPostType(type);
         sp.setPostDescription(description);
-        sp.setDate(date);
+        sp.setPostedTime(date);
         fire.push().setValue(sp);
         d.dismiss();
 
