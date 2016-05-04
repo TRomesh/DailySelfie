@@ -28,6 +28,7 @@ public class MyChallegesActivity extends AppCompatActivity {
     ArrayList<String> AL;
     ArrayAdapter<String> AD;
     ListView lv;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,15 @@ public class MyChallegesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
+        int userId = Integer.parseInt(userID);
+
         AL = new ArrayList<String>();
 
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT name,type FROM challanges WHERE userId=1";
+        String sql = "SELECT name,type FROM challanges WHERE userId='"+userId+"'";
         Cursor results = db.rawQuery(sql, null);
 
         while(results.moveToNext()){
