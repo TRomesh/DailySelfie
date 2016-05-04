@@ -124,25 +124,17 @@ public class ChildGrowthActivity extends AppCompatActivity {
                     //Date cBirthday = "";
                     //Date challangePeriod = "";
                     String cdescription = childDescription.getText().toString();
+                    String type = "ChildGrowth";
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(ChildGrowthActivity.this);
+                    String sql = "INSERT INTO challanges (type,name,height,weight,description,userId)" +
+                            " VALUES ('"+type+"','"+cChallangename+"','"+cHeight+"','"+cWeight+"','"+cdescription+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", "ChildGrowth");
-                    values.put("name", cChallangename);
-                    values.put("description", cdescription);
-                    values.put("height", cHeight);
-                    values.put("weight", cWeight);
-                    //values.put("targetDate",);
-                    //values.put("birthDay", );
-                    //values.put("alram",);
-                    //values.put("userId",);
-
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {

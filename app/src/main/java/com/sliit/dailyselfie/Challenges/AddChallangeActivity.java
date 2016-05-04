@@ -101,20 +101,16 @@ public class AddChallangeActivity extends AppCompatActivity {
                     String Challangename = cname.getText().toString();
                     String chaltype = (String) spn.getSelectedItem();
                     String description = cDescription.getText().toString();
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(AddChallangeActivity.this);
+                    String sql = "INSERT INTO challanges (type,name,description,userId)" +
+                            " VALUES ('"+chaltype+"','"+Challangename+"','"+description+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", chaltype);
-                    values.put("name", Challangename);
-                    values.put("description", description);
-                    //values.put("alram",);
-                    //values.put("userId",);
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {

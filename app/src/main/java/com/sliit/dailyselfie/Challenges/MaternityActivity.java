@@ -122,24 +122,17 @@ public class MaternityActivity extends AppCompatActivity {
                     Double maternityWeight = Double.parseDouble((String) maternityweight.getText());
                     Double maternitywaist = Double.parseDouble((String) maternityWaist.getText());
                     String maternitydescription = maternityDescription.getText().toString();
+                    String type = "Maternity";
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(MaternityActivity.this);
+                    String sql = "INSERT INTO challanges (type,name,height,weight,waistSize,description,userId)" +
+                            " VALUES ('"+type+"','"+maternityChallangename+"','"+maternityHeight+"','"+maternityWeight+"','"+maternitywaist+"','"+maternitydescription+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", "Maternity");
-                    values.put("name", maternityChallangename);
-                    values.put("height", maternityHeight);
-                    values.put("weight", maternityWeight);
-                    values.put("waistSize", maternitywaist);
-                    values.put("description", maternitydescription);
-                    //values.put("targetDate",);
-                    //values.put("alram",);
-                    //values.put("userId",);
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {

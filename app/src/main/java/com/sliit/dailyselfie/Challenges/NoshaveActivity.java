@@ -90,21 +90,17 @@ public class NoshaveActivity extends AppCompatActivity {
 
                     String noshaveChallangename = noShavename.getText().toString();
                     String noshavedescription = noShaveDescription.getText().toString();
+                    String type = "NoShave";
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(NoshaveActivity.this);
+                    String sql = "INSERT INTO challanges (type,name,description,userId)" +
+                            " VALUES ('"+type+"','"+noshaveChallangename+"','"+noshavedescription+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", "NoShave");
-                    values.put("name", noshaveChallangename);
-                    values.put("description", noshavedescription);
-                    //values.put("targetDate",);
-                    //values.put("alram",);
-                    //values.put("userId",);
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {

@@ -132,25 +132,17 @@ public class PostMaternityActivity extends AppCompatActivity {
                     Double pmaternitywaist = Double.parseDouble((String) pmaternityWaist.getText());
                     Double pmaternitytargetwaist = Double.parseDouble((String) pmaternityTargetWaist.getText());
                     String pmaternitydescription = pmaternityDescription.getText().toString();
+                    String type = "PostMaternity";
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(PostMaternityActivity.this);
+                    String sql = "INSERT INTO challanges (type,name,height,weight,waistSize,targetWaistSize,description,userId)" +
+                            " VALUES ('"+type+"','"+pmaternityChallangename+"','"+pmaternityHeight+"','"+pmaternityWeight+"','"+pmaternitywaist+"','"+pmaternitytargetwaist+"','"+pmaternitydescription+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", "PostMaternity");
-                    values.put("name", pmaternityChallangename);
-                    values.put("height", pmaternityHeight);
-                    values.put("weight", pmaternityWeight);
-                    values.put("waistSize", pmaternitywaist);
-                    values.put("targetWaistSize",pmaternitytargetwaist);
-                    values.put("description", pmaternitydescription);
-                    //values.put("targetDate",);
-                    //values.put("alram",);
-                    //values.put("userId",);
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {
