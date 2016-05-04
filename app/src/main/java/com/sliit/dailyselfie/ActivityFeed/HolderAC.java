@@ -15,6 +15,8 @@ public class HolderAC extends RecyclerView.ViewHolder {
 
     TextView t1;
     TextView t2;
+    TextView t3;
+    TextView t4;
     ImageView im;
     Button b1;
 
@@ -24,6 +26,7 @@ public class HolderAC extends RecyclerView.ViewHolder {
 
         t1 = (TextView)itemView.findViewById(R.id.activity_username);
         t2 = (TextView)itemView.findViewById(R.id.activity_fitnesstype);
+        t3 = (TextView)itemView.findViewById(R.id.activityDescription);
         im = (ImageView) itemView.findViewById(R.id.activity_image);
 
 

@@ -173,7 +173,7 @@ public class CameraActivity extends AppCompatActivity {
                                 d.setContentView(R.layout.fitnessdialog);
                                 ImageView fitim = (ImageView) d.findViewById(R.id.fitdialogimg);
                                 final EditText fittxt = (EditText) d.findViewById(R.id.fitdialogdesc);
-                                fitpicker = (SwipeNumberPicker)findViewById(R.id.fitweight);
+                                fitpicker = (SwipeNumberPicker)d.findViewById(R.id.fitweight);
                                 b1=(Button)d.findViewById(R.id.fitadd);
                                 b2=(Button)d.findViewById(R.id.fitcancle);
                                 fitpicker.setOnValueChangeListener(new OnValueChangeListener() {

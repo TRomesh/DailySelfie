@@ -1,5 +1,6 @@
 package com.sliit.dailyselfie.ActivityFeed;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -28,10 +31,11 @@ import java.util.ArrayList;
 public class ActivityFeed extends AppCompatActivity {
 
     BottomBar mBottomBar;
-    ArrayList<SharePost> SharedPosts = new ArrayList<>();
+    ArrayList<SharePost> SharedPosts;
     RecyclerView RV;
     AdapterAC adapterAC;
     Firebase fire;
+    Dialog d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,9 @@ public class ActivityFeed extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
+        SharedPosts = new ArrayList<>();
 
-        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedPost");
+        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
 
         RV= (RecyclerView)findViewById(R.id.recycler1);
         RV.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +66,7 @@ public class ActivityFeed extends AppCompatActivity {
                     Toast.makeText(ActivityFeed.this, "Timeline", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_fav) {
-                    Toast.makeText(ActivityFeed.this, "Take Snap", Toast.LENGTH_SHORT).show();
+                    showD();
 
                 } else if (menuItemId == R.id.nav_gallery) {
                     Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();
@@ -87,7 +92,7 @@ public class ActivityFeed extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        fire =new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+
     }
 
     public void RetriveData(){
@@ -129,6 +134,9 @@ public class ActivityFeed extends AppCompatActivity {
             sp.setPostType(ds.getValue(SharePost.class).getPostType());
             sp.setPostDescription(ds.getValue(SharePost.class).getPostDescription());
             sp.setPostImage(ds.getValue(SharePost.class).getPostImage());
+            sp.setDate(ds.getValue(SharePost.class).getDate());
+
+
 
             SharedPosts.add(sp);
 
@@ -142,6 +150,73 @@ public class ActivityFeed extends AppCompatActivity {
              Toast.makeText(ActivityFeed.this, "No data available", Toast.LENGTH_SHORT).show();
          }
 
+    }
+
+    public void RefreshData(){
+
+        fire.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                 GetDataUpdates(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                GetDataUpdates(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+    }
+
+
+    public  void save(String name,String type,String description,String date){
+
+        SharePost sp = new SharePost();
+        sp.setPostSharer(name);
+        sp.setPostType(type);
+        sp.setPostDescription(description);
+        sp.setDate(date);
+        fire.push().setValue(sp);
+        d.dismiss();
+
+
+    }
+
+    public  void showD(){
+        d= new Dialog(ActivityFeed.this);
+        d.setTitle("Save data");
+        d.setContentView(R.layout.shr);
+        final EditText name = (EditText)d.findViewById(R.id.editText);
+        final EditText type = (EditText)d.findViewById(R.id.editText2);
+        final EditText description = (EditText)d.findViewById(R.id.editText3);
+        final EditText date = (EditText)d.findViewById(R.id.editText4);
+        Button b = (Button)d.findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save(name.getText().toString(),type.getText().toString(),description.getText().toString(),date.getText().toString());
+                name.setText("");
+                type.setText("");
+                description.setText("");
+                date.setText("");
+            }
+        });
+        d.show();
     }
 
 }
