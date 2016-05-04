@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class ActivityFeed extends AppCompatActivity {
 
     BottomBar mBottomBar;
-    ArrayList<SharePost> SharedPosts = new ArrayList<>();
+    ArrayList<SharePost> SharedPosts;
     RecyclerView RV;
     AdapterAC adapterAC;
     Firebase fire;
@@ -40,6 +40,7 @@ public class ActivityFeed extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
+        SharedPosts = new ArrayList<>();
 
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedPost");
 
@@ -129,6 +130,9 @@ public class ActivityFeed extends AppCompatActivity {
             sp.setPostType(ds.getValue(SharePost.class).getPostType());
             sp.setPostDescription(ds.getValue(SharePost.class).getPostDescription());
             sp.setPostImage(ds.getValue(SharePost.class).getPostImage());
+            sp.setDate(ds.getValue(SharePost.class).getDate());
+            
+
 
             SharedPosts.add(sp);
 
@@ -141,6 +145,11 @@ public class ActivityFeed extends AppCompatActivity {
         }else{
              Toast.makeText(ActivityFeed.this, "No data available", Toast.LENGTH_SHORT).show();
          }
+
+    }
+
+    public void RefreshData(){
+
 
     }
 

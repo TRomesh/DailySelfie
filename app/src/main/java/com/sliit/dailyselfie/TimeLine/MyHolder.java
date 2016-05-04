@@ -22,7 +22,7 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     TextView txt3;
     ItemClickListner itemClickListner;
     ItemOnLongClickListner itemOnLongClickListner;
-    ButtonClickListner buttonClickListner;
+
 
     public MyHolder(final View itemView) {
         super(itemView);

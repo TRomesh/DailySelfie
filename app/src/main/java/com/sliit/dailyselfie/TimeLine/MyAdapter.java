@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.sliit.dailyselfie.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Tharaka on 22/03/2016.
  */

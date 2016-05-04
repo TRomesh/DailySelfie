@@ -171,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity {
                     values.put("lname", lname);
                     values.put("email",email);
                     values.put("password", password);
-                    values.put("profilepic", email);
+                    values.put("profilepic", propic);
 
                     try {
 
