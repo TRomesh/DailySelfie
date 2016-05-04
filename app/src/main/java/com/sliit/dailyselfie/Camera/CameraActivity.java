@@ -1,11 +1,14 @@
 package com.sliit.dailyselfie.Camera;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -186,6 +189,33 @@ public class CameraActivity extends AppCompatActivity {
                                         String fitCurrentDescription = fittxt.getText().toString();
                                         Double currentWeight = Double.parseDouble((String) fitpicker.getText());
                                         String currentImg = ImageFileLoaction;
+                                        String ChallangeName = "aaa";
+
+//                                        DBHelper helper = new DBHelper(CameraActivity.this);
+//                                        String sql = "INSERT INTO posts (description,weight,image,challangeName)" +
+//                                                " VALUES ('"+fitCurrentDescription+"','"+currentWeight+"','"+currentImg+"','"+ChallangeName+"') ";
+//
+//                                        SQLiteDatabase db = helper.getWritableDatabase();
+//
+//                                        try {
+//                                            db.execSQL(sql);
+//                                            successfulAlert();
+//
+//                                        } catch (SQLiteException e) {
+//                                            AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
+//                                            a_builder.setMessage("User already exist!")
+//                                                    .setCancelable(false)
+//                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                                        @Override
+//                                                        public void onClick(DialogInterface dialog, int which) {
+//                                                            dialog.cancel();
+//                                                        }
+//                                                    });
+//
+//                                            AlertDialog alert = a_builder.create();
+//                                            alert.setTitle("Alert");
+//                                            alert.show();
+//                                        }
 
                                         Toast.makeText(v.getContext(),fittxt.getText().toString(),Toast.LENGTH_SHORT).show();
                                     }
@@ -314,10 +344,22 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+//    public void successfulAlert(){
+//        AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
+//        a_builder.setMessage("Successfully inserted")
+//                .setCancelable(false)
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//        AlertDialog alert = a_builder.create();
+//        alert.show();
+//    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
