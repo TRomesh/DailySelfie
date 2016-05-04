@@ -11,7 +11,7 @@ import com.sliit.dailyselfie.R;
 /**
  * Created by Tharaka on 11/04/2016.
  */
-public class HolderAC extends RecyclerView.ViewHolder {
+public class HolderAC extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener  {
 
     TextView t1;
     TextView t2;
@@ -19,7 +19,8 @@ public class HolderAC extends RecyclerView.ViewHolder {
     TextView t4;
     ImageView im;
     Button b1;
-
+    ItemClickListner itemClickListner;
+    ItemOnLongClickListner itemOnLongClickListner;
 
     public HolderAC(View itemView) {
         super(itemView);
@@ -31,7 +32,32 @@ public class HolderAC extends RecyclerView.ViewHolder {
         im = (ImageView) itemView.findViewById(R.id.activity_image);
 
 
+          itemView.setOnClickListener(this);
+          itemView.setOnLongClickListener(this);
+
+
 
     }
+
+    public void setItemClickListner(ItemClickListner ic){
+        this.itemClickListner=ic;
+    }
+
+
+    public void setItemLongClickListner( ItemOnLongClickListner ic){
+        this.itemOnLongClickListner=ic;
+    }
+
+    @Override
+    public void onClick(View v) {
+        this.itemClickListner.onITemClick(v,getLayoutPosition());
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        this.itemOnLongClickListner.onITemLongClick(v,getLayoutPosition());
+        return false;
+    }
+
 
 }

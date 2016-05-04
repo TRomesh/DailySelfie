@@ -17,6 +17,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.sliit.dailyselfie.R;
@@ -43,7 +44,7 @@ public class ActivityFeed extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
 
-        fire=new Firebase("https://dailyselfie.firebaseio.com");
+        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
 
 
 
@@ -92,32 +93,18 @@ public class ActivityFeed extends AppCompatActivity {
     }
 
     public void RetriveData(){
-        fire.addChildEventListener(new ChildEventListener() {
-          @Override
-          public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-              GetDataUpdates(dataSnapshot);
-          }
 
-          @Override
-          public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-              GetDataUpdates(dataSnapshot);
-          }
+        fire.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GetDataUpdates(dataSnapshot);
+            }
 
-          @Override
-          public void onChildRemoved(DataSnapshot dataSnapshot) {
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
 
-          }
-
-          @Override
-          public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-          }
-
-          @Override
-          public void onCancelled(FirebaseError firebaseError) {
-
-          }
-      });
+            }
+        });
     }
 
     public void GetDataUpdates(DataSnapshot dataSnapshot ){
@@ -150,25 +137,10 @@ public class ActivityFeed extends AppCompatActivity {
 
     public void RefreshData(){
 
-        fire.addChildEventListener(new ChildEventListener() {
+        fire.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                 GetDataUpdates(dataSnapshot);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 GetDataUpdates(dataSnapshot);
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -176,6 +148,7 @@ public class ActivityFeed extends AppCompatActivity {
 
             }
         });
+
 
     }
 
