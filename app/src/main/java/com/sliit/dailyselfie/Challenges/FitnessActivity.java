@@ -164,25 +164,17 @@ public class FitnessActivity extends AppCompatActivity {
                     Double fitweight = Double.parseDouble((String) fweight.getText());
                     Double fittarweight = Double.parseDouble((String) ftarweight.getText());
                     String fitdescription = fitDescription.getText().toString();
+                    String type = "Fitness";
+                    int userId = 1;
 
                     DBHelper helper = new DBHelper(FitnessActivity.this);
+                    String sql = "INSERT INTO challanges (type,fitCategory,name,height,weight,targetWeight,description,userId)" +
+                            " VALUES ('"+type+"','"+fitType+"','"+fitChallangename+"','"+fitheight+"','"+fitweight+"','"+fittarweight+"','"+fitdescription+"','"+userId+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("type", "Fitness");
-                    values.put("fitCategory", fitType);
-                    values.put("name", fitChallangename);
-                    values.put("height", fitheight);
-                    values.put("weight", fitweight);
-                    values.put("targetWeight", fittarweight);
-                    values.put("description", fitdescription);
-                    //values.put("targetDate",);
-                    //values.put("alram",);
-                    //values.put("userId",);
-
                     try {
-                        db.insert("challanges", null, values);
-
+                        db.execSQL(sql);
                         successfulAlert();
 
                     } catch (SQLiteException e) {

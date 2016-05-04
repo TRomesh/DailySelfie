@@ -161,21 +161,17 @@ public class SignUpActivity extends AppCompatActivity {
                     String lname = rlname.getText().toString();
                     String email = remail.getText().toString();
                     String password = rpassword.getText().toString();
-                    String propic = "";
+                    String propic = ImageFileLoaction;
 
                     DBHelper helper = new DBHelper(getApplicationContext());
+                    String sql = "INSERT INTO register (fname,lname,email,password,profilepic)" +
+                            " VALUES ('"+fname+"','"+lname+"','"+email+"','"+password+"','"+propic+"') ";
+
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    ContentValues values = new ContentValues();
-                    values.put("fname",fname);
-                    values.put("lname", lname);
-                    values.put("email",email);
-                    values.put("password", password);
-                    values.put("profilepic", email);
-
                     try {
+                        db.execSQL(sql);
 
-                        db.insertOrThrow("register", null, values);
                         RU=new RegisterUser();
                         RU.setUname(fname);
                         RU.setLname(lname);
@@ -191,8 +187,6 @@ public class SignUpActivity extends AppCompatActivity {
                             RU.setProfilepic("Gallery pic");
                         }
                         registerUser(RU);
-                        db.insert("register", null, values);
-
                         successfulAlert();
 
                     }catch(SQLiteException e){
