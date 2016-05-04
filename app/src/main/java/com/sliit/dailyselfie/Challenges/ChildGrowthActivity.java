@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
@@ -43,6 +44,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
     private EditText childname,childDescription;
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
+    String userID;
     Button bset,bcancle;
 
     private SwipeNumberPicker cheight,cweight;
@@ -89,6 +91,8 @@ public class ChildGrowthActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
 
         cheight = (SwipeNumberPicker)findViewById(R.id.snpchild0);
         cheight.setOnValueChangeListener(new OnValueChangeListener() {
@@ -129,7 +133,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
                     //Date challangePeriod = "";
                     String cdescription = childDescription.getText().toString();
                     String type = "ChildGrowth";
-                    int userId = 1;
+                    int userId = Integer.parseInt(userID);
 
                     DBHelper helper = new DBHelper(ChildGrowthActivity.this);
                     String sql = "INSERT INTO challanges (type,name,height,weight,description,userId)" +

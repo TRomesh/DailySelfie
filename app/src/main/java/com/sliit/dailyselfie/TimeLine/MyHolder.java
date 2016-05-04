@@ -16,10 +16,8 @@ import com.sliit.dailyselfie.R;
 public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
 
     ImageView image;
-    TextView txt1;
-    TextView txt2;
+    TextView txt1,txt2,txt3;
     Button b1;
-    TextView txt3;
     ItemClickListner itemClickListner;
     ItemOnLongClickListner itemOnLongClickListner;
 
@@ -27,21 +25,15 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     public MyHolder(final View itemView) {
         super(itemView);
 
-        image=(ImageView)itemView.findViewById(R.id.recyclerImage);
+        //image=(ImageView)itemView.findViewById(R.id.recyclerImage);
         txt1=(TextView)itemView.findViewById(R.id.recyclerText);
-        txt2=(TextView)itemView.findViewById(R.id.recyclerText1);
+        //txt2=(TextView)itemView.findViewById(R.id.recyclerText1);
         b1=(Button)itemView.findViewById(R.id.postShare);
-
-
 
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
 
-
-
     }
-
-
 
     public void setItemClickListner(ItemClickListner ic){
         this.itemClickListner=ic;

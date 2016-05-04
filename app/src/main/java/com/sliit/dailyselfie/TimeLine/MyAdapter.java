@@ -22,48 +22,32 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
     Context c;
-    String []players;
-    String []name;
-    int []image;
     Dialog d;
+    ArrayList<Posts> posts;
 
-    public MyAdapter(Context cntx,String []plyrs,String []nme,int []img){
-
+    public MyAdapter(Context cntx,ArrayList<Posts> posts){
         this.c=cntx;
-        this.players=plyrs;
-        this.name=nme;
-        this.image=img;
-
+        this.posts = posts;
     }
-
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.model,null);
-
         MyHolder holder=new MyHolder(v);
-
-
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
-       holder.image.setImageResource(image[position]);
-       holder.txt1.setText(name[position]);
-       holder.txt2.setText(name[position]);
+
+        holder.txt1.setText(posts.get(position).getChallangeName());
 
         holder.setItemClickListner(new ItemClickListner() {
             @Override
             public void onITemClick(View v, int pos) {
-
-                Snackbar.make(v, players[position] + " : " + name[position], Snackbar.LENGTH_SHORT).show();
-
+                Snackbar.make(v,posts.get(pos).getChallangeName(),Snackbar.LENGTH_SHORT).show();
             }
-
-
         });
 
         holder.setItemLongClickListner(new ItemOnLongClickListner() {
@@ -75,8 +59,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 d.setContentView(R.layout.customlayout);
                 ImageView im = (ImageView) d.findViewById(R.id.customimg1);
                 TextView tx = (TextView) d.findViewById(R.id.customtext1);
-                im.setImageResource(image[position]);
-                tx.setText(name[position]);
+                //im.setImageResource(image[position]);
+                //tx.setText(name[position]);
                 d.show();
             }
         });
@@ -93,6 +77,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
     @Override
     public int getItemCount() {
-        return name.length;
+        return posts.size();
     }
 }
