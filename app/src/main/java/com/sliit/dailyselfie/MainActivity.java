@@ -23,6 +23,7 @@ import com.sliit.dailyselfie.Challenges.FitnessActivity;
 import com.sliit.dailyselfie.Challenges.MaternityActivity;
 import com.sliit.dailyselfie.Challenges.NoshaveActivity;
 import com.sliit.dailyselfie.Challenges.PostMaternityActivity;
+import com.sliit.dailyselfie.NavigationItems.MyChallegesActivity;
 import com.sliit.dailyselfie.TimeLine.TimeLine;
 
 public class MainActivity extends AppCompatActivity
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-            startActivity(new Intent(MainActivity.this,TimeLine.class));
+            startActivity(new Intent(MainActivity.this,MyChallegesActivity.class));
 
         } else if (id == R.id.nav_manage) {
 
