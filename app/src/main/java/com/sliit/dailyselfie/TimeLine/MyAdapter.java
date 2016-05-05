@@ -25,6 +25,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     Dialog d;
     ArrayList<Posts> posts;
 
+
+
+
     public MyAdapter(Context cntx,ArrayList<Posts> posts){
         this.c=cntx;
         this.posts = posts;

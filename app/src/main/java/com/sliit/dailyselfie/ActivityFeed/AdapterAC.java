@@ -23,10 +23,13 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
 
     Context c;
     ArrayList<SharePost> sharepost;
+    DownloadAsync DA;
+
 
     public AdapterAC(Context c, ArrayList<SharePost> sharepost) {
         this.c = c;
         this.sharepost = sharepost;
+
     }
 
     @Override
@@ -43,13 +46,12 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
         String Description =sharepost.get(position).getPostDescription();
         String Date = sharepost.get(position).getPostedTime();
         String Image = sharepost.get(position).getPostImage();
-        byte[] imageAsBytes = Base64.decode(Image, Base64.DEFAULT);
-        Bitmap bmp1 = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-        holder.t1.setText(Uname);
         holder.t2.setText(FitType);
         holder.t3.setText(Description);
         holder.t4.setText(Date);
-        holder.im.setImageBitmap(bmp1);
+        DA=new DownloadAsync(c,Image,holder.im);
+        DA.execute();
+
 
      holder.setItemClickListner(new com.sliit.dailyselfie.ActivityFeed.ItemClickListner() {
        @Override

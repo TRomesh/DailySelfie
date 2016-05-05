@@ -8,7 +8,7 @@ import com.sromku.simple.fb.SimpleFacebookConfiguration;
  */
 public class MyConfigurations {
 
-    Permission[] permissions = new Permission[]{Permission.EMAIL};
+    Permission[] permissions = new Permission[]{Permission.EMAIL,Permission.USER_ABOUT_ME};
     static final String APP_ID="1529806223987699";
 
     public SimpleFacebookConfiguration getMyConfigs(){
