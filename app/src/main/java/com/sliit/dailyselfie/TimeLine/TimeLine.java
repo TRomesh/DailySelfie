@@ -31,7 +31,7 @@ public class TimeLine extends AppCompatActivity {
 
     MyAdapter adapter;
     RecyclerView rv;
-    String chalName;
+    String chalName,chalType;
     ArrayList<Posts> posts = new ArrayList<>();
     Firebase fire;
     BottomBar mBottomBar;
@@ -47,8 +47,10 @@ public class TimeLine extends AppCompatActivity {
         mBottomBar.noNavBarGoodness();
         Firebase.setAndroidContext(this);
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+
         SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
         chalName = cDetails.getString("chName","");
+        chalType = cDetails.getString("chType","");
 
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override

@@ -37,7 +37,7 @@ import picker.ugurtekbas.com.Picker.Picker;
 
 public class AddChallangeActivity extends AppCompatActivity {
 
-    Spinner spn;
+    Spinner spn,spn1;
     private EditText cname,cDescription;
     private TextInputLayout inputLayoutName,inputLayoutDescription;
     private Button btnAdd;
@@ -96,6 +96,10 @@ public class AddChallangeActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challenges);
         spn.setAdapter(adapter);
 
+        spn1 = (Spinner)findViewById(R.id.cusdate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn1.setAdapter(adapter1);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_cusChallangeName);
         inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_cusChallangedescription);

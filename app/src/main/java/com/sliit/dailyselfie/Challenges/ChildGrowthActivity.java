@@ -20,8 +20,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sliit.dailyselfie.AlertReciver.AlarmReciver;
@@ -46,6 +48,7 @@ public class ChildGrowthActivity extends AppCompatActivity {
     private Button btnAdd;
     String userID;
     Button bset,bcancle;
+    Spinner spn;
 
     private SwipeNumberPicker cheight,cweight;
 
@@ -91,6 +94,11 @@ public class ChildGrowthActivity extends AppCompatActivity {
             }
         });
 
+        spn = (Spinner)findViewById(R.id.childdate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn.setAdapter(adapter);
+
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");
 
@@ -129,8 +137,6 @@ public class ChildGrowthActivity extends AppCompatActivity {
                     String cChallangename = childname.getText().toString();
                     Double cHeight = Double.parseDouble((String) cheight.getText());
                     Double cWeight = Double.parseDouble((String) cweight.getText());
-                    //Date cBirthday = "";
-                    //Date challangePeriod = "";
                     String cdescription = childDescription.getText().toString();
                     String type = "ChildGrowth";
                     int userId = Integer.parseInt(userID);

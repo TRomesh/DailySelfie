@@ -17,8 +17,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.sliit.dailyselfie.AlertReciver.AlarmReciver;
 import com.sliit.dailyselfie.Camera.CameraActivity;
@@ -34,6 +36,7 @@ public class NoshaveActivity extends AppCompatActivity {
     private Button btnAdd;
     String userID;
     Button bset,bcancle;
+    Spinner spn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +50,11 @@ public class NoshaveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Long alertTime =new GregorianCalendar().getTimeInMillis();
-                Intent alertIntent = new Intent(NoshaveActivity.this,AlarmReciver.class);
-                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP,alertTime,PendingIntent.getBroadcast(NoshaveActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,alertTime,alarmManager.INTERVAL_DAY*7,PendingIntent.getBroadcast(NoshaveActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
-
+                Long alertTime = new GregorianCalendar().getTimeInMillis();
+                Intent alertIntent = new Intent(NoshaveActivity.this, AlarmReciver.class);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, PendingIntent.getBroadcast(NoshaveActivity.this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alertTime, alarmManager.INTERVAL_DAY * 7, PendingIntent.getBroadcast(NoshaveActivity.this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
 
 //                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -80,6 +82,11 @@ public class NoshaveActivity extends AppCompatActivity {
 
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");
+
+        spn = (Spinner)findViewById(R.id.noshavedate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn.setAdapter(adapter);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_noShaveName);
         inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_noShavedescription);
