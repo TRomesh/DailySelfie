@@ -35,9 +35,9 @@
             app:snp_numberColor="@android:color/white"
             app:snp_arrowColor="@android:color/white"
             app:snp_backgroundColor="@color/colorAccent"
-            app:snp_max="8"
+            app:snp_max="100"
             app:snp_min="1"
-            app:snp_value="5"
+            app:snp_value="60"
             />
 
     </LinearLayout>

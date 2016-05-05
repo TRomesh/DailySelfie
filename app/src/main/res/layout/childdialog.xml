@@ -22,7 +22,7 @@
         <TextView
             android:textAlignment="center"
             android:textSize="25sp"
-            android:text="Today's Waist size"
+            android:text="Height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -35,9 +35,9 @@
             app:snp_numberColor="@android:color/white"
             app:snp_arrowColor="@android:color/white"
             app:snp_backgroundColor="@color/colorAccent"
-            app:snp_max="8"
+            app:snp_max="200"
             app:snp_min="1"
-            app:snp_value="5"
+            app:snp_value="70"
             />
 
     </LinearLayout>
