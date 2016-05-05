@@ -20,10 +20,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -40,6 +42,7 @@ import picker.ugurtekbas.com.Picker.Picker;
 
 public class FitnessActivity extends AppCompatActivity {
 
+    Spinner spn;
     String fitType;
     Dialog d;
     Picker picker;
@@ -96,6 +99,14 @@ public class FitnessActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.fitcansel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fitname.setText("");
+                fitDescription.setText("");
+            }
+        });
+
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");
 
@@ -122,6 +133,11 @@ public class FitnessActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        spn = (Spinner)findViewById(R.id.fitdate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn.setAdapter(adapter);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_fitName);
         inputLayoutDescription = (TextInputLayout) findViewById(R.id.input_layout_fitDescription);

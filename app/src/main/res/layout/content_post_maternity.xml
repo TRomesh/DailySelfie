@@ -83,9 +83,9 @@
                             app:snp_numberColor="@android:color/white"
                             app:snp_arrowColor="@android:color/white"
                             app:snp_backgroundColor="@color/colorAccent"
-                            app:snp_max="8"
+                            app:snp_max="200"
                             app:snp_min="1"
-                            app:snp_value="5"
+                            app:snp_value="100"
                             android:layout_marginRight="20dp"
                             android:layout_marginLeft="20dp"/>
 
@@ -118,9 +118,9 @@
                         app:snp_numberColor="@android:color/white"
                         app:snp_arrowColor="@android:color/white"
                         app:snp_backgroundColor="@color/colorAccent"
-                        app:snp_max="8"
+                        app:snp_max="200"
                         app:snp_min="1"
-                        app:snp_value="5"
+                        app:snp_value="60"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"/>
 
@@ -151,9 +151,9 @@
                         app:snp_numberColor="@android:color/white"
                         app:snp_arrowColor="@android:color/white"
                         app:snp_backgroundColor="@color/colorAccent"
-                        app:snp_max="8"
+                        app:snp_max="100"
                         app:snp_min="1"
-                        app:snp_value="5"
+                        app:snp_value="30"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"/>
 
@@ -170,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.5"
-                        android:text="Target Waist Size"
+                        android:text="Target Waist Size (cm)"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:textSize="15dp"
@@ -184,9 +184,9 @@
                         app:snp_numberColor="@android:color/white"
                         app:snp_arrowColor="@android:color/white"
                         app:snp_backgroundColor="@color/colorAccent"
-                        app:snp_max="8"
+                        app:snp_max="50"
                         app:snp_min="1"
-                        app:snp_value="5"
+                        app:snp_value="30"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"/>
 
