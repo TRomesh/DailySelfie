@@ -74,8 +74,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 d.setContentView(R.layout.customlayout);
                 ImageView im = (ImageView) d.findViewById(R.id.customimg1);
                 TextView tx = (TextView) d.findViewById(R.id.customtext1);
-                //im.setImageResource(image[position]);
-                //tx.setText(name[position]);
+                //im.setImageResource("");
+                //tx.setText("");
                 d.show();
             }
         });
