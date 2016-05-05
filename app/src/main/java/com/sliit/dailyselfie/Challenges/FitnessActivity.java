@@ -34,6 +34,7 @@ import com.sliit.dailyselfie.R;
 import com.vi.swipenumberpicker.OnValueChangeListener;
 import com.vi.swipenumberpicker.SwipeNumberPicker;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import picker.ugurtekbas.com.Picker.Picker;
@@ -52,6 +53,9 @@ public class FitnessActivity extends AppCompatActivity {
     private RadioGroup ftype;
     private SwipeNumberPicker fheight,fweight,ftarweight;
     String userID;
+    String hour,minutes;
+    Date date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +79,16 @@ public class FitnessActivity extends AppCompatActivity {
                 picker.setDialColor(Color.parseColor("#FF9800"));
                 picker.getCurrentHour();
                 picker.getCurrentMin();
+                picker.getTime();
                 d.show();
 
                 bset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
+                        date=picker.getTime();
+                        hour=Integer.toString(picker.getCurrentHour());
+                        minutes=Integer.toString(picker.getCurrentMin());
+                        Toast.makeText(getApplicationContext(),"Alarm set to"+ Integer.toString(picker.getCurrentHour())+" "+Integer.toString(picker.getCurrentMin()), Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -88,7 +96,7 @@ public class FitnessActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Cancle Alarm", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), picker.getTime().toString(), Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });

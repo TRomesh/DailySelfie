@@ -204,27 +204,16 @@
                 </LinearLayout>
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:orientation="vertical"
                     android:layout_marginTop="15dp">
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_fitdate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp">
+             
 
-                        <EditText
-                            android:id="@+id/fitdate"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="date"
-                            android:ems="10"
-                            android:hint="@string/txt_timeP" />
-                    </android.support.design.widget.TextInputLayout>
+
 
                 </LinearLayout>
 
