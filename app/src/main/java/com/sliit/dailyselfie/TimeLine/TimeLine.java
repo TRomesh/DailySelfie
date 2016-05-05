@@ -45,7 +45,7 @@ public class TimeLine extends AppCompatActivity {
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
-        adapter =new MyAdapter(this,posts,fire);
+        adapter =new MyAdapter(this,posts);
         showPost();
 
     }

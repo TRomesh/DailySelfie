@@ -1,11 +1,15 @@
 package com.sliit.dailyselfie.TimeLine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by Tharaka on 03/05/2016.
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Posts {
 
-    private int Id;
+
     private String Description;
     private double Height;
     private double Weight;
@@ -13,6 +17,9 @@ public class Posts {
     private String Created_at;
     private String challangeName;
     private String image;
+    @JsonIgnore
+    private int Id;
+
 
     public Posts(int id, String description, double height, double weight, double waistSize, String created_at, String image, String challangeName) {
         Id = id;
@@ -23,6 +30,9 @@ public class Posts {
         Created_at = created_at;
         this.challangeName = challangeName;
         this.image = image;
+    }
+
+    public Posts() {
     }
 
     public int getId() {
