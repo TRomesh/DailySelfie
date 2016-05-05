@@ -1,6 +1,8 @@
 package com.sliit.dailyselfie;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +26,7 @@ import com.sliit.dailyselfie.Challenges.MaternityActivity;
 import com.sliit.dailyselfie.Challenges.NoshaveActivity;
 import com.sliit.dailyselfie.Challenges.PostMaternityActivity;
 import com.sliit.dailyselfie.NavigationItems.MyChallegesActivity;
+import com.sliit.dailyselfie.Start.LoginActivity;
 import com.sliit.dailyselfie.TimeLine.TimeLine;
 
 public class MainActivity extends AppCompatActivity
@@ -154,6 +157,19 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_exit) {
+
+            SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = userDetails.edit();
+            editor.putString("loggedUserId", "");
+            editor.apply();
+
+            SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = cDetails.edit();
+            editor1.putString("chName", "");
+            editor1.apply();
+
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
