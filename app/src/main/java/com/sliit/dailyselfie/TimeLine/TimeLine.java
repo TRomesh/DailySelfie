@@ -27,8 +27,7 @@ public class TimeLine extends AppCompatActivity {
     RecyclerView rv;
     String chalName;
     ArrayList<Posts> posts = new ArrayList<>();
-    //int[] image = {R.drawable.dill};
-
+    Firebase fire;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +36,14 @@ public class TimeLine extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Firebase.setAndroidContext(this);
-
+        fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
         SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
         chalName = cDetails.getString("chName","");
 
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
-        adapter =new MyAdapter(this,posts);
+        adapter =new MyAdapter(this,posts,fire);
         showPost();
 
     }

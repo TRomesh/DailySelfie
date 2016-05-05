@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -25,14 +26,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     Context c;
     Dialog d;
     ArrayList<Posts> posts;
+    Firebase FB;
     //int[] img;
 
 
 
 
-    public MyAdapter(Context cntx,ArrayList<Posts> posts){
+    public MyAdapter(Context cntx, ArrayList<Posts> posts, Firebase fb){
         this.c=cntx;
         this.posts = posts;
+        this.FB=fb;
     }
 
     @Override
