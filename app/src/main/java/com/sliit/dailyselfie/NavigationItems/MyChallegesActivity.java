@@ -25,8 +25,8 @@ import java.util.List;
 
 public class MyChallegesActivity extends AppCompatActivity {
 
-    ArrayList<String> AL,AL1,AL2,AL3,AL4,AL5,AL6,AL7,AL8;
-    //ArrayList<String> ;
+    ArrayList<String> AL;
+    ArrayList<String> AL1;
     ArrayAdapter<String> AD;
     ListView lv;
     String userID;
@@ -44,13 +44,7 @@ public class MyChallegesActivity extends AppCompatActivity {
         int userId = Integer.parseInt(userID);
 
         AL = new ArrayList<String>();
-        AL2 = new ArrayList<String>();
-        AL3 = new ArrayList<String>();
-        AL4 = new ArrayList<String>();
-        AL5 = new ArrayList<String>();
-        AL6 = new ArrayList<String>();
-        AL7 = new ArrayList<String>();
-        AL8 = new ArrayList<String>();
+        AL1 = new ArrayList<String>();
 
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -60,23 +54,8 @@ public class MyChallegesActivity extends AppCompatActivity {
         while(results.moveToNext()){
             String cName = results.getString(0);
             String cType = results.getString(1);
-            //String cId = results.getString(2);
-            String cDesc = results.getString(3);
-            String cFitCat = results.getString(4);
-            String cHeight = results.getString(5);
-            String cWeight = results.getString(6);
-            String cWaist = results.getString(7);
-            String ctarWeight = results.getString(8);
-            String ctarWaist = results.getString(9);
             AL.add(cName);
             AL1.add(cType);
-            AL2.add(cDesc);
-            AL3.add(cFitCat);
-            AL4.add(cHeight);
-            AL5.add(cWeight);
-            AL6.add(cWaist);
-            AL7.add(ctarWeight);
-            AL8.add(ctarWaist);
         }
 
         lv = (ListView)findViewById(R.id.MyChallengeslistView);
@@ -89,25 +68,11 @@ public class MyChallegesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String)lv.getItemAtPosition(position);
                 String type = AL1.get(position);
-                String decs = AL2.get(position);
-                String fitCat = AL3.get(position);
-                String height = AL4.get(position);
-                String weight = AL5.get(position);
-                String waist = AL6.get(position);
-                String tarweight = AL7.get(position);
-                String tarwaist = AL8.get(position);
 
                 SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = cDetails.edit();
                 editor1.putString("chName", value);
                 editor1.putString("chType", type);
-                editor1.putString("chDesc", decs);
-                editor1.putString("cFitCat",fitCat);
-                editor1.putString("chHeight", height);
-                editor1.putString("chWeight", weight);
-                editor1.putString("chWaist", waist);
-                editor1.putString("chtarWeight", tarweight);
-                editor1.putString("chtarWaist", tarwaist);
                 editor1.apply();
                 Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
 
