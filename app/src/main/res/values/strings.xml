@@ -3,14 +3,14 @@
     <string name="txt_fitnesstype">Fitness Type</string>
     <string name="txt_fitnesstyperadio1">Weight Gain</string>
     <string name="txt_fitnesstyperadio2">Weight Loss</string>
-    <string name="txt_height">Height</string>
-    <string name="txt_weight">Weight</string>
-    <string name="txt_targetw">Target Weight</string>
+    <string name="txt_height">Height (cm)</string>
+    <string name="txt_weight">Weight (kg)</string>
+    <string name="txt_targetw">Target Weight (kg)</string>
     <string name="txt_timeP">Challange Period</string>
     <string name="txt_btn_submit">Submit</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="txt_maternity">My Pregnancy day by day</string>
-    <string name="txt_size">Waist size</string>
+    <string name="txt_size">Waist size (cm)</string>
     <string name="txt_deliveryDate">Expected Birth Date</string>
     <string name="txt_sepNote">Special Note</string>
     <string name="txt_chaName">Challenge Name</string>
@@ -19,10 +19,10 @@
 
     <array name="challenges">
         <item>Challenge Type</item>
-        <item>Children Growing</item>
         <item>Hair</item>
-        <item>Fitness</item>
         <item>Health</item>
+        <item>Nail</item>
+        <item>Family</item>
     </array>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_fitness">FitnessActivity</string>
@@ -66,6 +66,11 @@
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="app_id">1529806223987699</string>
 
-
+    <array name="challengePeriodType">
+        <item>Challange Period Type</item>
+        <item>Daily</item>
+        <item>Monthly</item>
+        <item>Weekly</item>
+    </array>
 
 </resources>

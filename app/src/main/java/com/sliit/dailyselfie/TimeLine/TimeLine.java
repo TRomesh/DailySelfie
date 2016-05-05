@@ -25,7 +25,7 @@ public class TimeLine extends AppCompatActivity {
 
     MyAdapter adapter;
     RecyclerView rv;
-    String chalName;
+    String chalName,chalType;
     ArrayList<Posts> posts = new ArrayList<>();
     Firebase fire;
     @Override
@@ -37,8 +37,10 @@ public class TimeLine extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Firebase.setAndroidContext(this);
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+
         SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
         chalName = cDetails.getString("chName","");
+        chalType = cDetails.getString("chType","");
 
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));

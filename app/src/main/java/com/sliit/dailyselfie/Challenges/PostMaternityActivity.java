@@ -20,8 +20,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sliit.dailyselfie.AlertReciver.AlarmReciver;
@@ -45,6 +47,7 @@ public class PostMaternityActivity extends AppCompatActivity {
     Button bset,bcancle;
     Dialog d;
     Picker picker;
+    Spinner spn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,8 @@ public class PostMaternityActivity extends AppCompatActivity {
                 d = new Dialog(PostMaternityActivity.this);
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setContentView(R.layout.alarmmodel);
-                bset=(Button)d.findViewById(R.id.BsetAlarm);
-                bcancle=(Button)d.findViewById(R.id.BcancleAlarm);
+                bset = (Button) d.findViewById(R.id.BsetAlarm);
+                bcancle = (Button) d.findViewById(R.id.BcancleAlarm);
                 picker = (Picker) d.findViewById(R.id.amPicker);
                 picker.setClockColor(Color.parseColor("#2196F3"));
                 picker.setDialColor(Color.parseColor("#FF9800"));
@@ -73,7 +76,7 @@ public class PostMaternityActivity extends AppCompatActivity {
                 bset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Set Alarm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -81,7 +84,7 @@ public class PostMaternityActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"cancle Alarm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "cancle Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -90,6 +93,11 @@ public class PostMaternityActivity extends AppCompatActivity {
 
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");
+
+        spn = (Spinner)findViewById(R.id.postMdate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn.setAdapter(adapter);
 
         pmaternityheight = (SwipeNumberPicker)findViewById(R.id.snppostM0);
         pmaternityheight.setOnValueChangeListener(new OnValueChangeListener() {

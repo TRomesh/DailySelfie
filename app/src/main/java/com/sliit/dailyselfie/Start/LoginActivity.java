@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     DBHelper DBH;
     private EditText username,password;
     private TextInputLayout inputLayoutName,inputLayoutPassword;
-    String uid;
+    String uid,ufname,ulname,uemail,upropic;
     SimpleFacebook SF;
     Button fb,gplus;
 
@@ -82,11 +82,15 @@ public class LoginActivity extends AppCompatActivity {
                 DBHelper helper = new DBHelper(getApplicationContext());
                 SQLiteDatabase db = helper.getWritableDatabase();
 
-                String sql = "SELECT id FROM register WHERE email = '" + Username + "' AND password = '" + Password + "'";
+                String sql = "SELECT id,fname,lname,email,profilepic FROM register WHERE email = '" + Username + "' AND password = '" + Password + "'";
                 Cursor results = db.rawQuery(sql, null);
 
                 if (results.moveToFirst()) {
                     uid = results.getString(0);
+                    ufname = results.getString(1);
+                    ulname = results.getString(2);
+                    uemail = results.getString(3);
+                    upropic = results.getString(4);
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
@@ -94,6 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = userDetails.edit();
                     editor.putString("loggedUserId", uid);
+                    editor.putString("loggedUserfname", ufname);
+                    editor.putString("loggedUserlname", ulname);
+                    editor.putString("loggedUseremail", uemail);
+                    editor.putString("loggedUserpropic", upropic);
                     editor.apply();
 
                 } else {

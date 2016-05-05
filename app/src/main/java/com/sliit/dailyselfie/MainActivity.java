@@ -15,8 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.sliit.dailyselfie.ActivityFeed.ActivityFeed;
 import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.Challenges.AddChallangeActivity;
@@ -29,12 +32,16 @@ import com.sliit.dailyselfie.NavigationItems.MyChallegesActivity;
 import com.sliit.dailyselfie.Start.LoginActivity;
 import com.sliit.dailyselfie.TimeLine.TimeLine;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
     boolean doubleBackToExitPressedOnce = false;
-
+    String userID,userFName,userEmail,userpropic,userLName;
+    ImageView PIV;
+    TextView Pname,Pemail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,23 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        PIV=(ImageView)findViewById(R.id.profile_image);
+        Pname=(TextView)findViewById(R.id.profile_name);
+        Pemail=(TextView)findViewById(R.id.profile_email);
+
+
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userID = userDetails.getString("loggedUserId","");
+        userFName = userDetails.getString("loggedUserfname","");
+        userLName = userDetails.getString("loggedUserlname","");
+        userEmail = userDetails.getString("loggedUseremail","");
+        userpropic = userDetails.getString("loggedUserpropic","");
+
+        //Glide.with(this).load(userpropic).into(PIV);
+//        Pname.setText(userFName.toString());
+//        Pemail.setText(userEmail.toString());
+//
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -98,9 +122,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), PostMaternityActivity.class));
             }
         });
-
-
-
     }
 
     @Override

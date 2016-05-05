@@ -26,6 +26,7 @@ import java.util.List;
 public class MyChallegesActivity extends AppCompatActivity {
 
     ArrayList<String> AL;
+    ArrayList<String> AL1;
     ArrayAdapter<String> AD;
     ListView lv;
     String userID;
@@ -43,16 +44,26 @@ public class MyChallegesActivity extends AppCompatActivity {
         int userId = Integer.parseInt(userID);
 
         AL = new ArrayList<String>();
+        AL1 = new ArrayList<String>();
 
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT name,type FROM challanges WHERE userId='"+userId+"'";
+        String sql = "SELECT name,type,id,description,fitCategory,height,weight,waistSize,targetWeight,targetWaistSize FROM challanges WHERE userId='"+userId+"'";
         Cursor results = db.rawQuery(sql, null);
 
         while(results.moveToNext()){
             String cName = results.getString(0);
-            //String cType = results.getString(1);
+            String cType = results.getString(1);
+//            String cId = results.getString(2);
+//            String cDesc = results.getString(3);
+//            String cFitCat = results.getString(4);
+//            String cHeight = results.getString(5);
+//            String cWeight = results.getString(6);
+//            String cWaist = results.getString(7);
+//            String ctarWeight = results.getString(8);
+//            String ctarWaist = results.getString(9);
             AL.add(cName);
+            AL1.add(cType);
         }
 
         lv = (ListView)findViewById(R.id.MyChallengeslistView);
@@ -64,11 +75,20 @@ public class MyChallegesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String)lv.getItemAtPosition(position);
+                String type = AL1.get(position);
 
                 SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = cDetails.edit();
                 editor1.putString("chName", value);
+                editor1.putString("chType", type);
+//                editor1.putString("chDesc", value);
+//                editor1.putString("chHeight", value);
+//                editor1.putString("chWeight", value);
+//                editor1.putString("chWaist", value);
+//                editor1.putString("chtarWeight", value);
+//                editor1.putString("chtarWaist", value);
                 editor1.apply();
+                Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(), TimeLine.class));
             }

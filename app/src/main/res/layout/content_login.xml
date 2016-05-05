@@ -41,13 +41,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <EditText
-                android:id="@+id/uname"
-                android:layout_weight="0.6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Username"
-                android:inputType="text"/>
+        <EditText
+            android:id="@+id/uname"
+            android:layout_weight="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Username"
+            android:inputType="textEmailAddress"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
-                android:inputType="text"/>
+                android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
