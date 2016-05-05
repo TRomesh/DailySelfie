@@ -2,6 +2,7 @@ package com.sliit.dailyselfie.TimeLine;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.Image;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     Context c;
     Dialog d;
     ArrayList<Posts> posts;
+    //int[] img;
 
     public MyAdapter(Context cntx,ArrayList<Posts> posts){
         this.c=cntx;
@@ -40,8 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
-
-        holder.txt1.setText(posts.get(position).getChallangeName());
+        //holder.image.setImageResource(R.drawable.dill);
+        holder.txt1.setText(posts.get(position).getCreated_at());
 
         holder.setItemClickListner(new ItemClickListner() {
             @Override

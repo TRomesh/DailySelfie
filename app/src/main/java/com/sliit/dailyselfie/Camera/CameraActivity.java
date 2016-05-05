@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -73,6 +74,7 @@ public class CameraActivity extends AppCompatActivity {
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12;
 
     Uri ImageUri;
+    String chalName;
 
 
     @Override
@@ -85,6 +87,9 @@ public class CameraActivity extends AppCompatActivity {
          helper = new DBHelper(this);
          db = helper.getWritableDatabase();
          values = new ContentValues();
+
+        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+        chalName = cDetails.getString("chName","");
 
         IV = (ImageView)findViewById(R.id.snap1);
         fitpicker = (SwipeNumberPicker)findViewById(R.id.fitweight);
@@ -189,7 +194,7 @@ public class CameraActivity extends AppCompatActivity {
                                         String fitCurrentDescription = fittxt.getText().toString();
                                         Double currentWeight = Double.parseDouble((String) fitpicker.getText());
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,weight,image,challangeName)" +
@@ -252,7 +257,7 @@ public class CameraActivity extends AppCompatActivity {
                                         String matCurrentDescription = mattxt.getText().toString();
                                         Double currentWaist = Double.parseDouble((String) maternitypicker.getText());
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,waistSize,image,challangeName)" +
@@ -315,7 +320,7 @@ public class CameraActivity extends AppCompatActivity {
                                         String childCurrentDescription = chiltxt.getText().toString();
                                         Double currentHeight = Double.parseDouble((String) childpicker.getText());
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,height,image,challangeName)" +
@@ -377,7 +382,7 @@ public class CameraActivity extends AppCompatActivity {
                                         String postCurrentDescription = posttxt.getText().toString();
                                         Double currentWaist = Double.parseDouble((String) postpicker.getText());
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,waistSize,image,challangeName)" +
@@ -432,7 +437,7 @@ public class CameraActivity extends AppCompatActivity {
 
                                         String noshaveCurrentDescription = noshavetxt.getText().toString();
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,image,challangeName)" +
@@ -487,7 +492,7 @@ public class CameraActivity extends AppCompatActivity {
 
                                         String cusCurrentDescription = custxt.getText().toString();
                                         String currentImg = ImageFileLoaction;
-                                        String ChallangeName = "aaa1";
+                                        String ChallangeName = chalName;
 
                                         DBHelper helper = new DBHelper(CameraActivity.this);
                                         String sql = "INSERT INTO posts (description,image,challangeName)" +

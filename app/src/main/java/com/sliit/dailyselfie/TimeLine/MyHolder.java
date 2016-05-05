@@ -25,7 +25,7 @@ public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     public MyHolder(final View itemView) {
         super(itemView);
 
-        //image=(ImageView)itemView.findViewById(R.id.recyclerImage);
+        image=(ImageView)itemView.findViewById(R.id.recyclerImage);
         txt1=(TextView)itemView.findViewById(R.id.recyclerText);
         //txt2=(TextView)itemView.findViewById(R.id.recyclerText1);
         b1=(Button)itemView.findViewById(R.id.postShare);
