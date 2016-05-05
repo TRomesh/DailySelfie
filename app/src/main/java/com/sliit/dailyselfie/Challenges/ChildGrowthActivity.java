@@ -145,6 +145,11 @@ public class ChildGrowthActivity extends AppCompatActivity {
                         db.execSQL(sql);
                         successfulAlert();
 
+                        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = cDetails.edit();
+                        editor1.putString("chName", cChallangename);
+                        editor1.apply();
+
                     } catch (SQLiteException e) {
                         AlertDialog.Builder a_builder = new AlertDialog.Builder(ChildGrowthActivity.this);
                         a_builder.setMessage("User already exist!")

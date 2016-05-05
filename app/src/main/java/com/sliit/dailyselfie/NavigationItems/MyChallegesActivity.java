@@ -65,13 +65,12 @@ public class MyChallegesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String)lv.getItemAtPosition(position);
 
-                startActivity(new Intent(getApplicationContext(),TimeLine.class));
+                SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = cDetails.edit();
+                editor1.putString("chName", value);
+                editor1.apply();
 
-                SharedPreferences challangeDetails = getSharedPreferences("challangeDetails", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = challangeDetails.edit();
-                editor.putString("challangeID", value);
-                editor.apply();
-
+                startActivity(new Intent(getApplicationContext(), TimeLine.class));
             }
 
         };

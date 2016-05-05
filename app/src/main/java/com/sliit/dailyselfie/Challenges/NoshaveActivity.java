@@ -111,6 +111,11 @@ public class NoshaveActivity extends AppCompatActivity {
                         db.execSQL(sql);
                         successfulAlert();
 
+                        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = cDetails.edit();
+                        editor1.putString("chName", noshaveChallangename);
+                        editor1.apply();
+
                     } catch (SQLiteException e) {
                         AlertDialog.Builder a_builder = new AlertDialog.Builder(NoshaveActivity.this);
                         a_builder.setMessage("User already exist!")

@@ -223,6 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
                         dialog.cancel();
                     }
                 });

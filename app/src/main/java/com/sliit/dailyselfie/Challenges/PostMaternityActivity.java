@@ -161,6 +161,11 @@ public class PostMaternityActivity extends AppCompatActivity {
                         db.execSQL(sql);
                         successfulAlert();
 
+                        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = cDetails.edit();
+                        editor1.putString("chName",pmaternityChallangename);
+                        editor1.apply();
+
                     } catch (SQLiteException e) {
                         AlertDialog.Builder a_builder = new AlertDialog.Builder(PostMaternityActivity.this);
                         a_builder.setMessage("User already exist!")
