@@ -80,6 +80,7 @@
 
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/activity_image"
             android:background="#CFD8DC"
             android:src="@drawable/dill"

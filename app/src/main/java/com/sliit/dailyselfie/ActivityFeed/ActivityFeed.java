@@ -1,6 +1,7 @@
 package com.sliit.dailyselfie.ActivityFeed;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -39,14 +41,12 @@ public class ActivityFeed extends AppCompatActivity {
         setContentView(R.layout.activity_activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RV= (RecyclerView)findViewById(R.id.recycler1);
         RV.setLayoutManager(new LinearLayoutManager(this));
         Firebase.setAndroidContext(this);
 
-
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
-
-
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noNavBarGoodness();
@@ -62,7 +62,7 @@ public class ActivityFeed extends AppCompatActivity {
                     Toast.makeText(ActivityFeed.this, "Timeline", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_fav) {
-                    showD();
+                    startActivity(new Intent(ActivityFeed.this, CameraActivity.class));
 
                 } else if (menuItemId == R.id.nav_gallery) {
                     Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();

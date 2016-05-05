@@ -1,11 +1,14 @@
 package com.sliit.dailyselfie.TimeLine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +20,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
+import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -28,6 +34,8 @@ public class TimeLine extends AppCompatActivity {
     String chalName;
     ArrayList<Posts> posts = new ArrayList<>();
     Firebase fire;
+    BottomBar mBottomBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +43,49 @@ public class TimeLine extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.noNavBarGoodness();
         Firebase.setAndroidContext(this);
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
         SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
         chalName = cDetails.getString("chName","");
+
+        mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+
+                if (menuItemId == R.id.nav_home) {
+
+                    Toast.makeText(TimeLine.this, "Timeline", Toast.LENGTH_SHORT).show();
+
+                } else if (menuItemId == R.id.nav_fav) {
+                    startActivity(new Intent(TimeLine.this, CameraActivity.class).putExtra("Challenge","fitness"));
+
+                } else if (menuItemId == R.id.nav_gallery) {
+                    Toast.makeText(TimeLine.this, "Favorites", Toast.LENGTH_SHORT).show();
+
+                }
+
+                mBottomBar.mapColorForTab(0, ContextCompat.getColor(TimeLine.this, R.color.bottomPrimary));
+                mBottomBar.mapColorForTab(1, ContextCompat.getColor(TimeLine.this, R.color.bottomPrimary));
+                mBottomBar.mapColorForTab(2, ContextCompat.getColor(TimeLine.this, R.color.bottomPrimary));
+
+
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+
+            }
+        });
 
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
         adapter =new MyAdapter(this,posts);
         showPost();
+
+
 
     }
 
