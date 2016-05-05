@@ -25,8 +25,9 @@ public class TimeLine extends AppCompatActivity {
 
     MyAdapter adapter;
     RecyclerView rv;
-    String challangeName;
+    String chalName;
     ArrayList<Posts> posts = new ArrayList<>();
+    //int[] image = {R.drawable.dill};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +38,15 @@ public class TimeLine extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Firebase.setAndroidContext(this);
 
+        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+        chalName = cDetails.getString("chName","");
+
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
         adapter =new MyAdapter(this,posts);
-
-        SharedPreferences challangeDetails = getSharedPreferences("challangeDetails", Context.MODE_PRIVATE);
-        challangeName = challangeDetails.getString("challangeID","");
-
         showPost();
+
     }
 
     public void showPost(){
@@ -67,14 +68,12 @@ public class TimeLine extends AppCompatActivity {
             String picpath = c.getString(6);
             String name = c.getString(7);
 
-            if(name == challangeName){
-                Posts p = new Posts(id,des,height,weight,waist,time,picpath,name);
-                posts.add(p);
-            }
+                Toast.makeText(getApplicationContext(),"DB name "+ name,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"shared preferance name " +chalName,Toast.LENGTH_SHORT).show();
 
-            if(posts.size() < 1){
+                Posts p = new Posts(id, des, height, weight, waist, time, picpath, name);
+                posts.add(p);
                 rv.setAdapter(adapter);
-            }
 
         }
     }

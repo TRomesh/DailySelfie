@@ -68,8 +68,8 @@ public class FitnessActivity extends AppCompatActivity {
                 d = new Dialog(FitnessActivity.this);
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setContentView(R.layout.alarmmodel);
-                bset=(Button)d.findViewById(R.id.BsetAlarm);
-                bcancle=(Button)d.findViewById(R.id.BcancleAlarm);
+                bset = (Button) d.findViewById(R.id.BsetAlarm);
+                bcancle = (Button) d.findViewById(R.id.BcancleAlarm);
                 picker = (Picker) d.findViewById(R.id.amPicker);
                 picker.setClockColor(Color.parseColor("#2196F3"));
                 picker.setDialColor(Color.parseColor("#FF9800"));
@@ -80,7 +80,7 @@ public class FitnessActivity extends AppCompatActivity {
                 bset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Set Alarm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -88,7 +88,7 @@ public class FitnessActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Cancle Alarm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Cancle Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -169,6 +169,11 @@ public class FitnessActivity extends AppCompatActivity {
                     try {
                         db.execSQL(sql);
                         successfulAlert();
+
+                        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = cDetails.edit();
+                        editor1.putString("chName", fitChallangename);
+                        editor1.apply();
 
                     } catch (SQLiteException e) {
                         AlertDialog.Builder a_builder = new AlertDialog.Builder(FitnessActivity.this);

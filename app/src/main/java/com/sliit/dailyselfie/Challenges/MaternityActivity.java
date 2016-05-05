@@ -152,6 +152,11 @@ public class MaternityActivity extends AppCompatActivity {
                         db.execSQL(sql);
                         successfulAlert();
 
+                        SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = cDetails.edit();
+                        editor1.putString("chName", maternityChallangename);
+                        editor1.apply();
+
                     } catch (SQLiteException e) {
                         AlertDialog.Builder a_builder = new AlertDialog.Builder(MaternityActivity.this);
                         a_builder.setMessage("User already exist!")
