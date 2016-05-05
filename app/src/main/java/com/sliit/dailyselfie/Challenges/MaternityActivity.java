@@ -20,8 +20,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sliit.dailyselfie.AlertReciver.AlarmReciver;
@@ -45,6 +47,7 @@ public class MaternityActivity extends AppCompatActivity {
     Button bset,bcancle;
     Dialog d;
     Picker picker;
+    Spinner spn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,11 @@ public class MaternityActivity extends AppCompatActivity {
 
      }
         });
+
+        spn = (Spinner)findViewById(R.id.maternitydate);
+        final String [] challengePeriodType = getResources().getStringArray(R.array.challengePeriodType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,challengePeriodType);
+        spn.setAdapter(adapter);
 
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");

@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.R;
 
 import java.util.ArrayList;
@@ -25,11 +27,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     Context c;
     Dialog d;
     ArrayList<Posts> posts;
+    Firebase FB;
     //int[] img;
 
-    public MyAdapter(Context cntx,ArrayList<Posts> posts){
+
+
+
+    public MyAdapter(Context cntx, ArrayList<Posts> posts, Firebase fb){
         this.c=cntx;
         this.posts = posts;
+        this.FB=fb;
     }
 
     @Override
@@ -42,8 +49,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
-        //holder.image.setImageResource(R.drawable.dill);
+
         holder.txt1.setText(posts.get(position).getCreated_at());
+        Glide.with(c).load(posts.get(position).getImage()).into(holder.image);
 
         holder.setItemClickListner(new ItemClickListner() {
             @Override

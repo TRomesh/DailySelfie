@@ -1,7 +1,10 @@
 package com.sliit.dailyselfie.ActivityFeed;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +23,13 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
 
     Context c;
     ArrayList<SharePost> sharepost;
+    DownloadAsync DA;
+
 
     public AdapterAC(Context c, ArrayList<SharePost> sharepost) {
         this.c = c;
         this.sharepost = sharepost;
+
     }
 
     @Override
@@ -39,10 +45,13 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
         String  FitType =sharepost.get(position).getPostType();
         String Description =sharepost.get(position).getPostDescription();
         String Date = sharepost.get(position).getPostedTime();
-        holder.t1.setText(Uname);
+        String Image = sharepost.get(position).getPostImage();
         holder.t2.setText(FitType);
         holder.t3.setText(Description);
         holder.t4.setText(Date);
+        DA=new DownloadAsync(c,Image,holder.im);
+        DA.execute();
+
 
      holder.setItemClickListner(new com.sliit.dailyselfie.ActivityFeed.ItemClickListner() {
        @Override

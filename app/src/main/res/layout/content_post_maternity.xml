@@ -196,31 +196,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_marginTop="15dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:text="@string/txt_timeP"
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:textSize="15dp" />
+                        android:background="@color/calendar_selected_date_text"
+                        android:id="@+id/postMdate"></Spinner>
 
-                    <com.vi.swipenumberpicker.SwipeNumberPicker
-                        android:id="@+id/snppostM7"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:snp_numberColor="@android:color/white"
-                        app:snp_arrowColor="@android:color/white"
-                        app:snp_backgroundColor="@color/colorAccent"
-                        app:snp_max="8"
-                        app:snp_min="1"
-                        app:snp_value="5"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <ImageButton
+                            android:id="@+id/postMsetAlarm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Set Alarm"
+                            android:src="@drawable/alarm"
+                            android:background="@null"
+                            android:clickable="true"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -286,14 +290,14 @@
                     android:layout_height="match_parent">
 
                     <info.hoang8f.widget.FButton
-                        android:id="@+id/postMsetAlarm"
+                        android:id="@+id/postMcancel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="20dp"
                         android:minHeight="50dp"
                         android:minWidth="120dp"
-                        android:text="Set Alarm"
+                        android:text="Cancel"
                         android:textColor="@android:color/white"
                         fbutton:buttonColor="@color/fbutton_color_peter_river"
                         fbutton:shadowEnabled="true" />
