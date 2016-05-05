@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.client.Firebase;
 import com.sliit.dailyselfie.ActivityFeed.SharePost;
 import com.sliit.dailyselfie.R;
@@ -62,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     public void onBindViewHolder(MyHolder holder, final int position) {
 
         holder.txt1.setText(posts.get(position).getCreated_at());
-        Glide.with(c).load(posts.get(position).getImage()).into(holder.image);
+        Glide.with(c).load(posts.get(position).getImage()).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image);
 
         holder.setItemClickListner(new ItemClickListner() {
             @Override
