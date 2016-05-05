@@ -20,6 +20,7 @@
 
             <ImageView
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
                 android:src="@drawable/dill"
                 android:id="@+id/recyclerImage"
                 android:layout_width="match_parent"
