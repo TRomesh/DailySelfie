@@ -1,6 +1,8 @@
 package com.sliit.dailyselfie.Start;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.sliit.dailyselfie.Camera.CameraActivity;
 import com.sliit.dailyselfie.DB.DBHelper;
 import com.sliit.dailyselfie.MainActivity;
 import com.sliit.dailyselfie.R;
@@ -74,40 +77,89 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.print("login button awa");
 
                 String Username = username.getText().toString();
                 String Password = password.getText().toString();
 
-                DBHelper helper = new DBHelper(getApplicationContext());
-                SQLiteDatabase db = helper.getWritableDatabase();
+                if(!Username.isEmpty()){
 
-                String sql = "SELECT id,fname,lname,email,profilepic FROM register WHERE email = '" + Username + "' AND password = '" + Password + "'";
-                Cursor results = db.rawQuery(sql, null);
+                    if(!Password.isEmpty()){
 
-                if (results.moveToFirst()) {
-                    uid = results.getString(0);
-                    ufname = results.getString(1);
-                    ulname = results.getString(2);
-                    uemail = results.getString(3);
-                    upropic = results.getString(4);
+                        DBHelper helper = new DBHelper(getApplicationContext());
+                        SQLiteDatabase db = helper.getWritableDatabase();
 
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
+                        String sql = "SELECT id,fname,lname,email,profilepic FROM register WHERE email = '" + Username + "' AND password = '" + Password + "'";
+                        Cursor results = db.rawQuery(sql, null);
 
-                    SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = userDetails.edit();
-                    editor.putString("loggedUserId", uid);
-                    editor.putString("loggedUserfname", ufname);
-                    editor.putString("loggedUserlname", ulname);
-                    editor.putString("loggedUseremail", uemail);
-                    editor.putString("loggedUserpropic", upropic);
-                    editor.apply();
+                        if (results.moveToFirst()) {
+                            uid = results.getString(0);
+                            ufname = results.getString(1);
+                            ulname = results.getString(2);
+                            uemail = results.getString(3);
+                            upropic = results.getString(4);
 
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+
+                            SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = userDetails.edit();
+                            editor.putString("loggedUserId", uid);
+                            editor.putString("loggedUserfname", ufname);
+                            editor.putString("loggedUserlname", ulname);
+                            editor.putString("loggedUseremail", uemail);
+                            editor.putString("loggedUserpropic", upropic);
+                            editor.apply();
+
+                        } else {
+
+                            AlertDialog.Builder a_builder = new AlertDialog.Builder(LoginActivity.this);
+                            a_builder.setMessage("User Name or Password does not match")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert = a_builder.create();
+                            alert.setTitle("Error");
+                            alert.show();
+                        }
+                    } else {
+
+                        AlertDialog.Builder a_builder = new AlertDialog.Builder(LoginActivity.this);
+                        a_builder.setMessage("Password textfield is empty")
+                                .setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert = a_builder.create();
+                        alert.setTitle("Error");
+                        alert.show();
+                    }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Some problem occurred", Toast.LENGTH_SHORT).show();
 
+                    AlertDialog.Builder a_builder = new AlertDialog.Builder(LoginActivity.this);
+                    a_builder.setMessage("Username textfield is empty")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert = a_builder.create();
+                    alert.setTitle("Error");
+                    alert.show();
                 }
+
+
             }
         });
 

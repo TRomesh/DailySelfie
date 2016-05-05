@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -28,6 +29,8 @@ public class TimeLine extends AppCompatActivity {
     String chalName,chalType;
     ArrayList<Posts> posts = new ArrayList<>();
     Firebase fire;
+    TextView challangename;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,10 @@ public class TimeLine extends AppCompatActivity {
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
+
+        challangename = (TextView) findViewById(R.id.challangeType);
+        challangename.setText(chalName);
+
         adapter =new MyAdapter(this,posts);
         showPost();
 
@@ -69,8 +76,8 @@ public class TimeLine extends AppCompatActivity {
             String picpath = c.getString(6);
             String name = c.getString(7);
 
-                Toast.makeText(getApplicationContext(),"DB name "+ name,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),"shared preferance name " +chalName,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"DB name "+ name,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"shared preferance name " +chalName,Toast.LENGTH_SHORT).show();
 
                 Posts p = new Posts(id, des, height, weight, waist, time, picpath, name);
                 posts.add(p);

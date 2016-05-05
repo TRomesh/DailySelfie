@@ -41,6 +41,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.sliit.dailyselfie.DB.DBHelper;
 import com.sliit.dailyselfie.R;
+import com.sliit.dailyselfie.TimeLine.TimeLine;
 import com.vi.swipenumberpicker.OnValueChangeListener;
 import com.vi.swipenumberpicker.SwipeNumberPicker;
 
@@ -204,7 +205,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -214,6 +217,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -267,7 +271,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -277,6 +283,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -330,7 +337,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -340,6 +349,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -392,7 +402,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -402,6 +414,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -447,7 +460,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -457,6 +472,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -502,7 +518,9 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            successfulAlert();
+                                            if(successfulAlert()){
+                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
+                                            }
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -512,6 +530,7 @@ public class CameraActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             dialog.cancel();
+                                                            d.dismiss();
                                                         }
                                                     });
 
@@ -659,7 +678,7 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    public void successfulAlert(){
+    public boolean successfulAlert(){
         AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
         a_builder.setMessage("Successfully Inserted")
                 .setCancelable(false)
@@ -667,12 +686,14 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        d.dismiss();
 
                     }
                 });
 
         AlertDialog alert = a_builder.create();
         alert.show();
+        return true;
     }
 
     @Override
