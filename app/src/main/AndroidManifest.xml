@@ -112,6 +112,7 @@
         <activity
             android:name=".ActivityFeed.ActivityFeed"
             android:label="@string/title_activity_activity_feed"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NavigationItems.MyChallegesActivity"

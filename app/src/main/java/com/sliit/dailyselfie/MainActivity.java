@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     String userID,userFName,userEmail,userpropic,userLName;
     ImageView PIV;
     TextView Pname,Pemail;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        PIV=(ImageView)findViewById(R.id.profile_image);
-        Pname=(TextView)findViewById(R.id.profile_name);
-        Pemail=(TextView)findViewById(R.id.profile_email);
-
-
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userID = userDetails.getString("loggedUserId","");
         userFName = userDetails.getString("loggedUserfname","");
@@ -62,10 +58,6 @@ public class MainActivity extends AppCompatActivity
         userEmail = userDetails.getString("loggedUseremail","");
         userpropic = userDetails.getString("loggedUserpropic","");
 
-        //Glide.with(this).load(userpropic).into(PIV);
-//        Pname.setText(userFName.toString());
-//        Pemail.setText(userEmail.toString());
-//
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -85,6 +77,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+        PIV=(ImageView)header.findViewById(R.id.profile_image);
+        Pname = (TextView)header.findViewById(R.id.profile_name);
+        Pemail = (TextView)header.findViewById(R.id.profile_email);
+        Pname.setText(userFName);
+        Pemail.setText(userEmail);
+        Glide.with(this).load(userpropic).into(PIV);
 
 
         findViewById(R.id.button_fitness).setOnClickListener(new View.OnClickListener() {
@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -210,6 +212,18 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
             findViewById(R.id.activity_MainMenu).setPadding(16, 16, 16, 16);
         }
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+        PIV=(ImageView)header.findViewById(R.id.profile_image);
+        Pname = (TextView)header.findViewById(R.id.profile_name);
+        Pemail = (TextView)header.findViewById(R.id.profile_email);
+        Pname.setText(userFName);
+        Pemail.setText(userEmail);
+        Glide.with(this).load(userpropic).into(PIV);
+
     }
 
 
