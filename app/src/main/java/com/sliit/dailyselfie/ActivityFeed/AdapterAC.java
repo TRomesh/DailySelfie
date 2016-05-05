@@ -46,6 +46,7 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
         String Description =sharepost.get(position).getPostDescription();
         String Date = sharepost.get(position).getPostedTime();
         String Image = sharepost.get(position).getPostImage();
+        holder.t1.setText(Uname);
         holder.t2.setText(FitType);
         holder.t3.setText(Description);
         holder.t4.setText(Date);

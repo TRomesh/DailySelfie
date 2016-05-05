@@ -2,6 +2,7 @@ package com.sliit.dailyselfie.TimeLine;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -34,13 +35,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     ArrayList<Posts> posts;
     Firebase FB;
     SharePost SP;
+    String username;
 
 
 
 
-    public MyAdapter(Context cntx, ArrayList<Posts> posts){
+    public MyAdapter(Context cntx, ArrayList<Posts> posts,String UN){
         this.c=cntx;
         this.posts = posts;
+        this.username=UN;
+
+
     }
 
     @Override
@@ -49,6 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.model,null);
         MyHolder holder=new MyHolder(v);
         FB=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+
         return holder;
     }
 
@@ -74,8 +80,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 d.setContentView(R.layout.customlayout);
                 ImageView im = (ImageView) d.findViewById(R.id.customimg1);
                 TextView tx = (TextView) d.findViewById(R.id.customtext1);
-                //im.setImageResource(image[position]);
-                //tx.setText(name[position]);
+                tx.setText(posts.get(pos).getDescription());
                 d.show();
             }
         });
@@ -90,7 +95,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
                 byte[] byteArray = stream.toByteArray();
                 String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                SP.setPostSharer("Tharaka");
+                SP.setPostSharer(username);
                 SP.setPostType(posts.get(position).getChallangeName());
                 SP.setPostDescription(posts.get(position).getDescription());
                 SP.setPostedTime(posts.get(position).getCreated_at());

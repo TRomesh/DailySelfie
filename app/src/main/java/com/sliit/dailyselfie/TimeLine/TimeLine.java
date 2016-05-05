@@ -31,7 +31,7 @@ public class TimeLine extends AppCompatActivity {
 
     MyAdapter adapter;
     RecyclerView rv;
-    String chalName,chalType;
+    String chalName,chalType,userFName;
     ArrayList<Posts> posts = new ArrayList<>();
     Firebase fire;
     BottomBar mBottomBar;
@@ -47,10 +47,14 @@ public class TimeLine extends AppCompatActivity {
         mBottomBar.noNavBarGoodness();
         Firebase.setAndroidContext(this);
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+        SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        userFName = userDetails.getString("loggedUserfname","");
 
         SharedPreferences cDetails = getSharedPreferences("cDetails", Context.MODE_PRIVATE);
         chalName = cDetails.getString("chName","");
         chalType = cDetails.getString("chType","");
+
+
 
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override
@@ -84,7 +88,7 @@ public class TimeLine extends AppCompatActivity {
         rv=(RecyclerView) findViewById(R.id.recycler);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());
-        adapter =new MyAdapter(this,posts);
+        adapter =new MyAdapter(this,posts,userFName);
         showPost();
 
 
@@ -101,20 +105,24 @@ public class TimeLine extends AppCompatActivity {
         Cursor c = db.getall();
 
         while(c.moveToNext()){
-            int id = c.getInt(0);
-            String des = c.getString(1);
-            double height = c.getDouble(2);
-            double weight = c.getDouble(3);
-            double waist = c.getDouble(4);
-            String time = c.getString(5);
-            String picpath = c.getString(6);
-            String name = c.getString(7);
 
-                Toast.makeText(getApplicationContext(),"DB name "+ name,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),"shared preferance name " +chalName,Toast.LENGTH_SHORT).show();
+                int id = c.getInt(0);
+                String des = c.getString(1);
+                double height = c.getDouble(2);
+                double weight = c.getDouble(3);
+                double waist = c.getDouble(4);
+                String time = c.getString(5);
+                String picpath = c.getString(6);
+                String name = c.getString(7);
+
+
 
                 Posts p = new Posts(id, des, height, weight, waist, time, picpath, name);
+
+//                Toast.makeText(getApplicationContext(), "DB name " + name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "shared preferance name " + chalName, Toast.LENGTH_SHORT).show();
                 posts.add(p);
+
                 rv.setAdapter(adapter);
 
         }
