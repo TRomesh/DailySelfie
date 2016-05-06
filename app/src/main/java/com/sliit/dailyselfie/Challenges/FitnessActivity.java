@@ -93,6 +93,7 @@ public class FitnessActivity extends AppCompatActivity {
                         hour=Integer.toString(picker.getCurrentHour());
                         minutes=Integer.toString(picker.getCurrentMin());
                         Toast.makeText(getApplicationContext(),"Alarm set to"+ Integer.toString(picker.getCurrentHour())+" "+Integer.toString(picker.getCurrentMin()), Toast.LENGTH_SHORT).show();
+                        SetAlarmBroadcast();
                         d.dismiss();
                     }
                 });
@@ -296,12 +297,10 @@ public class FitnessActivity extends AppCompatActivity {
 
     public void SetAlarmBroadcast(){
 
-        Long alertTime =new GregorianCalendar().getTimeInMillis();
-        Intent alertIntent = new Intent(FitnessActivity.this,AlarmReciver.class).putExtra("Category","Fitness");
+        Long alertTime =new GregorianCalendar().getTimeInMillis()+5*1000;
+        Intent alertIntent = new Intent(this,AlarmReciver.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,alertTime,PendingIntent.getBroadcast(FitnessActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,alertTime,alarmManager.INTERVAL_DAY*7,PendingIntent.getBroadcast(FitnessActivity.this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
-
+        alarmManager.set(AlarmManager.RTC_WAKEUP,alertTime,PendingIntent.getBroadcast(this,1,alertIntent,PendingIntent.FLAG_UPDATE_CURRENT));
 
     }
 }
