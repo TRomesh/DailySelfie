@@ -248,7 +248,7 @@ public class FitnessActivity extends AppCompatActivity {
             return false;
         }
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
         return true;
     }
 

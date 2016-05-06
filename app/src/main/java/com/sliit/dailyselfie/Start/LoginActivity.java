@@ -66,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.uname);
         password = (EditText)findViewById(R.id.password);
 
+        username.addTextChangedListener(new MyTextWatcher(username));
+        password.addTextChangedListener(new MyTextWatcher(password));
+
         findViewById(R.id.signUpbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 String Username = username.getText().toString();
                 String Password = password.getText().toString();
 
-                if(!Username.isEmpty()){
-
-                    if(!Password.isEmpty()){
-
+                    if(submitForm()) {
                         DBHelper helper = new DBHelper(getApplicationContext());
                         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -126,40 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                             alert.setTitle("Error");
                             alert.show();
                         }
-                    } else {
-
-                        AlertDialog.Builder a_builder = new AlertDialog.Builder(LoginActivity.this);
-                        a_builder.setMessage("Password textfield is empty")
-                                .setCancelable(false)
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                        AlertDialog alert = a_builder.create();
-                        alert.setTitle("Error");
-                        alert.show();
                     }
-                } else {
-
-                    AlertDialog.Builder a_builder = new AlertDialog.Builder(LoginActivity.this);
-                    a_builder.setMessage("Username textfield is empty")
-                            .setCancelable(false)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert = a_builder.create();
-                    alert.setTitle("Error");
-                    alert.show();
-                }
-
-
             }
         });
 
@@ -169,6 +136,74 @@ public class LoginActivity extends AppCompatActivity {
                 fblogin();
             }
         });
+    }
+
+    private boolean submitForm() {
+
+        if (!validateEmail()) {
+            return false;
+        }
+        if (!validatePassword()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateEmail() {
+        String email = username.getText().toString().trim();
+
+        if (email.isEmpty()) {
+            inputLayoutName.setError(getString(R.string.err_msg_email));
+            requestFocus(username);
+            return false;
+        } else {
+            inputLayoutName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        if (password.getText().toString().trim().isEmpty()) {
+            inputLayoutPassword.setError(getString(R.string.err_msg_password));
+            requestFocus(password);
+            return false;
+        } else {
+            inputLayoutPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.uname:
+                    validateEmail();
+                    break;
+                case R.id.password:
+                    validatePassword();
+                    break;
+
+            }
+        }
     }
 
     @Override

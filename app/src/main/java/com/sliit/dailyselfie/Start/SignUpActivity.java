@@ -218,7 +218,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void successfulAlert(){
         AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUpActivity.this);
-        a_builder.setMessage("Successfully added")
+        a_builder.setMessage("")
                 .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override

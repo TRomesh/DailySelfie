@@ -24,7 +24,8 @@
             android:textAlignment="center"
             android:text="One of the most destructive batsmen in the game. he is a world class player"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:id="@+id/desc"/>
 
     </LinearLayout>
 
