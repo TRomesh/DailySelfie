@@ -56,8 +56,6 @@ public class TimeLine extends AppCompatActivity {
         chalName = cDetails.getString("chName","");
         chalType = cDetails.getString("chType","");
 
-
-
         mBottomBar.setItemsFromMenu(R.menu.bottomba_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
@@ -109,6 +107,7 @@ public class TimeLine extends AppCompatActivity {
 
         DBAdapter db =  new DBAdapter(this);
         db.openDB();
+        db.getChalName(chalName);
 
         Cursor c = db.getall();
 
@@ -121,10 +120,6 @@ public class TimeLine extends AppCompatActivity {
             String time = c.getString(5);
             String picpath = c.getString(6);
             String name = c.getString(7);
-
-            Toast.makeText(getApplicationContext(),"DB name "+ name,Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(),"shared preferance name " +chalName,Toast.LENGTH_SHORT).show();
-
 
                 Posts p = new Posts(id, des, height, weight, waist, time, picpath, name);
 

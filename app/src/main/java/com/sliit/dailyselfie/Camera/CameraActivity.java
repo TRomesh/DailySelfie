@@ -205,9 +205,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -271,9 +270,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -337,9 +335,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -402,9 +399,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -460,9 +456,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -518,9 +513,8 @@ public class CameraActivity extends AppCompatActivity {
 
                                         try {
                                             db.execSQL(sql);
-                                            if(successfulAlert()){
-                                                startActivity(new Intent(CameraActivity.this, TimeLine.class));
-                                            }
+                                            d.dismiss();
+                                            startActivity(new Intent(CameraActivity.this, TimeLine.class));
 
                                         } catch (SQLiteException e) {
                                             AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
@@ -676,24 +670,6 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public boolean successfulAlert(){
-        AlertDialog.Builder a_builder = new AlertDialog.Builder(CameraActivity.this);
-        a_builder.setMessage("Successfully Inserted")
-                .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        d.dismiss();
-
-                    }
-                });
-
-        AlertDialog alert = a_builder.create();
-        alert.show();
-        return true;
     }
 
     @Override

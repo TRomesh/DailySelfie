@@ -28,7 +28,9 @@ import com.sliit.dailyselfie.Challenges.FitnessActivity;
 import com.sliit.dailyselfie.Challenges.MaternityActivity;
 import com.sliit.dailyselfie.Challenges.NoshaveActivity;
 import com.sliit.dailyselfie.Challenges.PostMaternityActivity;
+import com.sliit.dailyselfie.NavigationItems.AboutUs;
 import com.sliit.dailyselfie.NavigationItems.MyChallegesActivity;
+import com.sliit.dailyselfie.NavigationItems.SettingsActivity;
 import com.sliit.dailyselfie.Start.LoginActivity;
 import com.sliit.dailyselfie.TimeLine.TimeLine;
 
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), PostMaternityActivity.class));
             }
         });
+
     }
 
     @Override
@@ -174,9 +177,13 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(new Intent(MainActivity.this,MyChallegesActivity.class));
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_share) {
+            startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+
+        } else if (id == R.id.nav_aboutus) {
+
+            startActivity(new Intent(MainActivity.this,AboutUs.class));
 
         } else if (id == R.id.nav_send) {
 

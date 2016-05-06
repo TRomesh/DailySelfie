@@ -79,7 +79,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setContentView(R.layout.customlayout);
                 ImageView im = (ImageView) d.findViewById(R.id.customimg1);
-                TextView tx = (TextView) d.findViewById(R.id.customtext1);
+                TextView tx = (TextView) d.findViewById(R.id.desc);
+
                 tx.setText(posts.get(pos).getDescription());
                 d.show();
             }

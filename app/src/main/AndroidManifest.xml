@@ -8,10 +8,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -27,12 +27,12 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/title_activity_main_drawer"
+            android:label="Home Page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Camera.CameraActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_camera"
+            android:label="Take a selfie"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Challenges.FitnessActivity"
@@ -63,7 +63,7 @@
         </activity>
         <activity
             android:name=".Diary.DiaryActivity"
-            android:label="@string/title_activity_diary"
+            android:label="Album"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Challenges.MaternityActivity"
@@ -103,11 +103,11 @@
         </activity>
         <activity
             android:name=".Start.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label="Login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Start.SignUpActivity"
-            android:label="@string/title_activity_sign_up"
+            android:label="Sign up"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityFeed.ActivityFeed"
@@ -118,22 +118,30 @@
             android:name=".NavigationItems.MyChallegesActivity"
             android:label="My Challeges"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Profile.UserProfile"
-            android:label="@string/title_activity_user_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        
-        <activity android:name="com.facebook.FacebookActivity"
+            android:label="User Profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/app_id"/>
+            android:value="@string/app_id" />
 
-
-        
+        <activity
+            android:name=".NavigationItems.SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NavigationItems.AboutUs"
+            android:label="About Us"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

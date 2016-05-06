@@ -1,6 +1,7 @@
 package com.sliit.dailyselfie.TimeLine;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,7 +15,7 @@ public class DBAdapter {
     Context c;
     SQLiteDatabase db;
     DBHelper  dbhelper;
-
+    String chalName;
 
     public DBAdapter(Context c) {
         this.c = c;
@@ -40,10 +41,14 @@ public class DBAdapter {
         //return this;
     }
 
+    public void getChalName(String name){
+        chalName = name;
+    }
+
     public Cursor getall(){
 
         String [] colomns = {"id","description","height","weight","waistSize","created_at","image","challangeName"};
-        return db.query("posts",colomns,null,null,null,null,null);
+        return db.query("posts",colomns,"challangeName=?", new String[] { chalName } ,null,null,"created_at"+" DESC",null);
     }
 
 }
