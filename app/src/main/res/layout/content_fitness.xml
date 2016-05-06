@@ -9,9 +9,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Challenges.FitnessActivity"
+    android:background="@drawable/fitnessscreen"
     tools:showIn="@layout/activity_fitness">
 
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Challenges.MaternityActivity"
+    android:background="@drawable/maternityscreen"
     tools:showIn="@layout/activity_maternity">
 
     <ScrollView

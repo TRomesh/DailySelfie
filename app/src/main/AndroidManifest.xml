@@ -37,6 +37,7 @@
         <activity
             android:name=".Challenges.FitnessActivity"
             android:label="My Fitness Pal"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -68,6 +69,7 @@
         <activity
             android:name=".Challenges.MaternityActivity"
             android:label="@string/txt_maternity"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

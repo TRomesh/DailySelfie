@@ -68,6 +68,7 @@ public class FitnessActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         findViewById(R.id.fitsetAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
