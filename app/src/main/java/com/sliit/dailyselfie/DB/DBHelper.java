@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE challanges (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR(200), name VARCHAR(250) NOT NULL UNIQUE, description TEXT, fitCategory VARCHAR(100), height DOUBLE, weight DOUBLE, waistSize DOUBLE, targetWeight DOUBLE, targetWaistSize DOUBLE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, userId INT, FOREIGN KEY (userId) REFERENCES register(id) )";
 
     public static String POST_TABLE =
-            "CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, height DOUBLE, weight DOUBLE, waistSize DOUBLE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP,image VARCHAR(500), challangeName VARCHAR(250), FOREIGN KEY (challangeName) REFERENCES challanges(name) )";
+            "CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, height DOUBLE, weight DOUBLE, waistSize DOUBLE, created_at DATE DEFAULT (datetime('now','localtime')),image VARCHAR(500), challangeName VARCHAR(250), FOREIGN KEY (challangeName) REFERENCES challanges(name) )";
 
 
     public DBHelper(Context context){

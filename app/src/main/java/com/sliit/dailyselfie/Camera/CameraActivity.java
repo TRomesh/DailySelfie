@@ -437,8 +437,8 @@ public class CameraActivity extends AppCompatActivity {
                                 d.setContentView(R.layout.noshavedialog);
                                 ImageView noshaveimg = (ImageView) d.findViewById(R.id.noshavedialogimg);
                                 final EditText noshavetxt = (EditText) d.findViewById(R.id.noshavedialogdesc);
-                                b9=(Button)d.findViewById(R.id.chiladd);
-                                b10=(Button)d.findViewById(R.id.chilcan);
+                                b9=(Button)d.findViewById(R.id.noshaveadd);
+                                b10=(Button)d.findViewById(R.id.noshavecan);
 
                                 b9.setOnClickListener(new View.OnClickListener() {
                                     @Override

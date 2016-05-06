@@ -111,6 +111,7 @@ public class TimeLine extends AppCompatActivity {
 
         Cursor c = db.getall();
 
+
         while(c.moveToNext()){
             int id = c.getInt(0);
             String des = c.getString(1);
