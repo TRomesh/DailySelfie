@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,7 @@
         <activity
             android:name=".Challenges.FitnessActivity"
             android:label="My Fitness Pal"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -46,6 +48,7 @@
         <activity
             android:name=".Challenges.AddChallangeActivity"
             android:label="Add New Challange"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -55,6 +58,7 @@
         <activity
             android:name=".Challenges.ChildGrowthActivity"
             android:label="Child Growth"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -68,6 +72,7 @@
         <activity
             android:name=".Challenges.MaternityActivity"
             android:label="@string/txt_maternity"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -77,6 +82,7 @@
         <activity
             android:name=".Challenges.NoshaveActivity"
             android:label="No Shave November"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -87,6 +93,7 @@
             android:name=".Challenges.PostMaternityActivity"
             android:label="Post Maternity"
             android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -142,6 +149,7 @@
             android:label="About Us"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <receiver android:name=".AlertReciver.AlarmReciver"/>
     </application>
 
 </manifest>

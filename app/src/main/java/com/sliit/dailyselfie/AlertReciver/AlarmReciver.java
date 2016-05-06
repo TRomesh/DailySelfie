@@ -17,23 +17,19 @@ import com.sliit.dailyselfie.R;
 public class AlarmReciver extends BroadcastReceiver {
 
     PendingIntent notificationIntent;
-    Bundle extras;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        extras=intent.getExtras();
-        CreateNotification(context,"Daily Selfie Challenge","Time to take a selfie", extras.get("Category").toString());
+        CreateNotification(context,"Daily Selfie Challenge!","Time to take a selfie","Alert");
     }
 
-    private void CreateNotification(Context context, String s, String s1, String alert) {
+    public void CreateNotification(Context context,String a,String b,String c){
 
-
-        notificationIntent = PendingIntent.getActivity(context,0,new Intent(context, CameraActivity.class).putExtra("Challenge",alert),0);
+        notificationIntent = PendingIntent.getActivity(context,0,new Intent(context, CameraActivity.class),0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        mBuilder.setContentTitle(s);
-        mBuilder.setContentText(s1);
-        mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+        mBuilder.setContentTitle(a);
+        mBuilder.setContentText(b);
         mBuilder.setContentIntent(notificationIntent);
         mBuilder.setDefaults(NotificationCompat.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);

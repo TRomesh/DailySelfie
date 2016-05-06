@@ -10,7 +10,7 @@
 
 
         <ScrollView
-            android:background="@android:color/darker_gray"
+            android:background="@drawable/mainscreen"
             android:fadeScrollbars="true"
             android:fillViewport="true"
             android:layout_width="match_parent"
@@ -59,7 +59,9 @@
                             />
 
                         <ImageButton
+                            android:src="@drawable/postmaternity"
                             android:id="@+id/button_diary"
+                            android:scaleType="fitCenter"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"/>
@@ -78,6 +80,7 @@
 
 
                     <ImageButton
+
                         android:src="@drawable/childgroeth"
                         android:id="@+id/button_childgrow"
                         android:scaleType="fitCenter"
