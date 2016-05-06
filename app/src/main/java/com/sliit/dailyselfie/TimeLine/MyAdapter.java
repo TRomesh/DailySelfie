@@ -63,6 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     public void onBindViewHolder(MyHolder holder, final int position) {
 
         holder.txt1.setText(posts.get(position).getCreated_at());
+        holder.txt2.setText(posts.get(position).getDescription());
         Glide.with(c).load(posts.get(position).getImage()).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image);
 
         holder.setItemClickListner(new ItemClickListner() {
@@ -91,7 +92,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             @Override
             public void onClick(View v) {
                 SP=new SharePost();
-                Toast.makeText(v.getContext(),"hello "+position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(),"hello "+position,Toast.LENGTH_SHORT).show();
                 Bitmap bmp = BitmapFactory.decodeFile(posts.get(position).getImage());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);

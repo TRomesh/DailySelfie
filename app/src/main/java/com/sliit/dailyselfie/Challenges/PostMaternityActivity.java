@@ -76,7 +76,7 @@ public class PostMaternityActivity extends AppCompatActivity {
                 bset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -84,7 +84,7 @@ public class PostMaternityActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "cancle Alarm", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "cancle Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });

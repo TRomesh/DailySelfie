@@ -91,7 +91,7 @@ public class FitnessActivity extends AppCompatActivity {
                         date=picker.getTime();
                         hour=Integer.toString(picker.getCurrentHour());
                         minutes=Integer.toString(picker.getCurrentMin());
-                        Toast.makeText(getApplicationContext(),"Alarm set to"+ Integer.toString(picker.getCurrentHour())+" "+Integer.toString(picker.getCurrentMin()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"Alarm set to"+ Integer.toString(picker.getCurrentHour())+" "+Integer.toString(picker.getCurrentMin()), Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -99,7 +99,7 @@ public class FitnessActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), picker.getTime().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), picker.getTime().toString(), Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });

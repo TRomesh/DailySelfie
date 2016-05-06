@@ -57,14 +57,14 @@ public class AdapterAC extends RecyclerView.Adapter<HolderAC> {
      holder.setItemClickListner(new com.sliit.dailyselfie.ActivityFeed.ItemClickListner() {
        @Override
            public void onITemClick(View v, int pos) {
-              Toast.makeText(v.getContext(),"On Click",Toast.LENGTH_SHORT).show();
+              //Toast.makeText(v.getContext(),"On Click",Toast.LENGTH_SHORT).show();
        }
      });
 
         holder.setItemLongClickListner(new com.sliit.dailyselfie.ActivityFeed.ItemOnLongClickListner() {
             @Override
             public boolean onITemLongClick(View v, int pos) {
-                Toast.makeText(v.getContext(),"On Long Click",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(),"On Long Click",Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
