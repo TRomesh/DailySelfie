@@ -218,7 +218,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void successfulAlert(){
         AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUpActivity.this);
-        a_builder.setMessage("")
+        a_builder.setMessage("Registed successfully")
                 .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -256,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity {
             return false;
         }
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -390,7 +390,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(requestCode==ActivityStartCAM  && resultCode==RESULT_OK){
             bit64camimage=BitmaptoString(ImageFileLoaction);
             rotateImage(setReducedImageSize());
-            Toast.makeText(getApplicationContext(), bit64camimage, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), bit64camimage, Toast.LENGTH_SHORT).show();
         }
     }
 

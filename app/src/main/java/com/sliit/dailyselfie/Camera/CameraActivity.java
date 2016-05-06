@@ -114,11 +114,11 @@ public class CameraActivity extends AppCompatActivity {
                         public boolean onItemSelected(int id) {
                             switch (id) {
                                 case R.id.addeffects:
-                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_SHORT).show();
                                     return true;
 
                                 case R.id.crop:
-                                    Toast.makeText(getApplicationContext(),"crop",Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(),"crop",Toast.LENGTH_SHORT).show();
                                     return true;
 
                                 default:

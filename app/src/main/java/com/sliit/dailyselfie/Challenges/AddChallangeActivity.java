@@ -73,7 +73,7 @@ public class AddChallangeActivity extends AppCompatActivity {
                 bset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Set Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -81,7 +81,7 @@ public class AddChallangeActivity extends AppCompatActivity {
                 bcancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "cancle Alarm", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "cancle Alarm", Toast.LENGTH_SHORT).show();
                         d.dismiss();
                     }
                 });
@@ -186,7 +186,7 @@ public class AddChallangeActivity extends AppCompatActivity {
             return false;
         }
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
         return true;
     }
 

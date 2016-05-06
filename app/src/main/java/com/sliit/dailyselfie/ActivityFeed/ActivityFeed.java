@@ -59,13 +59,13 @@ public class ActivityFeed extends AppCompatActivity {
 
                 if (menuItemId == R.id.nav_home) {
 
-                    Toast.makeText(ActivityFeed.this, "Timeline", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ActivityFeed.this, "Timeline", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_fav) {
                     startActivity(new Intent(ActivityFeed.this, CameraActivity.class));
 
                 } else if (menuItemId == R.id.nav_gallery) {
-                    Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ActivityFeed.this, "Favorites", Toast.LENGTH_SHORT).show();
 
                 }
 

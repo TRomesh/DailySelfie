@@ -49,6 +49,7 @@ public class TimeLine extends AppCompatActivity {
         mBottomBar.noNavBarGoodness();
         Firebase.setAndroidContext(this);
         fire=new Firebase("https://dailyselfie.firebaseio.com/sharedpost");
+
         SharedPreferences userDetails = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         userFName = userDetails.getString("loggedUserfname","");
 
@@ -62,13 +63,13 @@ public class TimeLine extends AppCompatActivity {
 
                 if (menuItemId == R.id.nav_home) {
 
-                    Toast.makeText(TimeLine.this, "Timeline", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(TimeLine.this, "Timeline", Toast.LENGTH_SHORT).show();
 
                 } else if (menuItemId == R.id.nav_fav) {
                     startActivity(new Intent(TimeLine.this, CameraActivity.class).putExtra("Challenge","fitness"));
 
                 } else if (menuItemId == R.id.nav_gallery) {
-                    Toast.makeText(TimeLine.this, "Favorites", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(TimeLine.this, "Favorites", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -126,8 +127,9 @@ public class TimeLine extends AppCompatActivity {
 
                 posts.add(p);
 
+            if(posts.size()>0){
                 rv.setAdapter(adapter);
-
+            }
         }
     }
 }
